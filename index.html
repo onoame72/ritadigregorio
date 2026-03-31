@@ -57,6 +57,19 @@ body {
 .hero-content {
   position:relative;
   z-index:2;
+  animation:fadeInUp 1.2s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+.problema-text {
+  font-size:18px;
+  font-style:italic;
+  line-height:1.8;
+  color:#444;
 }
 
 h1 {
@@ -108,6 +121,11 @@ h2 {
 
 .card:hover img {
   transform:scale(1.05);
+}
+
+.card:hover {
+  box-shadow:0 8px 24px rgba(0,0,0,0.1);
+  border-radius:8px;
 }
 
 .split {
@@ -164,6 +182,13 @@ h2 {
   padding:14px 20px;
   font-size:15px;
   letter-spacing:1px;
+}
+
+.topbar span {
+  color:rgba(255,255,255,0.5);
+  font-size:12px;
+  margin-left:8px;
+  letter-spacing:2px;
 }
 
 /* Custom list style */
@@ -239,7 +264,7 @@ h2 {
 <body>
 
 <!-- TOP BAR -->
-<div class="topbar">Rita Di Gregorio</div>
+<div class="topbar">Rita Di Gregorio <span>| Lifestyle Coach</span></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -253,9 +278,9 @@ h2 {
 
 <!-- PROBLEMA -->
 <div class="section-alt" style="text-align:center;">
-  <p>Vai avanti. Ti occupi di tutto. Funzioni.<br>
+  <p class="problema-text">Vai avanti. Ti occupi di tutto. Funzioni.<br>
   Fuori regge. Dentro si accumula.</p>
-  <p>Stanchezza. Confusione. Perdita di direzione.<br>
+  <p class="problema-text">Stanchezza. Confusione. Perdita di direzione.<br>
   Non è mancanza di forza. È mancanza di spazio per te.</p>
   <a class="btn" href="https://linkmate.one/link/RitaDiGregorio/p/riparti-da-te-webinar?language=it">Partecipa al webinar</a>
 </div>
@@ -263,7 +288,7 @@ h2 {
 <!-- CAMBIAMENTO -->
 <div class="section">
 <div class="split">
-  <img src="images/cambiamento.avif" alt="Il punto non è fare di più – riallineare mente, corpo ed emozioni">
+  <img loading="lazy" src="images/cambiamento.avif" alt="Il punto non è fare di più – riallineare mente, corpo ed emozioni">
   <div>
     <h2>Il punto non è fare di più</h2>
     <p>Continuare ad aggiungere non risolve.<br>Serve fermarsi, rimettere ordine, riallineare.</p>
@@ -287,25 +312,25 @@ h2 {
 <div class="grid">
 
 <div class="card">
-<img src="images/chiarezza1.avif" alt="Chiarezza mentale – ritrovare lucidità">
+<img loading="lazy" src="images/chiarezza1.avif" alt="Chiarezza mentale – ritrovare lucidità">
 <h3>Chiarezza mentale</h3>
 <p>Semplificare i pensieri e disinnescare il rumore mentale per ritrovare la lucidità necessaria.</p>
 </div>
 
 <div class="card">
-<img src="images/energia1.avif" alt="Gestione dell'energia personale">
+<img loading="lazy" src="images/energia1.avif" alt="Gestione dell'energia personale">
 <h3>Gestione dell’energia</h3>
 <p>Imparare a regolare le proprie risorse per mantenere una stabilità costante nel tempo.</p>
 </div>
 
 <div class="card">
-<img src="images/emozione1.avif" alt="Regolazione emotiva">
+<img loading="lazy" src="images/emozione1.avif" alt="Regolazione emotiva">
 <h3>Regolazione emotiva</h3>
 <p>Trasformare il rapporto con le tue emozioni per navigare il cambiamento senza stress.</p>
 </div>
 
 <div class="card">
-<img src="images/identita1.avif" alt="Identità e direzione personale">
+<img loading="lazy" src="images/identita1.avif" alt="Identità e direzione personale">
 <h3>Identità e direzione</h3>
 <p>Riallineare chi sei con dove stai andando, ritrovando il senso profondo del tuo agire.</p>
 </div>
@@ -334,14 +359,14 @@ h2 {
     </div>
     <p style="font-size:13px;margin-top:20px;color:#666;">Ti invio io tutte le informazioni dopo l'iscrizione.<br>Alcuni accessi sono riservati gratuitamente.</p>
   </div>
-  <img src="images/webinar.avif" alt="Webinar Riparti da Te">
+  <img loading="lazy" src="images/webinar.avif" alt="Webinar Riparti da Te">
 </div>
 </div>
 
 <!-- CHI SONO -->
 <div class="section-alt">
 <div class="split">
-  <img src="images/rita1.avif" alt="Rita Di Gregorio – Lifestyle Coach">
+  <img loading="lazy" src="images/rita1.avif" alt="Rita Di Gregorio – Lifestyle Coach">
   <div>
     <h2>Sono Rita Di Gregorio</h2>
     <p>Docente e lifestyle coach.</p>
@@ -360,7 +385,7 @@ h2 {
     <p style="text-transform:uppercase;letter-spacing:2px;font-size:13px;">Durata 20 minuti</p>
     <a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Prenota il tuo colloquio gratuito</a>
   </div>
-  <img src="images/call.avif" alt="Primo colloquio conoscitivo">
+  <img loading="lazy" src="images/call.avif" alt="Primo colloquio conoscitivo">
 </div>
 </div>
 
@@ -378,7 +403,7 @@ h2 {
 
 <!-- FLOATING CTA -->
 <div id="floating-cta">
-  <a href="https://wa.me/393477185545" target="_blank" rel="noopener">Contattami</a>
+  <a href="https://wa.me/393477185545" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Contattami</a>
 </div>
 
 <!-- SCRIPTS -->

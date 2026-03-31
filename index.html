@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rita Di Gregorio | Mental Coach</title>
+
+<style>
+body {
+  margin:0;
+  font-family:-apple-system, sans-serif;
+  color:#111;
+}
+
+.container {
+  max-width:1100px;
+  margin:auto;
+  padding:60px 20px;
+}
+
+.hero {
+  height:90vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  background:url('images/hero.jpg') center/cover fixed no-repeat;
+  position:relative;
+}
+
+.hero::after {
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+}
+
+.hero-content {
+  position:relative;
+  z-index:2;
+}
+
+h1 {
+  font-size:42px;
+}
+
+h2 {
+  margin-top:60px;
+}
+
+.btn {
+  display:inline-block;
+  margin-top:20px;
+  padding:14px 24px;
+  background:#c8a96a;
+  color:white;
+  text-decoration:none;
+  border-radius:6px;
+  transition:0.3s;
+}
+
+.btn:hover {
+  transform:translateY(-3px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:30px;
+}
+
+.card {
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.6s;
+}
+
+.card.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+.card img {
+  width:100%;
+  border-radius:8px;
+  transition:0.4s;
+}
+
+.card:hover img {
+  transform:scale(1.05);
+}
+
+.split {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
+  margin-top:60px;
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.8s;
+}
+
+.split.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+.split img {
+  width:100%;
+  border-radius:10px;
+}
+
+.footer {
+  text-align:center;
+  padding:40px;
+  background:#faf8f5;
+}
+
+/* Floating CTA */
+#floating-cta {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#c8a96a;
+  padding:14px 18px;
+  border-radius:30px;
+  display:none;
+}
+
+#floating-cta a {
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+@media(max-width:768px){
+  .split {
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 id="hero-text"></h1>
+    <p>Ritrova energia, direzione e chiarezza con un lavoro concreto su mente, corpo ed emozioni.</p>
+    <a class="btn" href="https://linkmate.one/link/RitaDiGregorio/p/riparti-da-te-webinar?language=it">Partecipa al webinar</a>
+  </div>
+</section>
+
+<div class="container">
+
+<!-- METODO -->
+<h2>Come lavoriamo</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="images/chiarezza.jpg">
+<h3>Chiarezza mentale</h3>
+<p>Riduci il rumore mentale e ritrovi lucidità.</p>
+</div>
+
+<div class="card">
+<img src="images/energia.jpg">
+<h3>Gestione dell’energia</h3>
+<p>Regoli le tue risorse e mantieni stabilità.</p>
+</div>
+
+<div class="card">
+<img src="images/emozioni.jpg">
+<h3>Regolazione emotiva</h3>
+<p>Gestisci ciò che senti senza esserne travolto.</p>
+</div>
+
+<div class="card">
+<img src="images/identita.jpg">
+<h3>Identità e direzione</h3>
+<p>Allinei chi sei con la direzione che scegli.</p>
+</div>
+
+</div>
+
+<!-- CAMBIAMENTO -->
+<div class="split">
+  <img src="images/cambiamento.jpg">
+  <div>
+    <h2>Il cambiamento</h2>
+    <p>Il cambiamento non è fare di più.</p>
+    <p>È tornare a funzionare meglio.</p>
+  </div>
+</div>
+
+<!-- WEBINAR -->
+<div class="split">
+  <div>
+    <h2>Webinar – Riparti da Te</h2>
+    <p>Un incontro pratico per rimettere ordine e ripartire con lucidità.</p>
+    <a class="btn" href="https://linkmate.one/link/RitaDiGregorio/p/riparti-da-te-webinar?language=it">Partecipa ora</a>
+  </div>
+  <img src="images/webinar.jpg">
+</div>
+
+<!-- CHI SONO -->
+<div class="split">
+  <img src="images/rita.jpg">
+  <div>
+    <h2>Sono Rita Di Gregorio</h2>
+    <p>Docente e mental coach.</p>
+    <p>Lavoro con adulti che vogliono ritrovare energia, stabilità e direzione.</p>
+  </div>
+</div>
+
+<!-- CALL -->
+<div style="text-align:center; margin-top:60px;">
+  <h2>Inizia con un primo colloquio</h2>
+  <p>20 minuti. Senza impegno.</p>
+  <a class="btn" href="https://wa.me/393477185545">Prenota il tuo colloquio gratuito</a>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <a class="btn" href="https://linkmate.one/link/RitaDiGregorio/p/riparti-da-te-webinar?language=it">Partecipa al webinar</a>
+  <br><br>
+  <a href="mailto:digregorio.rita@gmail.com">Email</a> |
+  <a href="https://www.instagram.com/rita.digregorio_la_prof_coach/">Instagram</a> |
+  <a href="https://www.youtube.com/@siiguerriero">YouTube</a> |
+  <a href="https://www.linkedin.com/in/rita-di-gregorio-a1754738a/">LinkedIn</a>
+</div>
+
+<!-- FLOATING CTA -->
+<div id="floating-cta">
+  <a href="https://linkmate.one/link/RitaDiGregorio/p/riparti-da-te-webinar?language=it">Partecipa</a>
+</div>
+
+<!-- SCRIPTS -->
+<script>
+const text = "Per chi sta facendo tutto… ma sente che qualcosa dentro non torna.";
+let i = 0;
+
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("hero-text").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 30);
+  }
+}
+typeWriter();
+
+// scroll animations
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+});
+
+document.querySelectorAll('.card, .split').forEach(el => {
+  observer.observe(el);
+});
+
+// floating CTA
+window.addEventListener("scroll", function() {
+  const cta = document.getElementById("floating-cta");
+  if (window.scrollY > 600) {
+    cta.style.display = "block";
+  } else {
+    cta.style.display = "none";
+  }
+});
+</script>
+
+</body>
+</html>

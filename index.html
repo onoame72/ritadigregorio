@@ -3,9 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rita Di Gregorio | Mental Coach</title>
+<title>Rita Di Gregorio | Lifestyle Coach – Energia, Direzione e Chiarezza</title>
+<meta name="description" content="Rita Di Gregorio – Lifestyle Coach. Percorsi individuali per ritrovare energia, direzione e chiarezza. Lavoro concreto su mente, corpo ed emozioni.">
+<meta property="og:title" content="Rita Di Gregorio | Lifestyle Coach">
+<meta property="og:description" content="Percorsi individuali per ritrovare energia, direzione e chiarezza. Lavoro concreto su mente, corpo ed emozioni.">
+<meta property="og:image" content="images/hero.avif">
+<meta property="og:type" content="website">
 
 <style>
+html {
+  scroll-behavior:smooth;
+}
 body {
   margin:0;
   font-family:-apple-system, sans-serif;
@@ -25,8 +33,16 @@ body {
   justify-content:center;
   text-align:center;
   color:white;
-  background:url('images/hero.jpeg') center/cover fixed no-repeat;
+  background:url('images/hero.avif') center/cover no-repeat;
   position:relative;
+}
+
+@supports (-webkit-overflow-scrolling: touch) {
+  .hero { background-attachment:scroll; }
+}
+
+@supports not (-webkit-overflow-scrolling: touch) {
+  .hero { background-attachment:fixed; }
 }
 
 .hero::after {
@@ -98,7 +114,7 @@ h2 {
   grid-template-columns:1fr 1fr;
   gap:40px;
   align-items:center;
-  margin-top:60px;
+  margin-top:0;
   opacity:0;
   transform:translateY(40px);
   transition:0.8s;
@@ -128,13 +144,34 @@ h2 {
   background:#c8a96a;
   padding:14px 18px;
   border-radius:30px;
-  display:none;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.4s;
+}
+
+#floating-cta.visible {
+  opacity:1;
+  pointer-events:auto;
 }
 
 #floating-cta a {
   color:white;
   text-decoration:none;
   font-weight:bold;
+}
+
+.section-alt {
+  background:#faf8f5;
+}
+
+.section, .section-alt {
+  padding:60px 20px;
+}
+
+.section > *, .section-alt > * {
+  max-width:1100px;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 @media(max-width:768px){
@@ -151,82 +188,122 @@ h2 {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <h1 id="hero-text"></h1>
+    <p style="text-transform:uppercase;letter-spacing:4px;font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:0;">Webinar di Sviluppo Personale</p>
+    <h1 id="hero-text">Per chi sta facendo tutto… ma sente che qualcosa dentro non torna.</h1>
     <p>Ritrova energia, direzione e chiarezza con un lavoro concreto su mente, corpo ed emozioni.</p>
     <a class="btn" href="https://linkmate.one/link/RitaDiGregorio/p/riparti-da-te-webinar?language=it">Partecipa al webinar</a>
   </div>
 </section>
 
-<div class="container">
+<!-- PROBLEMA -->
+<div class="section-alt" style="text-align:center;">
+  <p>Vai avanti. Ti occupi di tutto. Funzioni.<br>
+  Fuori regge. Dentro si accumula.</p>
+  <p>Stanchezza. Confusione. Perdita di direzione.<br>
+  Non è mancanza di forza. È mancanza di spazio per te.</p>
+  <a class="btn" href="https://linkmate.one/link/RitaDiGregorio/p/riparti-da-te-webinar?language=it">Partecipa al webinar</a>
+</div>
+
+<!-- CAMBIAMENTO -->
+<div class="section">
+<div class="split">
+  <img src="images/cambiamento.avif" alt="Il punto non è fare di più – riallineare mente, corpo ed emozioni">
+  <div>
+    <h2>Il punto non è fare di più</h2>
+    <p>Continuare ad aggiungere non risolve.<br>Serve fermarsi, rimettere ordine, riallineare.</p>
+    <p>Quando mente, corpo ed emozioni lavorano insieme:</p>
+    <ul>
+      <li>le decisioni diventano più chiare,</li>
+      <li>l’energia torna stabile,</li>
+      <li>la direzione si definisce.</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<div class="section-alt">
 
 <!-- METODO -->
 <h2>Come lavoriamo</h2>
+<p>Il mio approccio integra coaching, neuroscienze e lavoro sul linguaggio. Non aggiungo semplice teoria: lavoriamo su ciò che cambia davvero la tua esperienza quotidiana attraverso processi concreti di consapevolezza.</p>
+<hr style="border:none;border-top:1px solid #ddd;margin:60px 0;">
 
 <div class="grid">
 
 <div class="card">
-<img src="images/chiarezza.jpeg">
+<img src="images/chiarezza1.avif" alt="Chiarezza mentale – ritrovare lucidità">
 <h3>Chiarezza mentale</h3>
-<p>Riduci il rumore mentale e ritrovi lucidità.</p>
+<p>Semplificare i pensieri e disinnescare il rumore mentale per ritrovare la lucidità necessaria.</p>
 </div>
 
 <div class="card">
-<img src="images/energia.jpeg">
+<img src="images/energia1.avif" alt="Gestione dell'energia personale">
 <h3>Gestione dell’energia</h3>
-<p>Regoli le tue risorse e mantieni stabilità.</p>
+<p>Imparare a regolare le proprie risorse per mantenere una stabilità costante nel tempo.</p>
 </div>
 
 <div class="card">
-<img src="images/emozioni.jpeg">
+<img src="images/emozione1.avif" alt="Regolazione emotiva">
 <h3>Regolazione emotiva</h3>
-<p>Gestisci ciò che senti senza esserne travolto.</p>
+<p>Trasformare il rapporto con le tue emozioni per navigare il cambiamento senza stress.</p>
 </div>
 
 <div class="card">
-<img src="images/identita.jpeg">
+<img src="images/identita1.avif" alt="Identità e direzione personale">
 <h3>Identità e direzione</h3>
-<p>Allinei chi sei con la direzione che scegli.</p>
+<p>Riallineare chi sei con dove stai andando, ritrovando il senso profondo del tuo agire.</p>
 </div>
 
 </div>
-
-<!-- CAMBIAMENTO -->
-<div class="split">
-  <img src="images/cambiamento.jpeg">
-  <div>
-    <h2>Il cambiamento</h2>
-    <p>Il cambiamento non è fare di più.</p>
-    <p>È tornare a funzionare meglio.</p>
-  </div>
 </div>
 
 <!-- WEBINAR -->
+<div class="section">
 <div class="split">
   <div>
     <h2>Webinar – Riparti da Te</h2>
     <p>Un incontro pratico per rimettere ordine e ripartire con lucidità.</p>
-    <a class="btn" href="https://linkmate.one/link/RitaDiGregorio/p/riparti-da-te-webinar?language=it">Partecipa ora</a>
+    <p>Non ascolti soltanto.<br>Lavori su di te già durante il webinar.</p>
+    <p>Cosa ti porti a casa:</p>
+    <ul>
+      <li>un punto chiaro da cui ripartire</li>
+      <li>strumenti applicabili subito</li>
+      <li>una nuova lettura della tua situazione</li>
+      <li>maggiore chiarezza su cosa fare dopo</li>
+    </ul>
+    <p>Un lavoro concreto, guidato passo dopo passo.</p>
+    <a class="btn" href="https://linkmate.one/link/RitaDiGregorio/p/riparti-da-te-webinar?language=it">Prenota ora</a>
+    <a class="btn" href="https://wa.me/393477185545" style="margin-left:10px;">Scrivimi su WhatsApp</a>
+    <p style="font-size:13px;margin-top:20px;color:#666;">Ti invio io tutte le informazioni dopo l'iscrizione.<br>Alcuni accessi sono riservati gratuitamente.</p>
   </div>
-  <img src="images/webinar.jpeg">
+  <img src="images/webinar.avif" alt="Webinar Riparti da Te">
+</div>
 </div>
 
 <!-- CHI SONO -->
+<div class="section-alt">
 <div class="split">
-  <img src="images/rita.jpg">
+  <img src="images/rita1.avif" alt="Rita Di Gregorio – Lifestyle Coach">
   <div>
     <h2>Sono Rita Di Gregorio</h2>
-    <p>Docente e mental coach.</p>
-    <p>Lavoro con adulti che vogliono ritrovare energia, stabilità e direzione.</p>
+    <p>Docente e lifestyle coach.</p>
+    <p>Lavoro con adulti che stanno attraversando una fase di cambiamento e vogliono ritrovare stabilità, energia e direzione. Porto un lavoro diretto, concreto, basato su esperienza e neuroscienze.</p>
   </div>
+</div>
 </div>
 
 <!-- CALL -->
-<div style="text-align:center; margin-top:60px;">
-  <h2>Inizia con un primo colloquio</h2>
-  <p>20 minuti. Senza impegno.</p>
-  <a class="btn" href="https://wa.me/393477185545">Prenota il tuo colloquio gratuito</a>
+<div class="section">
+<div class="split">
+  <div>
+    <h2>Inizia con un primo colloquio conoscitivo</h2>
+    <p>Se vuoi capire da dove partire, possiamo fare un primo confronto.<br>
+    Uno spazio per mettere a fuoco la tua situazione e vedere insieme la direzione.</p>
+    <p style="text-transform:uppercase;letter-spacing:2px;font-size:13px;">Durata 20 minuti</p>
+    <a class="btn" href="https://wa.me/393477185545">Prenota il tuo colloquio gratuito</a>
+  </div>
+  <img src="images/call.avif" alt="Primo colloquio conoscitivo">
 </div>
-
 </div>
 
 <!-- FOOTER -->
@@ -241,17 +318,19 @@ h2 {
 
 <!-- FLOATING CTA -->
 <div id="floating-cta">
-  <a href="https://linkmate.one/link/RitaDiGregorio/p/riparti-da-te-webinar?language=it">Partecipa</a>
+  <a href="https://wa.me/393477185545">Contattami</a>
 </div>
 
 <!-- SCRIPTS -->
 <script>
 const text = "Per chi sta facendo tutto… ma sente che qualcosa dentro non torna.";
 let i = 0;
+const heroEl = document.getElementById("hero-text");
+heroEl.textContent = "";
 
 function typeWriter() {
   if (i < text.length) {
-    document.getElementById("hero-text").innerHTML += text.charAt(i);
+    heroEl.textContent += text.charAt(i);
     i++;
     setTimeout(typeWriter, 30);
   }
@@ -275,9 +354,9 @@ document.querySelectorAll('.card, .split').forEach(el => {
 window.addEventListener("scroll", function() {
   const cta = document.getElementById("floating-cta");
   if (window.scrollY > 600) {
-    cta.style.display = "block";
+    cta.classList.add("visible");
   } else {
-    cta.style.display = "none";
+    cta.classList.remove("visible");
   }
 });
 </script>

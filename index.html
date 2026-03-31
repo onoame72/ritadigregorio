@@ -9,6 +9,7 @@
 <meta property="og:description" content="Percorsi individuali per ritrovare energia, direzione e chiarezza. Lavoro concreto su mente, corpo ed emozioni.">
 <meta property="og:image" content="images/hero.avif">
 <meta property="og:type" content="website">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
 html {
@@ -136,6 +137,47 @@ h2 {
   background:#faf8f5;
 }
 
+.footer a {
+  color:#c8a96a;
+  text-decoration:none;
+  margin:0 8px;
+}
+
+.footer a.btn {
+  color:white;
+  margin:0;
+}
+
+.footer a:hover {
+  text-decoration:underline;
+}
+
+.footer .footer-links {
+  margin-top:10px;
+}
+
+/* Top bar */
+.topbar {
+  background:#111;
+  color:white;
+  text-align:center;
+  padding:14px 20px;
+  font-size:15px;
+  letter-spacing:1px;
+}
+
+/* Custom list style */
+.styled-list {
+  list-style:none;
+  padding-left:0;
+}
+
+.styled-list li::before {
+  content:"✓ ";
+  color:#c8a96a;
+  font-weight:bold;
+}
+
 /* Floating CTA */
 #floating-cta {
   position:fixed;
@@ -178,6 +220,17 @@ h2 {
   .split {
     grid-template-columns:1fr;
   }
+  h1 {
+    font-size:28px;
+  }
+  .btn-group {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .btn-group .btn {
+    margin-left:0 !important;
+  }
 }
 </style>
 
@@ -185,13 +238,16 @@ h2 {
 
 <body>
 
+<!-- TOP BAR -->
+<div class="topbar">Rita Di Gregorio</div>
+
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <p style="text-transform:uppercase;letter-spacing:4px;font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:0;">Webinar di Sviluppo Personale</p>
+    <p style="text-transform:uppercase;letter-spacing:4px;font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:0;">Lifestyle Coaching</p>
     <h1 id="hero-text">Per chi sta facendo tutto… ma sente che qualcosa dentro non torna.</h1>
-    <p>Ritrova energia, direzione e chiarezza con un lavoro concreto su mente, corpo ed emozioni.</p>
-    <a class="btn" href="https://linkmate.one/link/RitaDiGregorio/p/riparti-da-te-webinar?language=it">Partecipa al webinar</a>
+    <p>Un percorso concreto per ritrovare chiarezza, energia e direzione. Lavoro su mente, corpo ed emozioni.</p>
+    <a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Prenota un colloquio gratuito</a>
   </div>
 </section>
 
@@ -212,7 +268,7 @@ h2 {
     <h2>Il punto non è fare di più</h2>
     <p>Continuare ad aggiungere non risolve.<br>Serve fermarsi, rimettere ordine, riallineare.</p>
     <p>Quando mente, corpo ed emozioni lavorano insieme:</p>
-    <ul>
+    <ul class="styled-list">
       <li>le decisioni diventano più chiare,</li>
       <li>l’energia torna stabile,</li>
       <li>la direzione si definisce.</li>
@@ -265,15 +321,17 @@ h2 {
     <p>Un incontro pratico per rimettere ordine e ripartire con lucidità.</p>
     <p>Non ascolti soltanto.<br>Lavori su di te già durante il webinar.</p>
     <p>Cosa ti porti a casa:</p>
-    <ul>
+    <ul class="styled-list">
       <li>un punto chiaro da cui ripartire</li>
       <li>strumenti applicabili subito</li>
       <li>una nuova lettura della tua situazione</li>
       <li>maggiore chiarezza su cosa fare dopo</li>
     </ul>
     <p>Un lavoro concreto, guidato passo dopo passo.</p>
+    <div class="btn-group">
     <a class="btn" href="https://linkmate.one/link/RitaDiGregorio/p/riparti-da-te-webinar?language=it">Prenota ora</a>
-    <a class="btn" href="https://wa.me/393477185545" style="margin-left:10px;">Scrivimi su WhatsApp</a>
+    <a class="btn" href="https://wa.me/393477185545" style="margin-left:10px;" target="_blank" rel="noopener">Scrivimi su WhatsApp</a>
+    </div>
     <p style="font-size:13px;margin-top:20px;color:#666;">Ti invio io tutte le informazioni dopo l'iscrizione.<br>Alcuni accessi sono riservati gratuitamente.</p>
   </div>
   <img src="images/webinar.avif" alt="Webinar Riparti da Te">
@@ -300,7 +358,7 @@ h2 {
     <p>Se vuoi capire da dove partire, possiamo fare un primo confronto.<br>
     Uno spazio per mettere a fuoco la tua situazione e vedere insieme la direzione.</p>
     <p style="text-transform:uppercase;letter-spacing:2px;font-size:13px;">Durata 20 minuti</p>
-    <a class="btn" href="https://wa.me/393477185545">Prenota il tuo colloquio gratuito</a>
+    <a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Prenota il tuo colloquio gratuito</a>
   </div>
   <img src="images/call.avif" alt="Primo colloquio conoscitivo">
 </div>
@@ -308,36 +366,23 @@ h2 {
 
 <!-- FOOTER -->
 <div class="footer">
-  <a class="btn" href="https://linkmate.one/link/RitaDiGregorio/p/riparti-da-te-webinar?language=it">Partecipa al webinar</a>
-  <br><br>
-  <a href="mailto:digregorio.rita@gmail.com">Email</a> |
-  <a href="https://www.instagram.com/rita.digregorio_la_prof_coach/">Instagram</a> |
-  <a href="https://www.youtube.com/@siiguerriero">YouTube</a> |
-  <a href="https://www.linkedin.com/in/rita-di-gregorio-a1754738a/">LinkedIn</a>
+  <a class="btn" href="https://linkmate.one/link/RitaDiGregorio/p/riparti-da-te-webinar?language=it" target="_blank" rel="noopener">Partecipa al webinar</a>
+  <div class="footer-links">
+    <a href="mailto:digregorio.rita@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+    <a href="https://www.instagram.com/rita.digregorio_la_prof_coach/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> Instagram</a>
+    <a href="https://www.youtube.com/@siiguerriero" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> YouTube</a>
+    <a href="https://www.linkedin.com/in/rita-di-gregorio-a1754738a/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
+  </div>
+  <p style="font-size:12px;color:#999;margin-top:20px;">© 2026 Rita Di Gregorio. Tutti i diritti riservati.</p>
 </div>
 
 <!-- FLOATING CTA -->
 <div id="floating-cta">
-  <a href="https://wa.me/393477185545">Contattami</a>
+  <a href="https://wa.me/393477185545" target="_blank" rel="noopener">Contattami</a>
 </div>
 
 <!-- SCRIPTS -->
 <script>
-const text = "Per chi sta facendo tutto… ma sente che qualcosa dentro non torna.";
-let i = 0;
-const heroEl = document.getElementById("hero-text");
-heroEl.textContent = "";
-
-function typeWriter() {
-  if (i < text.length) {
-    heroEl.textContent += text.charAt(i);
-    i++;
-    setTimeout(typeWriter, 30);
-  }
-}
-typeWriter();
-
-// scroll animations
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if(entry.isIntersecting){

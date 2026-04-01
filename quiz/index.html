@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sii Gioia - Test di autoesplorazione</title>
+  <meta name="description" content="Sii Gioia: quiz di autoesplorazione di coaching. Risultato immediato con archetipo dominante e seconda energia." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-row">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">SG</div>
+        <div class="brand-text">
+          <div class="brand-title">Sii Gioia</div>
+          <div class="brand-sub">Test di autoesplorazione</div>
+        </div>
+      </div>
+      <div class="meta">
+        <a href="https://ritadigregorio.it" style="color:#c8a96a;text-decoration:none;font-size:13px;">← ritadigregorio.it</a>
+        <span class="pill">0–10</span>
+        <span class="pill" id="progressPill">0 / 49</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card" id="introCard">
+      <h1>Sii Gioia</h1>
+      <p class="lead">Test di autoesplorazione</p>
+      <p class="small">
+        Percorso ideato e condotto da <strong>Rita Di Gregorio</strong>.<br/>
+        Questo Test è uno strumento di coaching. Non ha finalità diagnostiche.
+        Le domande invitano a osservare come alcune funzioni interiori si esprimono oggi nella tua vita.
+      </p>
+
+      <div class="hint">
+        <div class="hint-title">Come rispondere</div>
+        <ul>
+          <li>0 = per nulla vero</li>
+          <li>10 = totalmente vero</li>
+          <li>Rispondi in modo intuitivo.</li>
+        </ul>
+      </div>
+
+      <p class="small" style="margin-top:14px;">
+        Le risposte e il risultato del test non vengono salvati né raccolti.
+      </p>
+
+      <div class="actions">
+        <button class="btn primary" id="startBtn">Inizia</button>
+      </div>
+    </section>
+
+    <section class="card hidden" id="quizCard" aria-live="polite">
+      <div class="q-top">
+        <div class="q-num" id="qNum">Domanda 1</div>
+      </div>
+
+      <div class="q-text" id="qText"></div>
+
+      <div class="scale">
+        <div class="scale-guides" aria-label="Riferimenti scala">
+          <span class="scale-guide left"><strong>0</strong><span class="scale-label">per nulla vero</span></span>
+          <span class="scale-guide right"><strong>10</strong><span class="scale-label">totalmente vero</span></span>
+        </div>
+
+        <div class="scale-row alt-a" aria-label="Scala 0-10">
+          <div class="num-scale" id="numScale" role="group" aria-label="Seleziona un valore da 0 a 10">
+            <button type="button" class="num-btn" data-value="0">0</button>
+            <button type="button" class="num-btn" data-value="1">1</button>
+            <button type="button" class="num-btn" data-value="2">2</button>
+            <button type="button" class="num-btn" data-value="3">3</button>
+            <button type="button" class="num-btn" data-value="4">4</button>
+            <button type="button" class="num-btn" data-value="5">5</button>
+            <button type="button" class="num-btn" data-value="6">6</button>
+            <button type="button" class="num-btn" data-value="7">7</button>
+            <button type="button" class="num-btn" data-value="8">8</button>
+            <button type="button" class="num-btn" data-value="9">9</button>
+            <button type="button" class="num-btn" data-value="10">10</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav">
+        <button class="btn" id="prevBtn">Indietro</button>
+        <div class="nav-mid">
+          <div class="bar">
+            <div class="bar-fill" id="barFill" style="width:0%"></div>
+          </div>
+        </div>
+        <button class="btn primary" id="nextBtn">Avanti</button>
+      </div>
+    </section>
+
+    <section class="card hidden" id="resultCard">
+      <h2>Il tuo risultato</h2>
+      <p class="lead" id="resultLead"></p>
+
+      <div class="result-block">
+        <div class="result-image" id="mainImage" aria-hidden="true"></div>
+        <div class="result-copy">
+          <div class="kicker">Archetipo dominante</div>
+          <h3 id="mainTitle"></h3>
+          <p class="need" id="mainNeed"></p>
+          <p class="result-text" id="mainText"></p>
+        </div>
+      </div>
+
+      
+      <div class="work-area">
+        <div class="kicker">Aree di lavoro</div>
+        <h4 class="work-title">Due archetipi su cui lavorare di più</h4>
+      </div>
+
+      <div class="result-block compact">
+        <div class="result-image small" id="work1Image" aria-hidden="true"></div>
+        <div class="result-copy">
+          <div class="kicker">Archetipo da rafforzare</div>
+          <h4 id="work1Title"></h4>
+          <p class="need" id="work1Need"></p>
+          <p class="result-text" id="work1Text"></p>
+        </div>
+      </div>
+
+      <div class="result-block compact">
+        <div class="result-image small" id="work2Image" aria-hidden="true"></div>
+        <div class="result-copy">
+          <div class="kicker">Archetipo da rafforzare</div>
+          <h4 id="work2Title"></h4>
+          <p class="need" id="work2Need"></p>
+          <p class="result-text" id="work2Text"></p>
+        </div>
+      </div>
+</div>
+
+      <div class="divider"></div>
+
+      <div class="summary" id="closingText"></div>
+
+      <div class="signature">
+        <div class="phone">Per approfondire puoi contattarmi al<br/><strong>347 718 5545</strong>.</div>
+        <div class="sig">
+          <strong>Rita Di Gregorio</strong><br/>
+          Counselor gestaltica · Lifestyle Coach
+        </div>
+      </div>
+
+      <details class="details">
+        <summary>Mostra punteggi (facoltativo)</summary>
+        <div id="scoreTable"></div>
+      </details>
+
+      <section class="newsletter" aria-label="Contatti">
+        <p class="small">
+          Le risposte e il risultato del test non vengono salvati né raccolti.<br>
+          Per approfondire il tuo risultato, contattami direttamente.
+        </p>
+        <div class="actions" style="margin-top:12px;">
+          <a class="btn primary" href="https://wa.me/393477185545" target="_blank" rel="noopener">Scrivimi su WhatsApp</a>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button class="btn" id="restartBtn">Ricomincia</button>
+        <button class="btn primary" id="copyBtn">Copia risultato</button>
+      </div>
+
+      <p class="small footer-note">
+        Indicazione di coaching basata sulle risposte. Nessuna finalità diagnostica.
+      </p>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <span>© Sii Gioia</span>
+    <span class="dot">•</span>
+    <span>Rita Di Gregorio</span>
+  </footer>
+
+  <script src="app.js"></script>
+
+</body>
+</html>

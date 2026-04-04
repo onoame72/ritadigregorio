@@ -237,6 +237,15 @@ h3 {
   color:white;
 }
 
+.menu-toggle {
+  display:none;
+  background:none;
+  border:none;
+  color:white;
+  font-size:24px;
+  cursor:pointer;
+}
+
 /* Custom list style */
 .styled-list {
   list-style:none;
@@ -307,6 +316,30 @@ h3 {
 }
 
 @media(max-width:768px){
+  .topbar {
+    flex-wrap:wrap;
+  }
+  .topbar-brand span {
+    display:none;
+  }
+  .menu-toggle {
+    display:block;
+  }
+  .topbar nav {
+    display:none;
+    width:100%;
+    text-align:center;
+    padding:10px 0;
+  }
+  .topbar nav.open {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .topbar nav a {
+    margin-left:0;
+    font-size:16px;
+  }
   .split {
     grid-template-columns:1fr;
   }
@@ -337,6 +370,7 @@ h3 {
 <!-- TOP BAR -->
 <div class="topbar">
   <a class="topbar-brand" href="index.html"><img src="images/logo.png" alt="Rita Di Gregorio"> Rita Di Gregorio <span>| Lifestyle Coach</span></a>
+  <button class="menu-toggle" onclick="document.querySelector('.topbar nav').classList.toggle('open')">☰</button>
   <nav>
     <a href="index.html">Home</a>
     <a href="chi-sono.html">Chi Sono</a>

@@ -20,6 +20,7 @@ body { margin:0; font-family:-apple-system, sans-serif; color:#111; font-size:18
 .topbar span { color:rgba(255,255,255,0.5); font-size:12px; margin-left:8px; letter-spacing:2px; }
 .topbar nav a { color:rgba(255,255,255,0.6); text-decoration:none; margin-left:20px; font-size:14px; letter-spacing:1px; transition:0.3s; }
 .topbar nav a:hover { color:white; }
+.menu-toggle { display:none; background:none; border:none; color:white; font-size:24px; cursor:pointer; }
 h1 { font-family:'Playfair Display', serif; font-size:42px; text-align:center; }
 h2 { font-family:'Playfair Display', serif; font-size:28px; color:#c8a96a; text-align:center; text-transform:uppercase; letter-spacing:2px; }
 .section { padding:60px 20px; }
@@ -36,7 +37,7 @@ h2 { font-family:'Playfair Display', serif; font-size:28px; color:#c8a96a; text-
 .footer { text-align:center; padding:40px; background:#111; color:rgba(255,255,255,0.6); }
 .footer a { color:#c8a96a; text-decoration:none; margin:0 8px; }
 .footer a:hover { color:white; }
-@media(max-width:768px) { h1 { font-size:28px; } .video-grid { grid-template-columns:1fr; } body { font-size:16px; } }
+@media(max-width:768px) { .topbar { flex-wrap:wrap; } .topbar-brand span { display:none; } .menu-toggle { display:block; } .topbar nav { display:none; width:100%; text-align:center; padding:10px 0; } .topbar nav.open { display:flex; flex-direction:column; gap:10px; } .topbar nav a { margin-left:0; font-size:16px; } h1 { font-size:28px; } .video-grid { grid-template-columns:1fr; } body { font-size:16px; } }
 </style>
 </head>
 
@@ -44,6 +45,7 @@ h2 { font-family:'Playfair Display', serif; font-size:28px; color:#c8a96a; text-
 
 <div class="topbar">
   <a class="topbar-brand" href="index.html"><img src="images/logo.png" alt="Rita Di Gregorio"> Rita Di Gregorio <span>| Lifestyle Coach</span></a>
+  <button class="menu-toggle" onclick="document.querySelector('.topbar nav').classList.toggle('open')">☰</button>
   <nav>
     <a href="index.html">Home</a>
     <a href="chi-sono.html">Chi Sono</a>

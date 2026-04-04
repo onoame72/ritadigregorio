@@ -12,7 +12,7 @@
 <meta property="og:image" content="images/hero.jpeg">
 <meta property="og:type" content="website">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="preload" as="image" href="images/hero.avif">
+<link rel="preload" as="image" href="images/rita3.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
@@ -35,35 +35,28 @@ body {
 }
 
 .hero {
-  height:90vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  background:#000;
   text-align:center;
   color:white;
-  background:url('images/hero.avif') center/cover no-repeat;
-  position:relative;
+  padding:20px 20px 30px;
+  min-height:calc(100vh - 60px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
 }
 
-@supports (-webkit-overflow-scrolling: touch) {
-  .hero { background-attachment:scroll; }
-}
-
-@supports not (-webkit-overflow-scrolling: touch) {
-  .hero { background-attachment:fixed; }
+.hero img {
+  max-height:45vh;
+  border-radius:10px;
+  margin-bottom:-10px;
 }
 
 .hero::after {
-  content:"";
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.5);
+  display:none;
 }
 
 .hero-content {
-  position:relative;
-  z-index:2;
   animation:fadeInUp 1.2s ease-out;
 }
 
@@ -198,14 +191,20 @@ h3 {
 .topbar {
   background:#111;
   color:white;
-  text-align:center;
   padding:10px 20px;
   font-size:15px;
   letter-spacing:1px;
   display:flex;
   align-items:center;
-  justify-content:center;
+  justify-content:space-between;
+}
+
+.topbar-brand {
+  display:flex;
+  align-items:center;
   gap:12px;
+  text-decoration:none;
+  color:white;
 }
 
 .topbar img {
@@ -222,6 +221,19 @@ h3 {
   letter-spacing:2px;
 }
 
+.topbar nav a {
+  color:rgba(255,255,255,0.6);
+  text-decoration:none;
+  margin-left:20px;
+  font-size:14px;
+  letter-spacing:1px;
+  transition:0.3s;
+}
+
+.topbar nav a:hover {
+  color:white;
+}
+
 /* Custom list style */
 .styled-list {
   list-style:none;
@@ -232,6 +244,24 @@ h3 {
   content:"✓ ";
   color:#c8a96a;
   font-weight:bold;
+}
+
+.percorso-box {
+  background:#111;
+  color:white;
+  border-radius:10px;
+  padding:30px 25px;
+  text-align:center;
+}
+
+.percorso-box h3 {
+  color:#c8a96a;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+.percorso-box p {
+  color:rgba(255,255,255,0.8);
 }
 
 /* Floating CTA */
@@ -270,6 +300,7 @@ h3 {
   max-width:1100px;
   margin-left:auto;
   margin-right:auto;
+  text-align:inherit;
 }
 
 @media(max-width:768px){
@@ -301,82 +332,143 @@ h3 {
 <body>
 
 <!-- TOP BAR -->
-<div class="topbar"><img src="images/logo.png" alt="Rita Di Gregorio"> Rita Di Gregorio <span>| Lifestyle Coach</span></div>
+<div class="topbar">
+  <a class="topbar-brand" href="index.html"><img src="images/logo.png" alt="Rita Di Gregorio"> Rita Di Gregorio <span>| Lifestyle Coach</span></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="chi-sono.html">Chi Sono</a>
+    <a href="media.html">Media</a>
+  </nav>
+</div>
 
 <!-- HERO -->
 <section class="hero">
+  <img src="images/rita3.png" alt="Rita Di Gregorio – Counseling & Lifestyle Coach">
   <div class="hero-content">
-    <p style="text-transform:uppercase;letter-spacing:4px;font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:0;">Lifestyle Coaching</p>
-    <h1 id="hero-text">Per chi sta facendo tutto… ma sente che qualcosa dentro non torna.</h1>
-    <p style="margin-bottom:30px;">Un percorso concreto per ritrovare chiarezza, energia e direzione. Lavoro su mente, corpo ed emozioni.</p>
-    <p class="problema-text" style="color:rgba(255,255,255,0.85);">Vai avanti. Ti occupi di tutto. Funzioni.<br>
-    Fuori regge. Dentro si accumula.</p>
-    <p class="problema-text" style="color:rgba(255,255,255,0.85);">Stanchezza. Confusione. Perdita di direzione.<br>
-    Non è mancanza di forza. È mancanza di spazio per te.</p>
+    <h1 style="margin-top:0;margin-bottom:5px;text-transform:uppercase;letter-spacing:4px;font-size:56px;">Rita Di Gregorio</h1>
+    <p style="text-transform:uppercase;letter-spacing:3px;font-size:28px;color:#c8a96a;margin-top:0;margin-bottom:20px;">Counseling & Lifestyle Coaching</p>
+    <p style="margin-bottom:0;">Percorsi individuali per ritrovare chiarezza, energia e direzione.</p>
+    <p style="margin-top:0;">Counseling familiare e supporto alla genitorialità.<br>Formazione strategica per educatori ed insegnanti.</p>
     <a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Prenota un colloquio gratuito</a>
   </div>
 </section>
 
-<!-- CAMBIAMENTO -->
+<!-- CHI SONO -->
+<div class="section-alt" style="text-align:center;font-size:22px;line-height:1.5;">
+  <h2 style="margin-bottom:10px;">Sono Rita Di Gregorio</h2>
+  <p style="margin-top:10px;margin-bottom:10px;">Docente, Counselor Gestaltica e Longevity & Lifestyle Coach Metodo Ongaro®.<br>
+  Utilizzo un approccio pluralistico integrato fondato su oltre 15 anni di esperienza e neuroscienze.<br>
+  Ti accompagno a ritrovare energia, stabilità e direzione.<br>
+  Lavoriamo sull'<strong>empowerment</strong> personale per sentire il tuo potere nelle scelte di ogni giorno.</p>
+  <a class="btn" href="chi-sono.html">Scopri di più su di me</a>
+</div>
+
+<!-- VISIONE MISSIONE VALORI -->
 <div class="section">
+<div class="grid" style="grid-template-columns:repeat(3,1fr);text-align:center;">
+
+<div class="card">
+<img loading="lazy" src="images/visione.png" alt="La mia visione">
+<h3 style="text-transform:uppercase;letter-spacing:2px;color:#c8a96a;">La mia visione</h3>
+<p>Sono convinta che solo una persona felice possa rendere intorno a sé il mondo più felice.</p>
+</div>
+
+<div class="card">
+<img loading="lazy" src="images/missione.png" alt="La mia missione d'anima">
+<h3 style="text-transform:uppercase;letter-spacing:2px;color:#c8a96a;">La mia missione d'anima</h3>
+<p>Portare un contributo positivo al mondo, partendo dal mio, spargendo semi di conoscenza.</p>
+</div>
+
+<div class="card">
+<img loading="lazy" src="images/valori.png" alt="I miei valori">
+<h3 style="text-transform:uppercase;letter-spacing:2px;color:#c8a96a;">I miei valori</h3>
+<p>La cura, l'autenticità, l'entusiasmo, l'affidabilità e la salute.</p>
+</div>
+
+</div>
+</div>
+
+<!-- CAMBIAMENTO -->
+<div class="section-alt">
 <div class="split">
-  <img loading="lazy" src="images/cambiamento.avif" alt="Il punto non è fare di più – riallineare mente, corpo ed emozioni">
-  <div>
-    <h2>Il punto non è fare di più</h2>
-    <p>Continuare ad aggiungere non risolve.<br>Serve fermarsi, rimettere ordine, riallineare.</p>
-    <p style="margin-top:20px;">Quando mente, corpo ed emozioni lavorano insieme:</p>
-    <ul class="styled-list">
-      <li>le decisioni diventano più chiare,</li>
-      <li>l’energia torna stabile,</li>
-      <li>la direzione si definisce.</li>
-    </ul>
+  <img loading="lazy" src="images/cambiamento.avif" alt="La via del coaching – tu al centro">
+  <div style="text-align:center;">
+    <h2 style="text-transform:uppercase;letter-spacing:2px;color:#c8a96a;">La via del coaching</h2>
+    <p>La tua vita è il risultato delle scelte che fai e delle abitudini che adotti.</p>
+    <p>Mente, corpo ed emozioni sono parte dello stesso sistema.<br>Quando sono allineati, le tue azioni diventano più semplici, più stabili, più efficaci.</p>
+    <p>Il coaching è un supporto per migliorare la tua vita e la tua salute cambiando le tue abitudini in modo duraturo.</p>
+    <p>Hai già le risorse.<br>Ti aiuto a riconoscerle e svilupparle in modo coerente al tuo progetto di vita, creando insieme un piano di azione concreto per operare le tue scelte con il maggior senso di autoefficacia possibile.</p>
+    <p style="text-transform:uppercase;letter-spacing:2px;color:#c8a96a;font-weight:bold;margin-top:25px;">Tu al centro</p>
   </div>
 </div>
 </div>
 
-<div class="section-alt">
 
-<!-- METODO -->
-<h2>Come lavoriamo</h2>
-<p>Il mio approccio integra coaching, neuroscienze e lavoro sul linguaggio. Non aggiungo semplice teoria: lavoriamo su ciò che cambia davvero la tua esperienza quotidiana attraverso processi concreti di consapevolezza.</p>
-<hr style="border:none;border-top:1px solid #ddd;margin:60px 0;">
-
-<div class="grid">
-
-<div class="card">
-<img loading="lazy" src="images/chiarezza1.avif" alt="Chiarezza mentale – ritrovare lucidità">
-<h3>Chiarezza mentale</h3>
-<p>Semplificare i pensieri e disinnescare il rumore mentale per ritrovare la lucidità necessaria.</p>
-</div>
-
-<div class="card">
-<img loading="lazy" src="images/energia1.avif" alt="Gestione dell'energia personale">
-<h3>Gestione dell’energia</h3>
-<p>Imparare a regolare le proprie risorse per mantenere una stabilità costante nel tempo.</p>
-</div>
-
-<div class="card">
-<img loading="lazy" src="images/emozione1.avif" alt="Regolazione emotiva">
-<h3>Regolazione emotiva</h3>
-<p>Trasformare il rapporto con le tue emozioni per navigare il cambiamento senza stress.</p>
-</div>
-
-<div class="card">
-<img loading="lazy" src="images/identita1.avif" alt="Identità e direzione personale">
-<h3>Identità e direzione</h3>
-<p>Riallineare chi sei con dove stai andando, ritrovando il senso profondo del tuo agire.</p>
-</div>
-
-</div>
-</div>
-
-<!-- WEBINAR -->
+<!-- PERCORSI -->
 <div class="section">
+<h2 style="text-align:center;text-transform:uppercase;letter-spacing:2px;color:#c8a96a;">I miei percorsi</h2>
+<p style="text-align:center;color:#666;">Incontri singoli o pacchetti di incontri.</p>
+
+<div class="grid" style="grid-template-columns:repeat(3,1fr);">
+
+<div class="card percorso-box">
+<h3>Percorsi Individuali</h3>
+<p>Attraversi un momento di dubbio o blocco? Ti guido verso una rinascita concreta.</p>
+<p>Ritrova energia, chiarezza e direzione mettendo ordine nei pensieri, riducendo il sovraccarico emotivo e costruendo stabilità.</p>
+<p>Lavoriamo su ciò che oggi ti blocca: pensieri, emozioni e abitudini, definendo azioni chiare e costruendo continuità nel tempo.</p>
+<a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Scopri di più</a>
+</div>
+
+<div class="card percorso-box">
+<h3>Parent Coaching</h3>
+<p>Counseling familiare e supporto alla genitorialità</p>
+<p>Per affrontare con lucidità le sfide educative, in particolare nei contesti di separazione.</p>
+<p>Comprendi i comportamenti dei tuoi figli e la fase che stanno vivendo.<br>Definisci strategie chiare e sostenibili.</p>
+<p>Rafforzi autorevolezza, comunicazione e coerenza educativa.<br>Ti aiuto ad aiutare i tuoi figli, partendo da te.</p>
+<a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Scopri di più</a>
+</div>
+
+<div class="card percorso-box">
+<h3>Group Coaching</h3>
+<p>Sono attivi percorsi di coaching di gruppo sia online che in presenza a Salerno.</p>
+<p>Il gruppo diventa un acceleratore del cambiamento.<br>Lavoriamo sul riconoscimento dei bisogni fondamentali, sulla chiarezza personale e sulla direzione.</p>
+<p>Attraverso il confronto, ogni partecipante amplia lo sguardo, si riconosce e attiva nuove possibilità.</p>
+<a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Scopri di più</a>
+</div>
+
+<div class="card percorso-box">
+<h3>Formazione Docenti Strategici</h3>
+<p>Percorsi di formazione per docenti centrati su emozioni, comunicazione e dinamiche relazionali in classe.</p>
+<p>Lavoriamo su gestione dei conflitti, educazione all'affettività, linguaggio inclusivo, prevenzione del bullismo e cyberbullismo e prevenzione del burn-out.</p>
+<p>Fornisco strumenti pratici e replicabili per migliorare il clima di classe e sostenere il ruolo educativo.</p>
+<a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Scopri di più</a>
+</div>
+
+<div class="card percorso-box">
+<h3>Webinar e Conferenze</h3>
+<p>Laboratori emotivi nelle scuole, aziende e carceri</p>
+<p>Progetto e conduco incontri e speech motivazionali per attivare e rafforzare il cambiamento, lavorando su emozioni, comunicazione e dinamiche relazionali.</p>
+<p>Attraverso strumenti pratici, accompagno persone e gruppi a riconoscere ciò che provano, gestire le situazioni complesse e migliorare la qualità delle relazioni.</p>
+<a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Scopri di più</a>
+</div>
+
+<div class="card percorso-box">
+<h3>Il Ritmo che Cura</h3>
+<p>Tarantismo e trasformazione emotiva</p>
+<p>Laboratorio esperienziale che utilizza il ritmo e il corpo come strumenti di lavoro sulle emozioni.</p>
+<p>La via del tarantismo: guarda negli occhi la tua taranta, smetti di evitarla e rinasci.<br>Trasforma le convinzioni limitanti in forza creativa. Trasforma il veleno in elisir.</p>
+<p>Attraverso il movimento, attraversi stati emotivi, sciogli tensioni e ritrovi energia.</p>
+<a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Scopri di più</a>
+</div>
+
+</div>
+</div>
+
+<!-- WEBINAR --><div class="section-alt">
 <div class="split">
   <div>
     <h2>Webinar – Riparti da Te</h2>
     <p>Un incontro pratico per rimettere ordine e ripartire con lucidità.</p>
-    <p>Non ascolti soltanto.<br>Lavori su di te già durante il webinar.</p>
     <p>Cosa ti porti a casa:</p>
     <ul class="styled-list">
       <li>un punto chiaro da cui ripartire</li>
@@ -395,43 +487,68 @@ h3 {
 </div>
 </div>
 
+<!-- CHALLENGE -->
+<div class="section" style="text-align:center;line-height:1.4;">
+  <h2 style="text-transform:uppercase;letter-spacing:2px;color:#c8a96a;">Riparti da te in 5 giorni</h2>
+  <p class="problema-text">Se senti che stai facendo tanto, ma dentro non si muove davvero nulla, questo è il punto da cui ripartire.</p>
+  <p>Ho creato una mini challenge gratuita di 5 giorni.</p>
+  <p>Uno spazio in cui inizi a lavorare su corpo, mente e anima insieme.</p>
+  <p>Ogni giorno ricevi una guida semplice e concreta, che entra nella tua giornata e ti permette di fare un passo reale.</p>
+  <hr style="border:none;border-top:1px solid #ddd;margin:30px auto;max-width:200px;">
+  <p>In questi 5 giorni lavori su 5 azioni precise:</p>
+  <div class="grid" style="grid-template-columns:repeat(5,1fr);gap:15px;margin:20px auto;max-width:1100px;">
+    <div style="text-align:center;">
+      <img loading="lazy" src="images/challenge 1.png" alt="Giorno 1 – Attivi il tuo stato" style="width:100%;border-radius:10px;">
+      <p style="font-size:14px;margin-top:8px;"><strong style="color:#c8a96a;font-size:16px;">Attivi il tuo stato</strong><br>Riporti energia e presenza nel corpo</p>
+    </div>
+    <div style="text-align:center;">
+      <img loading="lazy" src="images/challenge 2.png" alt="Giorno 2 – Agisci in piccolo" style="width:100%;border-radius:10px;">
+      <p style="font-size:14px;margin-top:8px;"><strong style="color:#c8a96a;font-size:16px;">Agisci in piccolo</strong><br>Inizi da ciò che è accessibile e possibile</p>
+    </div>
+    <div style="text-align:center;">
+      <img loading="lazy" src="images/challenge 3.png" alt="Giorno 3 – Interrompi uno schema" style="width:100%;border-radius:10px;">
+      <p style="font-size:14px;margin-top:8px;"><strong style="color:#c8a96a;font-size:16px;">Interrompi uno schema</strong><br>Riconosci un automatismo e crei una variazione</p>
+    </div>
+    <div style="text-align:center;">
+      <img loading="lazy" src="images/challenge 4.png" alt="Giorno 4 – Costruisci identità" style="width:100%;border-radius:10px;">
+      <p style="font-size:14px;margin-top:8px;"><strong style="color:#c8a96a;font-size:16px;">Costruisci identità</strong><br>Porti attenzione a come ti nutri e a come ti muovi</p>
+    </div>
+    <div style="text-align:center;">
+      <img loading="lazy" src="images/chellenge 5.png" alt="Giorno 5 – Dai direzione" style="width:100%;border-radius:10px;">
+      <p style="font-size:14px;margin-top:8px;"><strong style="color:#c8a96a;font-size:16px;">Dai direzione</strong><br>Scegli le tue priorità e inizi a orientarti</p>
+    </div>
+  </div>
+  <p>Ti accompagno passo dopo passo.</p>
+  <p style="margin-top:25px;">Scrivimi <strong>"CHALLENGE"</strong> su WhatsApp e inizia da qui.</p>
+  <a class="btn" href="https://wa.me/393477185545?text=CHALLENGE" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Inizia la Challenge</a>
+</div>
+
 <!-- QUIZ -->
 <div class="section-alt" style="text-align:center;">
   <h2>Scopri cosa ti chiede attenzione</h2>
   <p>Un test di autoesplorazione in 49 domande per osservare come funzioni oggi — e dove puoi lavorare.<br>
   Scopri il tuo archetipo dominante e le aree su cui investire energia.</p>
   <p style="font-size:13px;color:#666;margin-top:25px;">Risposte intuitive, risultato immediato. Nessun dato viene raccolto.</p>
-  <a class="btn" href="/quiz" target="_blank" rel="noopener">Fai il test — Sii Gioia</a>
-</div>
-
-<!-- CHI SONO -->
-<div class="section">
-<div class="split">
-  <img loading="lazy" src="images/rita1.avif" alt="Rita Di Gregorio – Lifestyle Coach">
-  <div>
-    <h2>Sono Rita Di Gregorio</h2>
-    <p>Docente e lifestyle coach.</p>
-    <p style="margin-top:20px;">Lavoro con adulti che stanno attraversando una fase di cambiamento e vogliono ritrovare stabilità, energia e direzione. Porto un lavoro diretto, concreto, basato su esperienza e neuroscienze.</p>
-  </div>
-</div>
+  <a class="btn" href="quiz/index.html" target="_blank" rel="noopener">Fai il test gratuito — Sii Gioia</a>
 </div>
 
 <!-- CALL -->
-<div class="section-alt">
+<div class="section">
 <div class="split">
   <div>
     <h2>Inizia con un primo colloquio conoscitivo</h2>
-    <p>Se vuoi capire da dove partire, possiamo fare un primo confronto.<br>
-    Uno spazio per mettere a fuoco la tua situazione e vedere insieme la direzione.</p>
+    <p>Un incontro gratuito di primo contatto, pensato per conoscerci, comprendere la situazione e valutare insieme il percorso più adatto.</p>
+    <p>È uno spazio di ascolto e orientamento per chiarire il bisogno, definire gli obiettivi e capire se e come iniziare un lavoro insieme.</p>
+    <p>L’incontro consente di costruire una proposta coerente con la fase di vita e le esigenze personali.</p>
     <p style="text-transform:uppercase;letter-spacing:2px;font-size:13px;margin-top:25px;">Durata 20 minuti</p>
     <a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Prenota il tuo colloquio gratuito</a>
   </div>
-  <img loading="lazy" src="images/call.avif" alt="Primo colloquio conoscitivo">
+  <img loading="lazy" src="images/ritacolloquio.png" alt="Rita Di Gregorio – Primo colloquio conoscitivo">
 </div>
 </div>
 
 <!-- NEWSLETTER -->
-<div class="section" style="text-align:center;">
+<div class="section-alt" style="text-align:center;">
   <h2>Resta in contatto</h2>
   <p>Iscriviti alla newsletter per ricevere spunti pratici su energia, chiarezza e direzione.</p>
   <form action="https://instagram.us10.list-manage.com/subscribe/post?u=fd8fd83d1bbf1c47a7ab3185b&amp;id=d4482970c1&amp;f_id=000645e4f0" method="post" target="_blank" style="margin-top:20px;">
@@ -451,6 +568,7 @@ h3 {
     </div>
   </form>
   <p style="font-size:12px;color:#999;margin-top:15px;">Niente spam. Puoi cancellarti in qualsiasi momento.</p>
+  <p style="margin-top:15px;">Unisciti al canale Telegram: <a href="https://t.me/LifestyleRita" target="_blank" rel="noopener" style="color:#c8a96a;text-decoration:none;"><i class="fab fa-telegram"></i> LifestyleRita</a></p>
 </div>
 
 <!-- FOOTER -->
@@ -459,6 +577,7 @@ h3 {
     <a href="mailto:digregorio.rita@gmail.com"><i class="fas fa-envelope"></i> Email</a>
     <a href="https://www.instagram.com/rita.digregorio_la_prof_coach/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> Instagram</a>
     <a href="https://www.youtube.com/@siiguerriero" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> YouTube</a>
+    <a href="https://t.me/LifestyleRita" target="_blank" rel="noopener"><i class="fab fa-telegram"></i> Telegram</a>
     <a href="https://www.linkedin.com/in/rita-di-gregorio-a1754738a/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
   </div>
   <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:20px;">© 2026 Rita Di Gregorio. Tutti i diritti riservati.</p>

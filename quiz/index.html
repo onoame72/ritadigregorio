@@ -6,13 +6,30 @@
   <title>Sii Gioia - Test di autoesplorazione</title>
   <meta name="description" content="Sii Gioia: quiz di autoesplorazione di coaching. Risultato immediato con archetipo dominante e seconda energia." />
   <link rel="stylesheet" href="styles.css" />
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3FEX3GSE3Y"></script>
+<!-- Cookie Consent Banner -->
+<style>
+#cookie-banner{display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:white;padding:16px 20px;z-index:9999;font-size:14px;border-top:1px solid #c8a96a;text-align:center;}
+#cookie-banner a{color:#c8a96a;}
+#cookie-banner button{padding:8px 20px;border:none;border-radius:6px;cursor:pointer;margin-left:10px;font-size:14px;}
+#cookie-accept{background:#c8a96a;color:white;}
+#cookie-reject{background:#333;color:white;}
+</style>
 <script>
-  window.dataLayer = window.dataLayer || [];
+function loadGA(){
+  var s=document.createElement('script');s.async=true;
+  s.src='https://www.googletagmanager.com/gtag/js?id=G-3FEX3GSE3Y';
+  document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-3FEX3GSE3Y');
+  gtag('js',new Date());gtag('config','G-3FEX3GSE3Y');
+}
+(function(){
+  var c=localStorage.getItem('cookie-consent');
+  if(c==='accepted'){loadGA();}
+  else if(c!=='rejected'){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').style.display='block';});}
+})();
+function acceptCookies(){localStorage.setItem('cookie-consent','accepted');document.getElementById('cookie-banner').style.display='none';loadGA();}
+function rejectCookies(){localStorage.setItem('cookie-consent','rejected');document.getElementById('cookie-banner').style.display='none';}
 </script>
 </head>
 <body>
@@ -202,5 +219,13 @@
 
   <script src="app.js"></script>
 
+
+<!-- Cookie Banner -->
+<div id="cookie-banner">
+  Questo sito utilizza cookie tecnici e di analisi per migliorare la tua esperienza.
+  <a href="https://www.iubenda.com/privacy-policy/67937036/cookie-policy" target="_blank">Cookie Policy</a>
+  <button id="cookie-accept" onclick="acceptCookies()">Accetta</button>
+  <button id="cookie-reject" onclick="rejectCookies()">Rifiuta</button>
+</div>
 </body>
 </html>

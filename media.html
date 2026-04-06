@@ -41,13 +41,30 @@ h2 { font-family:'Playfair Display', serif; font-size:28px; color:#c8a96a; text-
 .footer a:hover { color:white; }
 @media(max-width:768px) { .topbar { flex-wrap:wrap; } .topbar-brand span { display:none; } .menu-toggle { display:block; } .topbar nav { display:none; width:100%; text-align:center; padding:10px 0; } .topbar nav.open { display:flex; flex-direction:column; gap:10px; } .topbar nav a { margin-left:0; font-size:16px; } h1 { font-size:28px; } .video-grid { grid-template-columns:1fr; } body { font-size:16px; } }
 </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3FEX3GSE3Y"></script>
+<!-- Cookie Consent Banner -->
+<style>
+#cookie-banner{display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:white;padding:16px 20px;z-index:9999;font-size:14px;border-top:1px solid #c8a96a;text-align:center;}
+#cookie-banner a{color:#c8a96a;}
+#cookie-banner button{padding:8px 20px;border:none;border-radius:6px;cursor:pointer;margin-left:10px;font-size:14px;}
+#cookie-accept{background:#c8a96a;color:white;}
+#cookie-reject{background:#333;color:white;}
+</style>
 <script>
-  window.dataLayer = window.dataLayer || [];
+function loadGA(){
+  var s=document.createElement('script');s.async=true;
+  s.src='https://www.googletagmanager.com/gtag/js?id=G-3FEX3GSE3Y';
+  document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-3FEX3GSE3Y');
+  gtag('js',new Date());gtag('config','G-3FEX3GSE3Y');
+}
+(function(){
+  var c=localStorage.getItem('cookie-consent');
+  if(c==='accepted'){loadGA();}
+  else if(c!=='rejected'){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').style.display='block';});}
+})();
+function acceptCookies(){localStorage.setItem('cookie-consent','accepted');document.getElementById('cookie-banner').style.display='none';loadGA();}
+function rejectCookies(){localStorage.setItem('cookie-consent','rejected');document.getElementById('cookie-banner').style.display='none';}
 </script>
 <meta property="og:title" content="Media | Rita Di Gregorio">
 <meta property="og:description" content="Video interviste, eventi e momenti dal percorso di Rita Di Gregorio.">
@@ -115,8 +132,21 @@ h2 { font-family:'Playfair Display', serif; font-size:28px; color:#c8a96a; text-
     <a href="https://t.me/LifestyleRita" target="_blank" rel="noopener"><i class="fab fa-telegram"></i> Telegram</a>
     <a href="https://www.linkedin.com/in/rita-di-gregorio-a1754738a/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
   </div>
+  <div style="margin-top:15px;">
+    <a href="https://www.iubenda.com/privacy-policy/67937036" class="iubenda-white iubenda-noiframe iubenda-embed" title="Privacy Policy">Privacy Policy</a>
+    <a href="https://www.iubenda.com/privacy-policy/67937036/cookie-policy" class="iubenda-white iubenda-noiframe iubenda-embed" title="Cookie Policy">Cookie Policy</a>
+    <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+  </div>
   <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:20px;">© 2026 Rita Di Gregorio. Tutti i diritti riservati.</p>
 </div>
 
+
+<!-- Cookie Banner -->
+<div id="cookie-banner">
+  Questo sito utilizza cookie tecnici e di analisi per migliorare la tua esperienza.
+  <a href="https://www.iubenda.com/privacy-policy/67937036/cookie-policy" target="_blank">Cookie Policy</a>
+  <button id="cookie-accept" onclick="acceptCookies()">Accetta</button>
+  <button id="cookie-reject" onclick="rejectCookies()">Rifiuta</button>
+</div>
 </body>
 </html>

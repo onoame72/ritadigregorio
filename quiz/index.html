@@ -35,15 +35,31 @@ function rejectCookies(){localStorage.setItem('cookie-consent','rejected');docum
 </head>
 <body>
   <!-- TOP BAR -->
-  <div style="background:#111;color:white;padding:10px 20px;font-size:15px;letter-spacing:1px;display:flex;align-items:center;justify-content:space-between;">
-    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:white;">
+  <style>
+    .qz-topbar{background:#111;color:white;padding:10px 20px;font-size:15px;letter-spacing:1px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+    .qz-topbar a.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:white;}
+    .qz-topbar a.brand span{color:rgba(255,255,255,0.5);font-size:12px;margin-left:8px;letter-spacing:2px;}
+    .qz-topbar nav a{color:rgba(255,255,255,0.6);text-decoration:none;margin-left:20px;font-size:14px;letter-spacing:1px;}
+    .qz-topbar nav a:hover{color:white;}
+    .qz-menu-toggle{display:none;background:none;border:none;color:white;font-size:24px;cursor:pointer;}
+    @media(max-width:768px){
+      .qz-topbar a.brand span{display:none;}
+      .qz-menu-toggle{display:block;}
+      .qz-topbar nav{display:none;width:100%;text-align:center;padding:10px 0;}
+      .qz-topbar nav.open{display:flex;flex-direction:column;gap:10px;}
+      .qz-topbar nav a{margin-left:0;font-size:16px;}
+    }
+  </style>
+  <div class="qz-topbar">
+    <a class="brand" href="../index.html">
       <img src="../images/logo.png" alt="Rita Di Gregorio" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
-      Rita Di Gregorio <span style="color:rgba(255,255,255,0.5);font-size:12px;margin-left:8px;letter-spacing:2px;">| Lifestyle Coach</span>
+      Rita Di Gregorio <span>| Lifestyle Coach</span>
     </a>
+    <button class="qz-menu-toggle" onclick="document.querySelector('.qz-topbar nav').classList.toggle('open')">☰</button>
     <nav>
-      <a href="../index.html" style="color:rgba(255,255,255,0.6);text-decoration:none;margin-left:20px;font-size:14px;letter-spacing:1px;">Home</a>
-      <a href="../chi-sono.html" style="color:rgba(255,255,255,0.6);text-decoration:none;margin-left:20px;font-size:14px;letter-spacing:1px;">Chi Sono</a>
-      <a href="../media.html" style="color:rgba(255,255,255,0.6);text-decoration:none;margin-left:20px;font-size:14px;letter-spacing:1px;">Media</a>
+      <a href="../index.html">Home</a>
+      <a href="../chi-sono.html">Chi Sono</a>
+      <a href="../media.html">Media</a>
     </nav>
   </div>
 

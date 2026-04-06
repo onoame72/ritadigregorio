@@ -219,13 +219,6 @@ h3 {
   object-fit:cover;
 }
 
-.topbar span {
-  color:rgba(255,255,255,0.5);
-  font-size:12px;
-  margin-left:8px;
-  letter-spacing:2px;
-}
-
 .topbar nav a {
   color:rgba(255,255,255,0.6);
   text-decoration:none;
@@ -320,9 +313,6 @@ h3 {
 @media(max-width:768px){
   .topbar {
     flex-wrap:wrap;
-  }
-  .topbar-brand span {
-    display:none;
   }
   .menu-toggle {
     display:block;
@@ -424,7 +414,7 @@ function rejectCookies(){localStorage.setItem('cookie-consent','rejected');docum
 
 <!-- TOP BAR -->
 <div class="topbar">
-  <a class="topbar-brand" href="index.html"><img src="images/logo.png" alt="Rita Di Gregorio"> Rita Di Gregorio <span>| Lifestyle Coach</span></a>
+  <a class="topbar-brand" href="index.html"><img src="images/logo.png" alt="Rita Di Gregorio"> <span style="display:flex;flex-direction:column;line-height:1.2;">Rita Di Gregorio<span style="color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;">Lifestyle Coach</span></span></a>
   <button class="menu-toggle" onclick="document.querySelector('.topbar nav').classList.toggle('open')">☰</button>
   <nav>
     <a href="index.html">Home</a>

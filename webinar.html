@@ -152,7 +152,7 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
   <!-- REGISTRATION FORM -->
   <div id="form-section">
     <h2>Prenota il tuo posto</h2>
-    <form action="https://9849341c.sibforms.com/serve/MUIFAOl2If2oulTxHD44FDMGcfnaY96ZJUawYx6FwGvvD14K5ljN1iyBN8vdUe76Xn-CqO2Kl3CKu5hnNigsjJNQjSTApOkzFSqJ7YKIoH1C8pDcxI48POxElexbT4e40Xot94mHDIZFaYMXt8n7f3EQ3Qyns_pkpB7xJ9y4g19s_dOunb9QJgG7vZAvL1mMrMCylToasB-6T9EPrA==" method="post" target="_blank">
+    <form id="signup-form" action="https://9849341c.sibforms.com/serve/MUIFAOl2If2oulTxHD44FDMGcfnaY96ZJUawYx6FwGvvD14K5ljN1iyBN8vdUe76Xn-CqO2Kl3CKu5hnNigsjJNQjSTApOkzFSqJ7YKIoH1C8pDcxI48POxElexbT4e40Xot94mHDIZFaYMXt8n7f3EQ3Qyns_pkpB7xJ9y4g19s_dOunb9QJgG7vZAvL1mMrMCylToasB-6T9EPrA==" method="post" target="brevo-iframe" onsubmit="setTimeout(function(){document.getElementById('form-section').style.display='none';document.getElementById('success-section').style.display='block';},1000);">
       <input type="email" name="EMAIL" class="form-input" placeholder="La tua email" required><br>
       <label class="gdpr-label">
         <input type="checkbox" required style="margin-right:6px;">
@@ -161,6 +161,7 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
       <br>
       <button type="submit" class="btn">Prenota il tuo posto gratuito</button>
     </form>
+    <iframe name="brevo-iframe" style="display:none;"></iframe>
   </div>
 
   <!-- SUCCESS MESSAGE -->
@@ -208,7 +209,7 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
 </div>
 
 <script>
-// Form submits to Brevo
+// Form submits to Brevo via hidden iframe
 </script>
 
 </body>

@@ -152,17 +152,12 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
   <!-- REGISTRATION FORM -->
   <div id="form-section">
     <h2>Prenota il tuo posto</h2>
-    <form action="https://instagram.us10.list-manage.com/subscribe/post?u=fd8fd83d1bbf1c47a7ab3185b&amp;id=d4482970c1&amp;f_id=000645e4f0" method="post" target="_blank">
-      <input type="email" name="EMAIL" class="form-input" placeholder="La tua email" required><br>
-      <input type="hidden" name="FNAME" value="Webinar-Diario">
+    <form id="signup-form" onsubmit="return submitForm(event)">
+      <input type="email" id="mce-EMAIL" name="EMAIL" class="form-input" placeholder="La tua email" required><br>
       <label class="gdpr-label">
         <input type="checkbox" name="gdpr[63007]" value="Y" required style="margin-right:6px;">
         Acconsento a ricevere comunicazioni email.
       </label><br>
-      <!-- bot protection -->
-      <div style="position:absolute;left:-5000px;" aria-hidden="true">
-        <input type="text" name="b_fd8fd83d1bbf1c47a7ab3185b_d4482970c1" tabindex="-1" value="">
-      </div>
       <br>
       <button type="submit" class="btn">Prenota il tuo posto gratuito</button>
     </form>
@@ -213,7 +208,23 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
 </div>
 
 <script>
-// No additional script needed - form submits via iframe
+function submitForm(e) {
+  e.preventDefault();
+  var email = document.getElementById('mce-EMAIL').value;
+  var url = 'https://instagram.us10.list-manage.com/subscribe/post-json?u=fd8fd83d1bbf1c47a7ab3185b&id=d4482970c1&f_id=000645e4f0&EMAIL=' + encodeURIComponent(email) + '&gdpr[63007]=Y&tags=14573954&c=callback';
+  var script = document.createElement('script');
+  script.src = url;
+  document.body.appendChild(script);
+  window.callback = function(data) {
+    if (data.result === 'success' || data.msg.indexOf('already subscribed') > -1) {
+      document.getElementById('form-section').style.display = 'none';
+      document.getElementById('success-section').style.display = 'block';
+    } else {
+      alert('Errore: ' + data.msg);
+    }
+  };
+  return false;
+}
 </script>
 
 </body>

@@ -152,10 +152,10 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
   <!-- REGISTRATION FORM -->
   <div id="form-section">
     <h2>Prenota il tuo posto</h2>
-    <form id="signup-form" onsubmit="return submitForm(event)">
-      <input type="email" id="mce-EMAIL" name="EMAIL" class="form-input" placeholder="La tua email" required><br>
+    <form action="https://9849341c.sibforms.com/serve/MUIFAOl2If2oulTxHD44FDMGcfnaY96ZJUawYx6FwGvvD14K5ljN1iyBN8vdUe76Xn-CqO2Kl3CKu5hnNigsjJNQjSTApOkzFSqJ7YKIoH1C8pDcxI48POxElexbT4e40Xot94mHDIZFaYMXt8n7f3EQ3Qyns_pkpB7xJ9y4g19s_dOunb9QJgG7vZAvL1mMrMCylToasB-6T9EPrA==" method="post" target="_blank">
+      <input type="email" name="EMAIL" class="form-input" placeholder="La tua email" required><br>
       <label class="gdpr-label">
-        <input type="checkbox" name="gdpr[63007]" value="Y" required style="margin-right:6px;">
+        <input type="checkbox" required style="margin-right:6px;">
         Acconsento a ricevere comunicazioni email.
       </label><br>
       <br>
@@ -208,23 +208,7 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
 </div>
 
 <script>
-function submitForm(e) {
-  e.preventDefault();
-  var email = document.getElementById('mce-EMAIL').value;
-  var url = 'https://instagram.us10.list-manage.com/subscribe/post-json?u=fd8fd83d1bbf1c47a7ab3185b&id=d4482970c1&f_id=000645e4f0&EMAIL=' + encodeURIComponent(email) + '&gdpr[63007]=Y&tags=14573954&c=callback';
-  var script = document.createElement('script');
-  script.src = url;
-  document.body.appendChild(script);
-  window.callback = function(data) {
-    if (data.result === 'success' || data.msg.indexOf('already subscribed') > -1) {
-      document.getElementById('form-section').style.display = 'none';
-      document.getElementById('success-section').style.display = 'block';
-    } else {
-      alert('Errore: ' + data.msg);
-    }
-  };
-  return false;
-}
+// Form submits to Brevo
 </script>
 
 </body>

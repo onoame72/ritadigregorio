@@ -152,8 +152,9 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
   <!-- REGISTRATION FORM -->
   <div id="form-section">
     <h2>Prenota il tuo posto</h2>
-    <form id="signup-form" onsubmit="return submitForm(event)">
-      <input type="email" id="mce-EMAIL" name="EMAIL" class="form-input" placeholder="La tua email" required><br>
+    <form id="signup-form" action="https://instagram.us10.list-manage.com/subscribe/post?u=fd8fd83d1bbf1c47a7ab3185b&id=d4482970c1&f_id=000645e4f0" method="post" target="mc-iframe" onsubmit="setTimeout(function(){document.getElementById('form-section').style.display='none';document.getElementById('success-section').style.display='block';},500);">
+      <input type="email" name="EMAIL" class="form-input" placeholder="La tua email" required><br>
+      <input type="hidden" name="MMERGE6" value="Webinar-Diario-Aprile">
       <label class="gdpr-label">
         <input type="checkbox" name="gdpr[63007]" value="Y" required style="margin-right:6px;">
         Acconsento a ricevere comunicazioni email.
@@ -165,6 +166,7 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
       <br>
       <button type="submit" class="btn">Prenota il tuo posto gratuito</button>
     </form>
+    <iframe name="mc-iframe" style="display:none;"></iframe>
   </div>
 
   <!-- SUCCESS MESSAGE -->
@@ -217,29 +219,7 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
 </div>
 
 <script>
-function submitForm(e) {
-  e.preventDefault();
-  var form = document.getElementById('signup-form');
-  var email = document.getElementById('mce-EMAIL').value;
-  
-  // Submit to Mailchimp via JSONP
-  var url = 'https://instagram.us10.list-manage.com/subscribe/post-json?u=fd8fd83d1bbf1c47a7ab3185b&id=d4482970c1&f_id=000645e4f0&EMAIL=' + encodeURIComponent(email) + '&gdpr[63007]=Y&tags=14573954&c=callback';
-  
-  var script = document.createElement('script');
-  script.src = url;
-  document.body.appendChild(script);
-  
-  window.callback = function(data) {
-    if (data.result === 'success' || data.msg.indexOf('already subscribed') > -1) {
-      document.getElementById('form-section').style.display = 'none';
-      document.getElementById('success-section').style.display = 'block';
-    } else {
-      alert('Errore: ' + data.msg);
-    }
-  };
-  
-  return false;
-}
+// No additional script needed - form submits via iframe
 </script>
 
 </body>

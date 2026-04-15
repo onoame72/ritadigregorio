@@ -141,6 +141,8 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
   <div id="form-section">
     <h2>Prenota il tuo posto</h2>
     <form id="signup-form" onsubmit="return submitForm(event)">
+      <input type="text" id="mce-FNAME" class="form-input" placeholder="Nome"><br>
+      <input type="text" id="mce-LNAME" class="form-input" placeholder="Cognome"><br>
       <input type="email" id="mce-EMAIL" class="form-input" placeholder="La tua email" required><br>
       <label class="gdpr-label">
         <input type="checkbox" id="gdpr-check" required style="margin-right:6px;">
@@ -199,10 +201,12 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
 function submitForm(e) {
   e.preventDefault();
   var email = document.getElementById('mce-EMAIL').value;
+  var fname = document.getElementById('mce-FNAME').value;
+  var lname = document.getElementById('mce-LNAME').value;
   var btn = document.getElementById('submit-btn');
   btn.textContent = 'Invio in corso...';
   btn.disabled = true;
-  var url = 'https://instagram.us10.list-manage.com/subscribe/post-json?u=fd8fd83d1bbf1c47a7ab3185b&id=d4482970c1&f_id=000645e4f0&EMAIL=' + encodeURIComponent(email) + '&gdpr[63007]=Y&tags=14573954&c=callback';
+  var url = 'https://instagram.us10.list-manage.com/subscribe/post-json?u=fd8fd83d1bbf1c47a7ab3185b&id=d4482970c1&f_id=000645e4f0&EMAIL=' + encodeURIComponent(email) + '&FNAME=' + encodeURIComponent(fname) + '&LNAME=' + encodeURIComponent(lname) + '&gdpr[63007]=Y&tags=14573954&c=callback';
   var s = document.createElement('script');
   s.src = url;
   document.body.appendChild(s);

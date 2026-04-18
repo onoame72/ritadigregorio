@@ -110,7 +110,9 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
   <p>Quando ti sei fermato, l'ultima volta, a scrivere per te?</p>
 
   <p>Ogni giorno la nostra mente è piena di stimoli:<br>
-  🔔 notifiche · 💬 messaggi · 📅 impegni</p>
+  🔔 notifiche<br>
+  💬 messaggi<br>
+  📅 impegni</p>
 
   <p>I pensieri scorrono veloci, spesso poco chiari.<br>
   Il diario crea uno spazio semplice di ascolto e di dialogo interiore, in cui mettere ordine.</p>
@@ -200,9 +202,11 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
 <script>
 function submitForm(e) {
   e.preventDefault();
-  var email = document.getElementById('mce-EMAIL').value;
-  var fname = document.getElementById('mce-FNAME').value;
-  var lname = document.getElementById('mce-LNAME').value;
+  var email = document.getElementById('mce-EMAIL').value.trim();
+  var fname = document.getElementById('mce-FNAME').value.trim();
+  var lname = document.getElementById('mce-LNAME').value.trim();
+  if (!fname) { alert('Per favore inserisci il tuo nome.'); return false; }
+  if (!email) { alert('Per favore inserisci la tua email.'); return false; }
   var btn = document.getElementById('submit-btn');
   btn.textContent = 'Invio in corso...';
   btn.disabled = true;

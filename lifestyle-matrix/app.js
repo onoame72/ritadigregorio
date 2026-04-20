@@ -84,11 +84,12 @@ function sectionComplete(){
 function nextSection(){
   if(!sectionComplete()){
     let s=allSections[currentSection];
+    let first=null;
     document.querySelectorAll('.question-card').forEach((card,i)=>{
-      if(!answers[s.id]||answers[s.id][i]===undefined)card.style.borderColor='#e74c3c';
+      if(!answers[s.id]||answers[s.id][i]===undefined){card.style.borderColor='#e74c3c';if(!first)first=card;}
       else card.style.borderColor='#333';
     });
-    document.querySelector('.question-card[style*="e74c3c"]').scrollIntoView({behavior:'smooth',block:'center'});
+    if(first)first.scrollIntoView({behavior:'smooth',block:'center'});
     return;
   }
   if(currentSection===allSections.length-1){submitResults();return;}

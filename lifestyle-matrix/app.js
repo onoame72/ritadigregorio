@@ -177,6 +177,10 @@ async function submitResults(){
       comTrasv:comTrasv,rTrasv:rTrasv,risTrasv:risTrasv,totalAvg:totalAvg
     });
     showScreen('screen-thanks');
+    fetch('https://script.google.com/macros/s/AKfycbydHUIzFMDdr3wUbi5tFG50GfTjMq7s06bweka25VuF4DIaqUH1O-Y1fgbbVLa-EmCL/exec',{
+      method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},
+      body:JSON.stringify({name:[userName,userSurname].filter(Boolean).join(' '),date:userDate,totalAvg:totalAvg})
+    }).catch(()=>{});
   }catch(e){
     console.error(e);
     alert('Errore nell\'invio: '+e.message);showScreen('screen-questions');

@@ -208,6 +208,7 @@ function compareSelected(){
   let checks=document.querySelectorAll('.sub-check:checked');
   if(checks.length<2){alert('Seleziona almeno 2 valutazioni.');return;}
   let selected=Array.from(checks).map(c=>currentSubmissions[+c.dataset.idx]);
+  selected.sort((a,b)=>a.timestamp-b.timestamp);
   let colors=['#c8a96a','#4CAF50','#e74c3c','#3498db','#9b59b6'];
   let fIds=['F1','F2','F3','F4'];
   let scoreKeys=[];

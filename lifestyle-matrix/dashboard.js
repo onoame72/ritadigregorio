@@ -68,11 +68,11 @@ async function createCoachee(){
 // COACHEE DETAIL
 async function openCoachee(id){
   currentCoacheeId=id;
+  try{
   let doc=await db.collection('coachees').doc(id).get();
   let d=doc.data();
   let html='<h2>'+[d.name,d.surname].filter(Boolean).join(' ')+'</h2>';
   html+='<p class="card-meta">'+(d.email||'Nessuna email')+'</p>';
-  // Show tokens
   let tokens=await db.collection('tokens').where('coacheeId','==',id).get();
   html+='<div style="margin:15px 0"><strong style="color:#c8a96a">Link attivi:</strong>';
   tokens.forEach(t=>{
@@ -81,22 +81,24 @@ async function openCoachee(id){
   });
   html+='</div>';
   document.getElementById('coacheeDetail').innerHTML=html;
-  // Load submissions
-  let subs=await db.collection('submissions').where('coacheeId','==',id).orderBy('timestamp','desc').get();
+  let subs=await db.collection('submissions').where('coacheeId','==',id).get();
   currentSubmissions=[];
+  let docs=[];subs.forEach(s=>{let sd=s.data();sd._id=s.id;docs.push(sd);});
+  docs.sort((a,b)=>b.timestamp-a.timestamp);
+  currentSubmissions=docs;
   let shtml='<h3 style="margin-top:20px">Valutazioni</h3>';
-  if(subs.empty){shtml+='<p style="color:rgba(255,255,255,0.5)">Nessuna valutazione ricevuta.</p>';}
-  subs.forEach((s,i)=>{
-    let sd=s.data();sd._id=s.id;currentSubmissions.push(sd);
+  if(!currentSubmissions.length){shtml+='<p style="color:rgba(255,255,255,0.5)">Nessuna valutazione ricevuta.</p>';}
+  currentSubmissions.forEach((sd,i)=>{
     shtml+='<div class="sub-row"><input type="checkbox" class="sub-check" data-idx="'+i+'">';
     shtml+='<div class="sub-info"><strong style="color:#c8a96a">'+sd.date+'</strong> — Media: <span class="'+scoreClass(sd.totalAvg)+'">'+sd.totalAvg+'</span></div>';
     shtml+='<button class="btn btn-sm" onclick="viewReport('+i+')">📄 Report</button>';
-    shtml+='<button class="btn btn-sm btn-danger" onclick="deleteSubmission(\''+s.id+'\','+i+')">🗑️</button>';
+    shtml+='<button class="btn btn-sm btn-danger" onclick="deleteSubmission(\''+sd._id+'\','+i+')">🗑️</button>';
     shtml+='</div>';
   });
   document.getElementById('submissionsList').innerHTML=shtml;
   document.getElementById('comparisonSection').style.display='none';
   showScreen('coacheeScreen');
+  }catch(e){console.error(e);alert('Errore: '+e.message);}
 }
 
 async function generateNewToken(){

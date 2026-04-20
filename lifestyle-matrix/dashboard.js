@@ -262,6 +262,7 @@ function compareSelected(){
 // RADAR
 function drawRadar(canvasId,labels,values,size,print){
   let c=document.getElementById(canvasId);
+  c._radarData={labels,values,size};
   let ctx=c.getContext('2d'),n=labels.length;
   let fontSize=n>10?10:12;
   ctx.font=fontSize+'px -apple-system,sans-serif';

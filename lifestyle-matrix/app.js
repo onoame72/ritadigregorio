@@ -92,7 +92,6 @@ function nextSection(){
     return;
   }
   if(currentSection===allSections.length-1){submitResults();return;}
-  if(isEndOfFoundation()){showFoundationRadar();return;}
   currentSection++;renderSection();showScreen('screen-questions');
 }
 

@@ -74,7 +74,13 @@ function isEndOfFoundation(){
   return !next||next.fId!==cur.fId;
 }
 
+function sectionComplete(){
+  let s=allSections[currentSection];
+  return answers[s.id]&&s.items.every((_,i)=>answers[s.id][i]!==undefined);
+}
+
 function nextSection(){
+  if(!sectionComplete()){alert('Rispondi a tutte le domande prima di continuare.');return;}
   if(currentSection===allSections.length-1){submitResults();return;}
   if(isEndOfFoundation()){showFoundationRadar();return;}
   currentSection++;renderSection();showScreen('screen-questions');
@@ -162,6 +168,7 @@ async function submitResults(){
     });
     showScreen('screen-thanks');
   }catch(e){
-    alert('Errore nell\'invio. Riprova.');showScreen('screen-questions');
+    console.error(e);
+    alert('Errore nell\'invio: '+e.message);showScreen('screen-questions');
   }
 }

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lifestyle Matrix — Metodo Ongaro®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#111;color:#fff;font-family:-apple-system,sans-serif;font-size:16px;line-height:1.6}
+h1,h2,h3{font-family:'Playfair Display',serif;color:#c8a96a}
+h1{font-size:32px;margin-bottom:10px}
+h2{font-size:24px;margin-bottom:8px}
+h3{font-size:18px;margin-bottom:15px;color:rgba(255,255,255,0.7)}
+.wrap{max-width:700px;margin:auto;padding:20px}
+.progress-bar{position:fixed;top:0;left:0;height:4px;background:#c8a96a;transition:width 0.3s;z-index:100}
+.screen{display:none;animation:fadeIn 0.4s}
+.screen.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.btn{display:inline-block;padding:14px 24px;background:#c8a96a;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;transition:0.3s;text-decoration:none}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.3)}
+.btn:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+.btn-outline{background:transparent;border:1px solid #c8a96a;color:#c8a96a}
+input[type=text],input[type=date],input[type=number]{padding:12px 16px;border:1px solid #c8a96a;border-radius:6px;background:#222;color:#fff;font-size:15px;width:100%;max-width:350px;margin-bottom:10px}
+input::placeholder{color:rgba(255,255,255,0.4)}
+.intro-box{background:#1a1a1a;border:1px solid #c8a96a;border-radius:10px;padding:25px;margin:20px 0;text-align:left}
+.intro-box p{margin:8px 0;font-size:14px;color:rgba(255,255,255,0.8)}
+.question-card{background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:20px;margin:15px 0}
+.question-text{font-size:15px;margin-bottom:12px;line-height:1.5}
+.rating-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.rating-btn{width:38px;height:38px;border:1px solid #555;border-radius:6px;background:#222;color:#fff;font-size:14px;cursor:pointer;transition:0.2s;display:flex;align-items:center;justify-content:center}
+.rating-btn:hover{border-color:#c8a96a}
+.rating-btn.selected{background:#c8a96a;border-color:#c8a96a;color:#fff;font-weight:bold}
+.section-header{text-align:center;margin:30px 0 20px;padding:20px;background:#1a1a1a;border-radius:10px;border:1px solid #c8a96a}
+.section-label{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:5px}
+.nav-row{display:flex;justify-content:space-between;margin-top:25px;gap:10px}
+.counter{text-align:center;color:rgba(255,255,255,0.5);font-size:13px;margin-top:10px}
+canvas{max-width:100%;margin:20px auto;display:block}
+.results-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+.results-table th,.results-table td{padding:8px 12px;border:1px solid #333;text-align:center}
+.results-table th{background:#1a1a1a;color:#c8a96a;font-size:13px}
+.results-table td{background:#222}
+.score-high{color:#4CAF50}
+.score-mid{color:#c8a96a}
+.score-low{color:#e74c3c}
+.foundation-title{text-align:center;padding:15px;margin:30px 0 10px;font-size:14px;letter-spacing:3px;text-transform:uppercase;color:#c8a96a;border-top:1px solid #333}
+.copyright{text-align:center;font-size:12px;color:rgba(255,255,255,0.3);margin-top:40px;padding:20px;border-top:1px solid #222}
+@media(max-width:500px){.rating-btn{width:30px;height:30px;font-size:12px}h1{font-size:26px}.question-text{font-size:14px}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="wrap">
+
+<!-- LOGO -->
+<div style="background:#111;padding:10px 20px;display:flex;align-items:center;gap:12px;">
+  <img src="https://ritadigregorio.it/images/logo.png" alt="Rita Di Gregorio" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+  <span style="display:flex;flex-direction:column;line-height:1.2;">
+    <span style="color:#fff;font-size:15px;letter-spacing:1px;">Rita Di Gregorio</span>
+    <span style="color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;">Lifestyle Coach</span>
+  </span>
+</div>
+
+<!-- INTRO SCREEN -->
+<div class="screen active" id="screen-intro">
+<div style="text-align:center;margin-top:40px">
+<p class="section-label">Metodo Ongaro®</p>
+<h1>Lifestyle Matrix</h1>
+<h3>Guida pratica al percorso di cambiamento</h3>
+<p style="color:rgba(255,255,255,0.4);font-size:12px;margin-top:5px">v2.0</p>
+</div>
+<div class="intro-box">
+<p><strong>Come funziona:</strong></p>
+<p>Ogni affermazione descrive una situazione, convinzione o abitudine ideale da raggiungere.</p>
+<p>Valuta da <strong>0</strong> (mai) a <strong>10</strong> (sempre) quanto è vera per te nelle ultime 4 settimane.</p>
+<p><strong>0</strong> = mai · <strong>5</strong> = il 50% del tempo · <strong>10</strong> = sempre</p>
+<p>Rispondi d'impulso con il punteggio che ti sembra più giusto.</p>
+</div>
+<div style="text-align:center;margin:20px 0">
+<input type="text" id="userName" placeholder="Nome"><br>
+<input type="text" id="userSurname" placeholder="Cognome"><br>
+<input type="number" id="userAge" placeholder="Età" min="1" max="120" style="max-width:350px"><br>
+<input type="text" id="userDate" placeholder="GG/MM/AAAA"><br><br>
+<button class="btn" onclick="startTest()">Inizia il Test</button>
+</div>
+</div>
+
+<!-- QUESTION SCREEN -->
+<div class="screen" id="screen-questions">
+<div class="section-header" id="sectionHeader">
+<p class="section-label" id="sectionLabel"></p>
+<h2 id="sectionTitle"></h2>
+</div>
+<div id="questionsContainer"></div>
+<div class="counter" id="sectionCounter"></div>
+<div class="nav-row">
+<button class="btn btn-outline" id="prevBtn" onclick="prevSection()">← Indietro</button>
+<button class="btn" id="nextBtn" onclick="nextSection()">Avanti →</button>
+</div>
+</div>
+
+<!-- RADAR SCREEN (after each foundation) -->
+<div class="screen" id="screen-radar">
+<div style="text-align:center">
+<p class="section-label" id="radarLabel"></p>
+<h2 id="radarTitle"></h2>
+</div>
+<canvas id="radarCanvas" width="500" height="500"></canvas>
+<div id="radarScores" style="text-align:center;margin:15px 0"></div>
+<div style="text-align:center">
+<button class="btn" onclick="continueAfterRadar()">Continua →</button>
+</div>
+</div>
+
+<!-- RESULTS SCREEN (hidden from coachee - just submits) -->
+<div class="screen" id="screen-submitting">
+<div style="text-align:center;margin-top:80px">
+<h2>Invio in corso...</h2>
+<p style="color:rgba(255,255,255,0.6)">Attendere prego</p>
+</div>
+</div>
+
+<!-- THANK YOU SCREEN -->
+<div class="screen" id="screen-thanks">
+<div style="text-align:center;margin-top:80px">
+<h1>Grazie!</h1>
+<h3 style="margin-top:15px">Il tuo assessment è stato inviato con successo.</h3>
+<p style="color:rgba(255,255,255,0.6);margin-top:20px">Il tuo coach ti contatterà con i risultati e le indicazioni personalizzate.</p>
+</div>
+<div class="copyright">© 2022 - Metodo Ongaro Switzerland SA · v2.0</div>
+</div>
+
+<!-- INVALID TOKEN SCREEN -->
+<div class="screen" id="screen-invalid">
+<div style="text-align:center;margin-top:80px">
+<h1>Link non valido</h1>
+<p style="color:rgba(255,255,255,0.6);margin-top:15px">Questo link non è valido o è scaduto.<br>Contatta il tuo coach per ricevere un nuovo link.</p>
+</div>
+<div class="copyright">© 2022 - Metodo Ongaro Switzerland SA · v2.0</div>
+</div>
+
+</div>
+
+<script>
+firebase.initializeApp({
+  apiKey:"AIzaSyCe93JvddBAmv6BUwvkzSsCO1GAdqXRv4Q",
+  authDomain:"lifestyle-matrix.firebaseapp.com",
+  projectId:"lifestyle-matrix",
+  storageBucket:"lifestyle-matrix.firebasestorage.app",
+  messagingSenderId:"885705065634",
+  appId:"1:885705065634:web:0e6ca7855628021ecbc3fb"
+});
+const db=firebase.firestore();
+
+const DATA = [
+{fId:"F1",fName:"Nutrizione",sections:[
+{id:"F1Com",name:"Competenze Base",div:10,items:["Mangio 5 volte al giorno","Uso il piatto unico con il giusto rapporto di macro-nutrienti","Assicuro varietà con una rotazione di almeno 5 tipi diversi a categoria di macronutrienti","Scelgo gli alimenti più potenziativi possibili","Uso alimenti depotenziativi solo come eccezioni pianificate al massimo due volte alla settimana","Davanti alle scelte applico a memoria la piramide degli alimenti potenziativi e depotenziativi","Bevo al massimo 3 bicchieri di vino alla settimana ed evito super-alcolici ed altre sostanze nocive","Mastico bene e in modo consapevole ogni boccone","Bevo la giusta quantità di acqua ogni giorno","Tengo l'introito calorico e il consumo calorico equilibrati a grandi linee"]},
+{id:"F1R1",name:"Percezione",div:4,items:["Mangio in modo consapevole","Mangio senza sensi di colpa","So distinguere bene tra la fame fisiologica e la voglia di mangiare alla ricerca di piacere emotivo","Mangiare mi evoca complessivamente piacere"]},
+{id:"F1R2",name:"Interpretazione",div:4,items:["Sono in controllo delle mie scelte alimentari","Sono una persona che mangia sano","È facile mangiare sano e resistere alle tentazioni con sufficiente amor-proprio","Le eccezioni sono importanti e quando sgarro me le godo in pieno"]},
+{id:"F1R3",name:"Focalizzazione",div:4,items:["Rispetto un piano alimentare settimanale","Faccio la spesa con la lista e la rispetto","Se mangio fuori casa mi porto da mangiare o scelgo l'alternativa più potenziativa possibile","Rimango con le mie decisioni alimentari sia in compagnia che in solitudine"]},
+{id:"F1R4",name:"Adattamento",div:4,items:["Anche quando ho mangiato tanto o male riprendo serenamente il mio regime senza auto-punizioni","Riesco a contenere la fame fino al prossimo pasto o spuntino pianificato","Vivo il mio regime alimentare senza rigidità o perfezionismo","Ogni nutriente giusto è un'informazione per il corpo che crea una reazione di adattamento positivo"]},
+{id:"F1R5",name:"Connessioni",div:7,items:["I miei familiari sono in linea con le mie abitudini alimentari","Scelgo i miei amici in modo da avere sostegno per il mio regime alimentare","Sto attento a trasmettere piacere e leggerezza agli altri quando seguo il mio regime alimentare e so che è l'unico modo di convincere anche loro","Parlo di nutrizione in maniera aperta anche con chi è scettico per continuare ad imparare e crescere","Condivido i miei obiettivi alimentari con familiari e amici per ricordarmeli meglio","Preparo almeno una volta alla settimana un pasto insieme a familiari o amici","Ho sempre qualcuno con cui posso parlare di nutrizione che la pensa come me"]}
+]},
+{fId:"F2",fName:"Nutraceutica",sections:[
+{id:"F2Com",name:"Competenze Base",div:10,items:["Assumo i nutraceutici essenziali con regolarità a dosaggio giusto","Mi tengo aggiornato sui valori del sangue che sono importanti per un'integrazione sensata","Controllo dal mio medico ogni 6 mesi i valori del sangue identificati come importanti per me","Mi tengo aggiornato sugli effetti e le controindicazioni dei nutraceutici che assumo","Per gli integratori non-essenziali e specifici per la mia situazione mi faccio seguire dal medico","Controllo con attenzione la credibilità dei produttori","Conservo i nutraceutici in un posto riparato da troppi sbalzi di temperatura e luce e fuori dalla portata dei bambini","Scelgo integratori in confezioni corrette per la loro conservazione","So riconoscere ogni pillola da colore e forma anche senza la sua confezione","Assumo integratori per aumentare la qualità del mio stile di vita e non per compensare errori"]},
+{id:"F2R1",name:"Percezione",div:4,items:["Sono tranquillo per il discorso degli effetti collaterali","Mi sento a mio agio ad assumere tutte queste pillole","Assumo gli integratori in pubblico senza problemi","Assumere nutraceutici aumenta il mio senso di controllo sulla mia vita"]},
+{id:"F2R2",name:"Interpretazione",div:4,items:["Con un'assunzione costante possono accelerare la rigenerazione e portarmi ad una salute potenziata e ad una prestazione migliore","So che mi fanno bene e me lo ricordo quando li assumo","Con la giusta quantità di acqua è facile ingoiare anche capsule grandi","Tengo in mente che gli integratori non sono medicine, ma aiutano a colmare carenze e microcarenze"]},
+{id:"F2R3",name:"Focalizzazione",div:4,items:["Mi ricordo sempre di assumerli","Quando vado in viaggio li porto con me","Li assumo sempre alla stessa ora","Rimango convinto anche se non tutti sono d'accordo con l'assunzione di nutraceutici"]},
+{id:"F2R4",name:"Adattamento",div:4,items:["L'assunzione di nutraceutici soddisfa il mio bisogno di proteggere in modo proattivo la mia salute","Sono grato di potermi permettere di assumere nutraceutici e di fare gli esami del sangue regolarmente","Ogni integratore giusto è un'informazione per il corpo che crea una reazione di adattamento positivo","Quando mi dimentico torno serenamente al mio piano senza sensi di colpa o azioni di compenso"]},
+{id:"F2R5",name:"Connessioni",div:7,items:["Condivido con i miei familiari l'obiettivo di ricordarsi sempre di assumere gli integratori","Mi sento di fare qualcosa di utile per me e per chi mi ama assumendo nutraceutici","Ne parlo con piacere e sono in grado di spiegare la loro utilità agli altri senza pretese","Ho sempre qualcuno con il quale posso parlare di nutraceutica sulla stessa frequenza d'onda","Parlo di nutraceutica in maniera aperta anche con chi è scettico per continuare ad imparare e crescere","Aiuto la mia famiglia a comprendere l'importanza dell'integrazione anche per loro","Spendere i soldi per i nutraceutici in famiglia ha il potere di migliorare anche la qualità delle relazioni"]}
+]},
+{fId:"F3",fName:"Allenamento Fisico",sections:[
+{id:"F3Com",name:"Competenze Base",div:10,items:["Faccio allenamento fisico con regolarità","Ho un programma di allenamento che copre cardio, forza, flessibilità/mobilità, equilibrio e recupero","Mi faccio valutare e aiutare da un personal trainer almeno una volta ogni 3 mesi","Uso qualche sistema di monitoraggio quotidiano (cardiofrequenzimetro, diario, etc.)","Sto attento a dare la giusta importanza al recupero","Gestisco con attenzione il rapporto intensità e volume di allenamento","Uso una bilancia con bioimpedenza almeno una volta ogni 2 settimane per monitorare la composizione corporea","Rispetto il mio programma di allenamento","Rivedo e aggiorno il mio programma di allenamento almeno ogni 3 mesi","Ho dell'abbigliamento e degli accessori piacevoli che facilitano la costanza nell'allenamento"]},
+{id:"F3R1",name:"Percezione",div:4,items:["Quando penso che è ora di allenarmi sono contento","Alla fine di un allenamento mi sento soddisfatto e con nuova energia positiva","Quando un muscolo è indolenzito dall'allenamento mi indica di aver fatto un buon lavoro","Mi alleno con costanza senza sentirmi in obbligo"]},
+{id:"F3R2",name:"Interpretazione",div:4,items:["Se ho avuto una giornata particolarmente difficile è davvero importante allenarmi bene","I miei allenamenti sono momenti importanti di alleanza con me stesso","Considero l'allenamento uno strumento di protezione per la mia salute e la mia libertà di fare quello che desidero","Sarà sempre possibile migliorare le mie prestazioni"]},
+{id:"F3R3",name:"Focalizzazione",div:4,items:["Quando sono in viaggio continuo comunque ad allenarmi in palestra o a corpo libero","Durante gli esercizi fisici riesco a concentrarmi completamente sul gesto","Sto attento all'armonia dei movimenti con la mia respirazione e con i pesi","Ho sempre un pensiero giusto sul quale posso concentrarmi per vincere un'eventuale inerzia"]},
+{id:"F3R4",name:"Adattamento",div:4,items:["Sono in grado di influenzare il mio corpo e lo faccio con rispetto e gratitudine","Sono cambiato molto da quando sono regolare con gli allenamenti","Se mi guardo allo specchio mi sento orgoglioso dei miei risultati","Ogni allenamento giusto è un'informazione per il corpo che crea una reazione di adattamento positivo durante il recupero"]},
+{id:"F3R5",name:"Connessioni",div:7,items:["Condivido con i miei familiari l'abitudine dell'allenamento senza pretese e obblighi","Mi alleno almeno una volta al mese con un compagno di allenamento o un gruppo","I miei familiari sono d'accordo con il tempo che investo per allenarmi","Lo sport mi permette di conoscere nuove persone","Sto attento a trasmettere piacere e leggerezza agli altri quando seguo il mio regime di allenamento","Ho sempre qualcuno con il quale posso parlare di allenamento che la pensa come me","Parlo di allenamento fisico in maniera aperta anche con chi è scettico per imparare e crescere"]}
+]},
+{fId:"F4",fName:"Lavoro Interiore",sections:[
+{id:"F4Com",name:"Competenze Base",div:10,items:["Uso regolarmente il diario per riflettere su emozioni, comportamenti e relazioni","Pratico meditazione o rilassamento profondo al mattino e alla sera","Uso un sistema di promemoria che mi ricorda almeno 5 volte al giorno di ripristinare la consapevolezza sul qui e ora","Respiro in modo profondo e consapevole","Ho un auto-dialogo positivo, benevolente e motivante","Valuto i miei comportamenti in termini di recupero o di consumo energetico","Sto per lo meno 3 ore alla settimana a stretto contatto con la natura","Mi dedico in modo regolare alla lettura e allo studio","Mi ricordo ogni giorno qual è il mio scopo","Uso i momenti vuoti e di transizione fra situazioni diverse per ritornare alla migliore versione di me"]},
+{id:"F4R1",name:"Percezione",div:7,items:["Mi sento sicuro, protetto e forte","Il giudizio degli altri mi preoccupa poco","Sono curioso e a mio agio quando devo fare qualcosa di nuovo","Mi soffermo a godermi le belle esperienze della mia vita","Mi piace la mia vita","Mi accorgo dei miei pensieri, delle mie sensazioni fisiche e delle mie emozioni","Mi piaccio"]},
+{id:"F4R2",name:"Interpretazione",div:7,items:["Uso le esperienze negative come delle opportunità per imparare e crescere","Trovo il lato positivo di ogni cosa e questo spesso basta per risolvere un problema","Ritengo tutti i problemi affrontabili e gestibili","Credo in una forza più grande che ci guida","Sono una persona amabile e affidabile e mi tratto con stima e benevolenza","Tengo in mente che l'unica cosa che posso davvero controllare sono le mie interpretazioni degli eventi","Interagisco con i miei pensieri, con le mie sensazioni fisiche e con le mie emozioni come se fossero membri della mia squadra interiore"]},
+{id:"F4R3",name:"Focalizzazione",div:7,items:["Mi concentro sempre sulla gratitudine per quello che ho invece che sulla frustrazione per ciò che mi manca","Rimango concentrato sulle mie cose senza guardare gli altri","Porto avanti i miei progetti superando la paura di sbagliare","Riesco a lavorare senza distrarmi per almeno 2 ore alla volta","Faccio ciò che devo con serenità e ciò che voglio con piacere","Uso i dispositivi elettronici (incluso TV) solo con uno scopo chiaro e per un tempo limitato","Mi concentro sempre sul risolvere invece che sul trovare i colpevoli"]},
+{id:"F4R4",name:"Adattamento",div:7,items:["Cambio facilmente rotta quando vedo che le mie idee non sono quelle migliori per raggiungere l'obiettivo","Rimango attento ad evitare l'adattamento edonistico","Se non esiste una strada la creo io","Ogni pensiero giusto è un'informazione per il corpo che crea una reazione di adattamento positivo","Mi godo ogni passo del processo verso i miei obiettivi","Accetto quello che non posso cambiare per non sprecare energia in lotte inutili","Mi godo le belle cose senza però averne bisogno"]},
+{id:"F4R5",name:"Connessioni",div:10,items:["Condivido il mio percorso di crescita con altri senza pretendere niente da loro","Rimango consapevole che qualsiasi cosa penso e faccio ha un effetto anche sugli altri","Valorizzo le persone per quello che sono e mi alleno ad essere incondizionatamente tollerante e benevole","Ho sempre qualcuno con cui posso parlare delle dinamiche interiori e relazionali che la pensa come me","Quando vivo delle difficoltà mi ricordo sempre che ci sono tanti altri nella stessa mia situazione","Vedo le critiche e le reazioni negative degli altri come opportunità per tirare fuori il meglio di me","Prima di interagire con qualcuno valuto se il mio stato emotivo è il migliore possibile in questo momento","Perdono errori miei e di altri per non rimanere intrappolato nel risentimento","Parlo di lavoro interiore in maniera aperta anche con chi è scettico per continuare ad imparare e crescere","Faccio parte anch'io dei miei cari da amare, accudire e proteggere al meglio possibile"]}
+]}
+];
+</script>
+<script src="app.js"></script>
+</body>
+</html>

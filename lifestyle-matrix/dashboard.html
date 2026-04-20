@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Lifestyle Matrix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#111;color:#fff;font-family:-apple-system,sans-serif;font-size:16px;line-height:1.6}
+h1,h2,h3{font-family:'Playfair Display',serif;color:#c8a96a}
+h1{font-size:28px;margin-bottom:10px}
+h2{font-size:22px;margin-bottom:8px}
+.wrap{max-width:800px;margin:auto;padding:20px}
+.btn{display:inline-block;padding:12px 20px;background:#c8a96a;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:bold;cursor:pointer;transition:0.3s;text-decoration:none}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.3)}
+.btn-outline{background:transparent;border:1px solid #c8a96a;color:#c8a96a}
+.btn-sm{padding:6px 12px;font-size:12px}
+.btn-danger{background:#e74c3c}
+input[type=text],input[type=email],input[type=number]{padding:10px 14px;border:1px solid #c8a96a;border-radius:6px;background:#222;color:#fff;font-size:14px;width:100%;max-width:300px;margin-bottom:8px}
+textarea{width:100%;padding:12px;border:1px solid #c8a96a;border-radius:6px;background:#222;color:#fff;font-size:14px;font-family:inherit;resize:vertical}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.4)}
+.section-label{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:5px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:16px;margin:10px 0;cursor:pointer;transition:0.2s}
+.card:hover{border-color:#c8a96a}
+.card-name{font-size:16px;font-weight:bold;color:#c8a96a}
+.card-meta{font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px}
+.results-table{width:100%;border-collapse:collapse;margin:15px 0;font-size:13px}
+.results-table th,.results-table td{padding:6px 10px;border:1px solid #333;text-align:center}
+.results-table th{background:#1a1a1a;color:#c8a96a;font-size:12px}
+.results-table td{background:#222}
+.score-high{color:#4CAF50}.score-mid{color:#c8a96a}.score-low{color:#e74c3c}
+.delta-pos{color:#4CAF50}.delta-neg{color:#e74c3c}.delta-zero{color:rgba(255,255,255,0.4)}
+.foundation-title{text-align:center;padding:12px;margin:25px 0 8px;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#c8a96a;border-top:1px solid #333}
+canvas{max-width:100%;margin:15px auto;display:block}
+.nav{display:flex;gap:10px;margin:15px 0;flex-wrap:wrap}
+.screen{display:none}.screen.active{display:block}
+.token-box{background:#222;border:1px solid #c8a96a;border-radius:6px;padding:10px 14px;font-family:monospace;font-size:13px;word-break:break-all;margin:8px 0;user-select:all}
+.sub-row{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#1a1a1a;border:1px solid #333;border-radius:8px;margin:6px 0;font-size:13px}
+.sub-row input[type=checkbox]{accent-color:#c8a96a;width:16px;height:16px}
+.sub-info{flex:1}
+.copyright{text-align:center;font-size:12px;color:rgba(255,255,255,0.3);margin-top:40px;padding:20px;border-top:1px solid #222}
+#loginScreen{text-align:center;margin-top:100px}
+.question-card{background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:16px;margin:10px 0}
+@media print{body{background:#fff;color:#000}h1,h2,h3,.section-label,.card-name{color:#333}.foundation-title{page-break-before:always;color:#333}#notesSection{page-break-before:always}.btn,.nav,#loginScreen{display:none!important}.results-table th{color:#333}.results-table td,.results-table th{border-color:#999}textarea{border:1px solid #999;color:#000;background:#fff}.question-card{border-color:#999}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="screen active" id="loginScreen">
+<p class="section-label">Metodo Ongaro®</p>
+<h1>Lifestyle Matrix — Dashboard</h1>
+<p style="color:rgba(255,255,255,0.6);margin:20px 0">Accedi per gestire i tuoi coachee</p>
+<button class="btn" onclick="doLogin()">🔐 Accedi con Google</button>
+</div>
+
+<div class="screen" id="mainScreen">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+<div><p class="section-label">Dashboard</p><h1>I tuoi Coachee</h1></div>
+<div class="nav">
+<button class="btn" onclick="showAddCoachee()">+ Nuovo Coachee</button>
+<button class="btn btn-outline" onclick="doLogout()">Esci</button>
+</div>
+</div>
+<div id="coacheeList"></div>
+</div>
+
+<div class="screen" id="addCoacheeScreen">
+<p class="section-label">Nuovo Coachee</p>
+<h2>Aggiungi Coachee</h2>
+<div style="margin:20px 0">
+<input type="text" id="newName" placeholder="Nome"><br>
+<input type="text" id="newSurname" placeholder="Cognome"><br>
+<input type="email" id="newEmail" placeholder="Email (opzionale)"><br><br>
+<button class="btn" onclick="createCoachee()">Crea e genera link</button>
+<button class="btn btn-outline" onclick="showMain()">Annulla</button>
+</div>
+<div id="newTokenResult"></div>
+</div>
+
+<div class="screen" id="coacheeScreen">
+<div class="nav">
+<button class="btn btn-outline" onclick="showMain()">← Tutti i coachee</button>
+<button class="btn" onclick="generateNewToken()">🔗 Nuovo link</button>
+</div>
+<div id="coacheeDetail"></div>
+<div id="submissionsList"></div>
+<div id="comparisonSection" style="display:none">
+<div class="foundation-title">Confronto Progressi</div>
+<canvas id="compareRadar" width="600" height="600"></canvas>
+<div id="compareTable"></div>
+</div>
+<div class="nav">
+<button class="btn" onclick="compareSelected()">📊 Confronta selezionati</button>
+</div>
+</div>
+
+<div class="screen" id="reportScreen">
+<div class="nav" id="reportNav">
+<button class="btn btn-outline" onclick="backToCoachee()">← Torna al coachee</button>
+<button class="btn" onclick="window.print()">🖨️ Stampa / PDF</button>
+</div>
+<div style="text-align:center;margin-top:20px">
+<p class="section-label">Risultati</p>
+<h1>La tua Lifestyle Matrix</h1>
+<p id="reportName" style="color:rgba(255,255,255,0.6)"></p>
+</div>
+<div id="reportContent"></div>
+<div id="notesSection">
+<div class="foundation-title">Note del Professionista</div>
+<div class="question-card"><label style="color:#c8a96a;font-weight:bold;display:block;margin-bottom:8px">Osservazioni</label><textarea id="noteOsservazioni" rows="4"></textarea></div>
+<div class="question-card"><label style="color:#c8a96a;font-weight:bold;display:block;margin-bottom:8px">Limiti</label><textarea id="noteLimiti" rows="4"></textarea></div>
+<div class="question-card"><label style="color:#c8a96a;font-weight:bold;display:block;margin-bottom:8px">Risorse</label><textarea id="noteRisorse" rows="4"></textarea></div>
+<div class="question-card"><label style="color:#c8a96a;font-weight:bold;display:block;margin-bottom:8px">Consigli Operativi</label><textarea id="noteConsigli" rows="4"></textarea></div>
+</div>
+<div class="nav"><button class="btn" onclick="saveNotes()">💾 Salva note</button></div>
+<div class="copyright">© 2022 - Metodo Ongaro Switzerland SA · v2.0</div>
+</div>
+
+</div>
+<script src="dashboard.js"></script>
+</body>
+</html>

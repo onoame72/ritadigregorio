@@ -128,42 +128,12 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
 
   <hr class="separator">
 
-  <p>Nel webinar lavoreremo insieme su questi aspetti in modo pratico.<br>
-  Riceverai riferimenti neuroscientifici, esercizi concreti e strumenti da applicare da subito.</p>
+  <p>In questo webinar lavoriamo insieme su questi aspetti in modo pratico, con riferimenti neuroscientifici, esercizi concreti e strumenti da applicare da subito.</p>
 
-  <p>Ci sarà uno spazio di condivisione per chi vorrà.</p>
-
-  <div class="event-box">
-    📅 <strong>Giovedì 23 aprile</strong><br>
-    ⏰ <strong>Ore 20:30</strong><br>
-    🎯 <strong>Webinar gratuito</strong>
-  </div>
-
-  <!-- REGISTRATION FORM -->
-  <div id="form-section">
-    <h2>Prenota il tuo posto</h2>
-    <form id="signup-form" onsubmit="return submitForm(event)">
-      <input type="text" id="mce-FNAME" class="form-input" placeholder="Nome *" required><br>
-      <input type="text" id="mce-LNAME" class="form-input" placeholder="Cognome (opzionale)"><br>
-      <input type="email" id="mce-EMAIL" class="form-input" placeholder="La tua email *" required><br>
-      <label class="gdpr-label">
-        <input type="checkbox" id="gdpr-check" required style="margin-right:6px;">
-        Acconsento a ricevere comunicazioni email.
-      </label><br>
-      <br>
-      <button type="submit" class="btn" id="submit-btn">Prenota il tuo posto gratuito</button>
-    </form>
-  </div>
-
-  <!-- SUCCESS MESSAGE -->
-  <div class="success-msg" id="success-section">
-    <h2>✅ Iscrizione confermata!</h2>
-    <div class="event-box">
-      📅 <strong>Giovedì 23 aprile</strong><br>
-      ⏰ <strong>Ore 20:30</strong>
-    </div>
-    <p>Riceverai il link per accedere via email.</p>
-    <p>A presto,<br><strong style="color:#c8a96a;">Rita</strong></p>
+  <!-- VIDEO REPLAY -->
+  <h2>Guarda il replay</h2>
+  <div style="max-width:640px;margin:20px auto;">
+    <iframe src="https://www.youtube.com/embed/X21OjTa3DUI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;aspect-ratio:16/9;border:none;border-radius:10px;"></iframe>
   </div>
 
   <p style="font-size:13px;color:#666;margin-top:30px;">
@@ -200,32 +170,7 @@ h2 { font-family:'Playfair Display', serif; color:#c8a96a; }
 </div>
 
 <script>
-function submitForm(e) {
-  e.preventDefault();
-  var email = document.getElementById('mce-EMAIL').value.trim();
-  var fname = document.getElementById('mce-FNAME').value.trim();
-  var lname = document.getElementById('mce-LNAME').value.trim();
-  if (!fname) { alert('Per favore inserisci il tuo nome.'); return false; }
-  if (!email) { alert('Per favore inserisci la tua email.'); return false; }
-  var btn = document.getElementById('submit-btn');
-  btn.textContent = 'Invio in corso...';
-  btn.disabled = true;
-  var url = 'https://instagram.us10.list-manage.com/subscribe/post-json?u=fd8fd83d1bbf1c47a7ab3185b&id=d4482970c1&f_id=000645e4f0&EMAIL=' + encodeURIComponent(email) + '&FNAME=' + encodeURIComponent(fname) + '&LNAME=' + encodeURIComponent(lname) + '&gdpr[63007]=Y&tags=14573954&c=callback';
-  var s = document.createElement('script');
-  s.src = url;
-  document.body.appendChild(s);
-  window.callback = function(data) {
-    if (data.result === 'success' || data.msg.indexOf('already subscribed') > -1) {
-      document.getElementById('form-section').style.display = 'none';
-      document.getElementById('success-section').style.display = 'block';
-    } else {
-      alert('Errore: ' + data.msg);
-      btn.textContent = 'Prenota il tuo posto gratuito';
-      btn.disabled = false;
-    }
-  };
-  return false;
-}
+// No form script needed - replay page
 </script>
 
 </body>

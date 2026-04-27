@@ -14,9 +14,9 @@ let currentCoacheeId='',currentSubmissions=[];
 // AUTH
 function doLogin(){auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());}
 function doLogout(){auth.signOut();}
-const ALLOWED_EMAIL = 'digregorio.rita@gmail.com';
+const ALLOWED_EMAILS = ['digregorio.rita@gmail.com', 'onoame72@gmail.com'];
 auth.onAuthStateChanged(user=>{
-  if(user && user.email===ALLOWED_EMAIL){showScreen('mainScreen');loadCoachees();}
+  if(user && ALLOWED_EMAILS.includes(user.email)){showScreen('mainScreen');loadCoachees();}
   else if(user){auth.signOut();alert('Accesso non autorizzato.');}
   else{showScreen('loginScreen');}
 });

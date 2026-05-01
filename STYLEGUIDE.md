@@ -197,7 +197,7 @@ Accessibilità minima obbligatoria:
 - Tutti i nomi file in **kebab-case**, minuscolo, senza spazi, senza caratteri accentati.
 - Estensioni immagine in minuscolo (`.jpg`, non `.JPG`; scegliere una tra `.jpg` e `.jpeg` per lo stesso scopo).
 - `siigioia.html` va rinominato `sii-gioia.html` in un intervento dedicato (richiede redirect, si valuta a parte).
-- File immagini con spazi o typo (`challenge 1.png`, `chellenge 5.png`) vanno rinominati (`challenge-1.png`, `challenge-5.png`).
+- File immagini con spazi o typo (storico: `challenge 1.png`, `chellenge 5.png`) vanno rinominati secondo questa convenzione. La challenge è stata risolta in un commit dedicato.
 
 ### 5.2 Classi CSS
 - **Blocco**: nome breve, kebab-case (`card`, `price-card`, `topbar`, `cookie-banner`).

@@ -104,6 +104,11 @@ Il beige `#f9f6f0` presente su `lifestyle-matrix.html` **deve** essere uniformat
 
 Tutti gli `h1` **devono** avere la stessa dimensione (48px desktop / 28px mobile). Le varianti attuali (42px, 38px) vanno normalizzate.
 
+Colore di default dei titoli:
+- `h1` eredita il colore del contesto (nero su chiaro, bianco su scuro).
+- `h2` è oro (`--color-gold`) su tutti i contesti. Se serve un h2 che erediti il colore del testo, usare una classe esplicita.
+- `h3` eredita il colore del contesto, salvo classi di componente che lo sovrascrivono (`.pillar h3`, `.price-card__title`, ecc.).
+
 ### 2.3 Layout
 | Token | Valore |
 |---|---|

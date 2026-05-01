@@ -1,0 +1,15 @@
+# Configurazione locale agente
+.kiro/
+
+# Backup e temporanei
+*.bak
+*.tmp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/

@@ -1,0 +1,891 @@
+/* components.css — componenti riutilizzabili */
+
+/* ===== Topbar ===== */
+.topbar {
+  background: var(--color-bg-dark);
+  color: var(--color-text-on-dark);
+  padding: 10px 20px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--color-text-on-dark);
+}
+
+.topbar__brand:hover {
+  text-decoration: none;
+}
+
+.topbar__logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.topbar__brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.topbar__brand-sub {
+  color: var(--color-text-on-dark-faint);
+  font-size: 11px;
+  letter-spacing: var(--ls-wide);
+}
+
+.topbar__nav a {
+  color: var(--color-text-on-dark-muted);
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+.topbar__nav a:hover {
+  color: var(--color-text-on-dark);
+  text-decoration: none;
+}
+
+.topbar__menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-text-on-dark);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+@media (max-width: 768px) {
+  .topbar__menu-toggle {
+    display: block;
+  }
+  .topbar__nav {
+    display: none;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+  }
+  .topbar__nav.is-open {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .topbar__nav a {
+    margin-left: 0;
+    font-size: 16px;
+  }
+}
+
+/* ===== Hero ===== */
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.hero--dark {
+  background: var(--color-bg-dark);
+  color: var(--color-text-on-dark);
+}
+
+.hero--dark h1 {
+  color: var(--color-text-on-dark);
+}
+
+.hero__img {
+  max-height: 40vh;
+  border-radius: var(--radius-lg);
+}
+
+.hero__label {
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* ===== Sezioni ===== */
+.section,
+.section-alt {
+  padding: var(--space-section);
+}
+
+.section-alt {
+  background: var(--color-bg-alt);
+}
+
+.section > *,
+.section-alt > * {
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: inherit;
+}
+
+.content {
+  max-width: var(--content-max);
+  margin: auto;
+  padding: 60px 20px 80px;
+}
+
+/* ===== Bottoni ===== */
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 14px 24px;
+  background: var(--color-gold);
+  color: var(--color-text-on-dark);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: 0.3s;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  text-decoration: none;
+  color: var(--color-text-on-dark);
+}
+
+.btn--outline {
+  background: transparent;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+}
+
+.btn--outline:hover {
+  color: var(--color-gold);
+}
+
+/* ===== Footer ===== */
+.footer {
+  text-align: center;
+  padding: 40px;
+  background: var(--color-bg-dark);
+  color: var(--color-text-on-dark-muted);
+}
+
+.footer__links a {
+  color: var(--color-gold);
+  text-decoration: none;
+  margin: 0 8px;
+}
+
+.footer__links a:hover {
+  color: var(--color-text-on-dark);
+  text-decoration: none;
+}
+
+.footer__legal {
+  margin-top: 15px;
+}
+
+.footer__copyright {
+  font-size: var(--fs-xsmall);
+  color: var(--color-text-on-dark-subtle);
+  margin-top: 20px;
+}
+
+/* ===== Cookie banner ===== */
+.cookie-banner {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-bg-dark);
+  color: var(--color-text-on-dark);
+  padding: 16px 20px;
+  z-index: 9999;
+  font-size: 14px;
+  border-top: 1px solid var(--color-gold);
+  text-align: center;
+}
+
+.cookie-banner.is-visible {
+  display: block;
+}
+
+.cookie-banner a {
+  color: var(--color-gold);
+}
+
+.cookie-banner button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.cookie-banner__accept {
+  background: var(--color-gold);
+  color: var(--color-text-on-dark);
+}
+
+.cookie-banner__reject {
+  background: #333;
+  color: var(--color-text-on-dark);
+}
+
+/* ===== Floating CTA ===== */
+.floating-cta {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--color-gold);
+  padding: 14px 18px;
+  border-radius: var(--radius-pill);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+  z-index: 50;
+}
+
+.floating-cta.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.floating-cta a {
+  color: var(--color-text-on-dark);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* ===== Pagina intera su sfondo scuro ===== */
+.page--dark {
+  background: var(--color-bg-dark);
+  color: var(--color-text-on-dark);
+}
+
+.page--dark .content {
+  color: var(--color-text-on-dark);
+  text-align: center;
+}
+
+.page--dark h1,
+.page--dark h2 {
+  color: var(--color-gold);
+}
+
+.page--dark h1 {
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+  margin: 10px 0;
+}
+
+/* ===== Label e citazioni ===== */
+.label {
+  color: var(--color-text-on-dark-faint);
+  font-size: var(--fs-xsmall);
+  letter-spacing: var(--ls-xwide);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.subtitle {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-style: italic;
+  color: var(--color-text-on-dark-muted);
+}
+
+.quote {
+  font-size: 22px;
+  font-style: italic;
+  margin: 30px 0;
+}
+
+.caption {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-top: 30px;
+}
+
+/* Su pagina scura, la caption usa un muted scuro */
+.page--dark .caption {
+  color: var(--color-text-on-dark-faint);
+}
+
+/* ===== Separator decorativo ===== */
+.separator {
+  border: none;
+  border-top: 1px solid var(--color-gold);
+  width: 100px;
+  margin: 30px auto;
+}
+
+/* ===== Video embed responsive ===== */
+.video-embed {
+  max-width: 640px;
+  margin: 20px auto;
+}
+
+.video-embed iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: var(--radius-lg);
+}
+
+.steps-large {
+  font-size: 20px;
+  line-height: 2.2;
+}
+
+/* ===== Griglia video (YouTube embed multipli) ===== */
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  max-width: var(--container-max);
+  margin: auto;
+}
+
+.video-grid iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: var(--radius-lg);
+}
+
+@media (max-width: 768px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Variante reel/short verticale */
+.video-reel {
+  width: 315px;
+  height: 560px;
+  max-width: 100%;
+  border: none;
+  border-radius: var(--radius-lg);
+}
+
+/* ===== Griglia foto ===== */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  max-width: var(--container-max);
+  margin: auto;
+}
+
+.photo-grid img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.photo-grid img:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-card);
+}
+
+/* ===== Titolo di sezione oro e maiuscolo ===== */
+.section-title {
+  text-align: center;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+}
+
+/* ===== Event box — riquadro scuro con bordo oro ===== */
+.event-box {
+  background: var(--color-bg-dark-2);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 25px;
+  max-width: 480px;
+  margin: 25px auto;
+  text-align: left;
+}
+
+.event-box--centered {
+  text-align: center;
+}
+
+.event-box__list {
+  color: var(--color-text-on-dark);
+  font-size: 16px;
+  line-height: 2.2;
+  margin: 0;
+}
+
+.event-box__item-note {
+  color: var(--color-text-on-dark-muted);
+  font-size: var(--fs-small);
+}
+
+/* ===== Price card ===== */
+.price-card {
+  background: var(--color-bg-dark-2);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 25px;
+  max-width: 480px;
+  margin: 15px auto;
+  text-align: left;
+  color: var(--color-text-on-dark);
+}
+
+.price-card__title {
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+  font-size: 20px;
+  margin: 0 0 10px;
+}
+
+.price-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px;
+  font-size: 15px;
+  color: var(--color-text-on-dark);
+  line-height: 1.7;
+}
+
+.price-card__features li {
+  padding: 2px 0;
+}
+
+.price-card__features li::before {
+  content: "– ";
+  color: var(--color-gold);
+}
+
+.price-card__price {
+  color: var(--color-gold);
+  font-size: 22px;
+  font-weight: bold;
+  margin: 15px 0 0;
+}
+
+.price-card__note {
+  color: var(--color-text-on-dark-faint);
+  font-size: var(--fs-xsmall);
+  margin-top: 10px;
+}
+
+/* Variante "featured" usata su lifestyle-matrix */
+.price-card--featured {
+  position: relative;
+  border-color: var(--color-gold);
+}
+
+.price-card--featured::before {
+  content: 'Consigliato';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-gold);
+  color: var(--color-text-on-dark);
+  font-size: 11px;
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ===== Pillars (4 aree lifestyle) ===== */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 40px auto;
+  max-width: 800px;
+}
+
+.pillar {
+  background: var(--color-bg-dark);
+  color: var(--color-text-on-dark);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 25px;
+  text-align: center;
+}
+
+.pillar h3 {
+  color: var(--color-gold);
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.pillar p {
+  color: var(--color-text-on-dark-muted);
+  font-size: var(--fs-small);
+  margin: 0;
+}
+
+/* ===== Step list numerata ===== */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+  margin: 40px auto;
+  max-width: 800px;
+}
+
+.step {
+  text-align: center;
+  padding: 20px;
+}
+
+.step__num {
+  width: 40px;
+  height: 40px;
+  background: var(--color-gold);
+  color: var(--color-text-on-dark);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.step h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.step p {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ===== FAQ ===== */
+.faq {
+  max-width: var(--content-max);
+  margin: 30px auto;
+}
+
+.faq details {
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding: 15px 0;
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--color-text);
+  font-size: 16px;
+}
+
+.faq details p {
+  font-size: 15px;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* ===== Footer CTA (sezione CTA finale su pagina chiara) ===== */
+.footer-cta {
+  background: var(--color-bg-dark);
+  color: var(--color-text-on-dark);
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.footer-cta h2 {
+  color: var(--color-gold);
+}
+
+.footer-cta p {
+  color: var(--color-text-on-dark-muted);
+}
+
+/* ===== Griglia pricing (card affiancate) ===== */
+.pricing {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin: 40px auto;
+  max-width: 700px;
+}
+
+/* Variante "full price display" con prezzo grande */
+.price-card--large .price-card__price {
+  font-size: 42px;
+  font-family: var(--font-heading);
+  color: var(--color-text-on-dark);
+  font-weight: normal;
+  margin: 15px 0;
+  text-align: center;
+}
+
+.price-card--large {
+  padding: 35px;
+  text-align: center;
+}
+
+.price-card--large .price-card__features {
+  text-align: left;
+  margin: 20px 0;
+  font-size: 15px;
+  color: var(--color-text-on-dark-muted);
+}
+
+.price-card--large .price-card__features li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--color-border-dark);
+}
+
+.price-card--large .price-card__features li::before {
+  content: "✓ ";
+  color: var(--color-gold);
+}
+
+/* ===== Griglia generica ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+/* ===== Card generica (immagine + titolo + testo) ===== */
+.card {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.6s;
+}
+
+.card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  transition: 0.4s;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-md);
+}
+
+/* Variante "percorso" — card scura con bordo interno */
+.card--percorso {
+  background: var(--color-bg-dark);
+  color: var(--color-text-on-dark);
+  border-radius: var(--radius-lg);
+  padding: 30px 25px;
+  text-align: center;
+}
+
+.card--percorso h3 {
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+}
+
+.card--percorso p {
+  color: var(--color-text-on-dark);
+  opacity: 0.8;
+}
+
+/* ===== Split (due colonne testo/immagine) ===== */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-top: 0;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s;
+}
+
+.split.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.split img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+}
+
+@media (max-width: 768px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Styled list (checkmark oro) ===== */
+.styled-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.styled-list li::before {
+  content: "✓ ";
+  color: var(--color-gold);
+  font-weight: bold;
+}
+
+/* ===== Problema text (apertura intro) ===== */
+.problema-text {
+  font-family: var(--font-heading);
+  font-size: var(--fs-body);
+  font-style: italic;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 30px;
+}
+
+/* ===== Hero homepage ===== */
+.hero--home {
+  background: var(--color-bg-dark);
+  text-align: center;
+  color: var(--color-text-on-dark);
+  padding: 20px 20px 30px;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero--home img {
+  max-height: 45vh;
+  border-radius: var(--radius-lg);
+  margin-bottom: -10px;
+}
+
+.hero__content {
+  animation: fadeInUp 1.2s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Feature promo box (omaggio/cta su pagina chiara) ===== */
+.feature-box {
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  max-width: 500px;
+  margin: 30px auto;
+  color: var(--color-text-on-dark);
+  text-align: center;
+}
+
+.feature-box strong {
+  color: var(--color-gold);
+}
+
+.feature-box__note {
+  font-size: var(--fs-small);
+  color: var(--color-text-on-dark-muted);
+}
+
+/* ===== Newsletter form ===== */
+.newsletter {
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  text-align: center;
+  color: var(--color-text-on-dark);
+}
+
+.newsletter h3 {
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+}
+
+.newsletter__input {
+  padding: 12px 16px;
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  width: 80%;
+  background: #222;
+  color: var(--color-text-on-dark);
+  margin-bottom: 10px;
+}
+
+.newsletter__gdpr {
+  text-align: left;
+  margin: 10px auto;
+  max-width: 80%;
+}
+
+.newsletter__gdpr label {
+  font-size: var(--fs-xsmall);
+  color: var(--color-text-on-dark-faint);
+  cursor: pointer;
+}
+
+.newsletter__success {
+  color: var(--color-gold);
+  margin-top: 15px;
+}
+
+/* ===== Channel card (CTA centrata verticalmente) ===== */
+.channel-card {
+  background: var(--color-bg-dark);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  text-align: center;
+  color: var(--color-text-on-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.channel-card h3 {
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+}
+
+/* ===== Challenge tile (5 giorni) ===== */
+.challenge-tile p {
+  font-size: var(--fs-small);
+  margin-top: 8px;
+}
+
+.challenge-tile__title {
+  color: var(--color-gold);
+  font-size: 16px;
+}
+
+.challenge-tile img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+}

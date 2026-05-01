@@ -1,39 +1,18 @@
+<!--page
+{
+  "path": "index.html",
+  "title": "Rita Di Gregorio | Counselor e Lifestyle Coach a Salerno e Online",
+  "description": "Rita Di Gregorio – Counselor e Lifestyle Coach Metodo Ongaro® a Salerno e online. Percorsi individuali per ritrovare energia, direzione e chiarezza. Counseling, coaching e formazione.",
+  "ogTitle": "Rita Di Gregorio | Lifestyle Coach",
+  "ogDescription": "Counselor e Lifestyle Coach Metodo Ongaro®. Percorsi individuali per ritrovare energia, direzione e chiarezza.",
+  "ogImage": "images/hero.jpeg",
+  "priority": "1.0"
+}
+page-->
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="dXll1czWayKbcaMxpZLQQg_kQ-v89kEecStvvJpRlTM">
-
-<title>Rita Di Gregorio | Counselor e Lifestyle Coach a Salerno e Online</title>
-<meta name="description" content="Rita Di Gregorio – Counselor e Lifestyle Coach Metodo Ongaro® a Salerno e online. Percorsi individuali per ritrovare energia, direzione e chiarezza. Counseling, coaching e formazione.">
-
-<link rel="canonical" href="https://ritadigregorio.it/index.html">
-
-<meta property="og:title" content="Rita Di Gregorio | Lifestyle Coach">
-<meta property="og:description" content="Counselor e Lifestyle Coach Metodo Ongaro®. Percorsi individuali per ritrovare energia, direzione e chiarezza.">
-<meta property="og:image" content="https://ritadigregorio.it/images/hero.jpeg">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://ritadigregorio.it/index.html">
-
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<link rel="icon" type="image/png" sizes="48x48" href="images/logo.png">
-<link rel="icon" type="image/png" sizes="192x192" href="images/logo.png">
-<link rel="apple-touch-icon" sizes="180x180" href="images/logo.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-<link rel="stylesheet" href="assets/css/tokens.css">
-<link rel="stylesheet" href="assets/css/base.css">
-<link rel="stylesheet" href="assets/css/components.css">
-
-<script>window.__SITE_CONFIG__ = { gaId: "G-3FEX3GSE3Y" };</script>
-<script src="assets/js/cookies.js" defer></script>
-<script src="assets/js/ui.js" defer></script>
-
+{{> head}}
 <link rel="preload" as="image" href="images/rita3.png">
 <script type="application/ld+json">
 {
@@ -66,26 +45,7 @@
 </head>
 <body>
 
-<a class="skip-link" href="#main">Salta al contenuto</a>
-<header class="topbar">
-  <a class="topbar__brand" href="index.html">
-    <img class="topbar__logo" src="images/logo.png" alt="Rita Di Gregorio">
-    <span class="topbar__brand-text">
-      Rita Di Gregorio
-      <span class="topbar__brand-sub">Lifestyle Coach</span>
-    </span>
-  </a>
-  <button class="topbar__menu-toggle" data-menu-toggle aria-label="Apri menu" aria-expanded="false" aria-controls="main-nav">☰</button>
-  <nav class="topbar__nav" id="main-nav" data-menu>
-    <a href="index.html">Home</a>
-    <a href="chi-sono.html">Chi Sono</a>
-    <a href="media.html">Media</a>
-    <a href="lifestyle-matrix.html">Lifestyle Matrix</a>
-    <a href="siigioia.html">Sii Gioia</a>
-    
-  </nav>
-</header>
-
+{{> topbar}}
 
 <main id="main">
 
@@ -97,7 +57,7 @@
     <p style="text-transform:uppercase;letter-spacing:3px;font-size:28px;color:var(--color-gold);margin-top:0;margin-bottom:20px;">Counseling &amp; Lifestyle Coaching</p>
     <p style="margin-bottom:0;">Percorsi individuali per ritrovare chiarezza, energia e direzione.</p>
     <p style="margin-top:0;">Counseling familiare e supporto alla genitorialità.<br>Formazione strategica per educatori ed insegnanti.</p>
-    <a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Prenota un colloquio gratuito</a>
+    <a class="btn" href="{{contact.whatsappUrl}}" target="_blank" rel="noopener">Prenota un colloquio gratuito</a>
   </div>
 </section>
 
@@ -163,7 +123,7 @@
 <p>Attraversi un momento di dubbio o blocco? Ti guido verso una rinascita concreta.</p>
 <p>Ritrova energia, chiarezza e direzione mettendo ordine nei pensieri, riducendo il sovraccarico emotivo e costruendo stabilità.</p>
 <p>Lavoriamo su ciò che oggi ti blocca: pensieri, emozioni e abitudini, definendo azioni chiare e costruendo continuità nel tempo.</p>
-<a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Scopri di più</a>
+<a class="btn" href="{{contact.whatsappUrl}}" target="_blank" rel="noopener">Scopri di più</a>
 </div>
 
 <div class="card card--percorso">
@@ -172,7 +132,7 @@
 <p>Per affrontare con lucidità le sfide educative, in particolare nei contesti di separazione.</p>
 <p>Comprendi i comportamenti dei tuoi figli e la fase che stanno vivendo.<br>Definisci strategie chiare e sostenibili.</p>
 <p>Rafforzi autorevolezza, comunicazione e coerenza educativa.<br>Ti aiuto ad aiutare i tuoi figli, partendo da te.</p>
-<a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Scopri di più</a>
+<a class="btn" href="{{contact.whatsappUrl}}" target="_blank" rel="noopener">Scopri di più</a>
 </div>
 
 <div class="card card--percorso">
@@ -180,7 +140,7 @@
 <p>Sono attivi percorsi di coaching di gruppo sia online che in presenza a Salerno.</p>
 <p>Il gruppo diventa un acceleratore del cambiamento.<br>Lavoriamo sul riconoscimento dei bisogni fondamentali, sulla chiarezza personale e sulla direzione.</p>
 <p>Attraverso il confronto, ogni partecipante amplia lo sguardo, si riconosce e attiva nuove possibilità.</p>
-<a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Scopri di più</a>
+<a class="btn" href="{{contact.whatsappUrl}}" target="_blank" rel="noopener">Scopri di più</a>
 </div>
 
 <div class="card card--percorso">
@@ -188,7 +148,7 @@
 <p>Percorsi di formazione per docenti centrati su emozioni, comunicazione e dinamiche relazionali in classe.</p>
 <p>Lavoriamo su gestione dei conflitti, educazione all'affettività, linguaggio inclusivo, prevenzione del bullismo e cyberbullismo e prevenzione del burn-out.</p>
 <p>Fornisco strumenti pratici e replicabili per migliorare il clima di classe e sostenere il ruolo educativo.</p>
-<a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Scopri di più</a>
+<a class="btn" href="{{contact.whatsappUrl}}" target="_blank" rel="noopener">Scopri di più</a>
 </div>
 
 <div class="card card--percorso">
@@ -196,7 +156,7 @@
 <p>Laboratori emotivi nelle scuole, aziende e carceri</p>
 <p>Progetto e conduco incontri e speech motivazionali per attivare e rafforzare il cambiamento, lavorando su emozioni, comunicazione e dinamiche relazionali.</p>
 <p>Attraverso strumenti pratici, accompagno persone e gruppi a riconoscere ciò che provano, gestire le situazioni complesse e migliorare la qualità delle relazioni.</p>
-<a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Scopri di più</a>
+<a class="btn" href="{{contact.whatsappUrl}}" target="_blank" rel="noopener">Scopri di più</a>
 </div>
 
 <div class="card card--percorso">
@@ -205,7 +165,7 @@
 <p>Laboratorio esperienziale che utilizza il ritmo e il corpo come strumenti di lavoro sulle emozioni.</p>
 <p>La via del tarantismo: guarda negli occhi la tua taranta, smetti di evitarla e rinasci.<br>Trasforma le convinzioni limitanti in forza creativa. Trasforma il veleno in elisir.</p>
 <p>Attraverso il movimento, attraversi stati emotivi, sciogli tensioni e ritrovi energia.</p>
-<a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Scopri di più</a>
+<a class="btn" href="{{contact.whatsappUrl}}" target="_blank" rel="noopener">Scopri di più</a>
 </div>
 
 </div>
@@ -281,7 +241,7 @@
   </div>
   <p>Ti accompagno passo dopo passo.</p>
   <p style="margin-top:25px;">Scrivimi <strong>"CHALLENGE"</strong> su WhatsApp e inizia da qui.</p>
-  <a class="btn" href="https://wa.me/393477185545?text=CHALLENGE" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Inizia la Challenge</a>
+  <a class="btn" href="{{contact.whatsappUrl}}?text=CHALLENGE" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Inizia la Challenge</a>
 </section>
 
 <!-- QUIZ -->
@@ -302,7 +262,7 @@
     <p>È uno spazio di ascolto e orientamento per chiarire il bisogno, definire gli obiettivi e capire se e come iniziare un lavoro insieme.</p>
     <p>L'incontro consente di costruire una proposta coerente con la fase di vita e le esigenze personali.</p>
     <p style="text-transform:uppercase;letter-spacing:2px;font-size:13px;margin-top:25px;">Durata 20 minuti</p>
-    <a class="btn" href="https://wa.me/393477185545" target="_blank" rel="noopener">Prenota il tuo colloquio gratuito</a>
+    <a class="btn" href="{{contact.whatsappUrl}}" target="_blank" rel="noopener">Prenota il tuo colloquio gratuito</a>
   </div>
   <img loading="lazy" src="images/ritacolloquio.png" alt="Rita Di Gregorio – Primo colloquio conoscitivo">
 </div>
@@ -316,7 +276,7 @@
   <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;margin-top:30px;">
     <div class="newsletter">
       <h3><i class="fas fa-envelope" aria-hidden="true"></i> Newsletter</h3>
-      <form id="newsletter-form" action="https://9849341c.sibforms.com/serve/MUIFABGa1kTJDl4HsV-sA5c5oif7um-oVza5H64KFWJHKiGHk_qERtAZJkFGyHu5X4wfzE0BiKRIuk0g-bIdKIMONfs5_lrIm50Asxi7RZyfd1Q1VUvlu768kNYMFDtDgP3VZgsqhLu8rK6ZrAmkfoaKQKLh_OfuCriKEBMKXkiswqMq4NPFXRKx4MhD_jj0BAckL3UO4h8-7pU-jQ==" method="post" target="brevo-nl-iframe" onsubmit="setTimeout(function(){document.getElementById('nl-btn').style.display='none';document.getElementById('nl-email').style.display='none';document.getElementById('nl-gdpr').style.display='none';document.getElementById('nl-success').style.display='block';},1000);">
+      <form id="newsletter-form" action="{{brevo.formUrl}}" method="post" target="brevo-nl-iframe" onsubmit="setTimeout(function(){document.getElementById('nl-btn').style.display='none';document.getElementById('nl-email').style.display='none';document.getElementById('nl-gdpr').style.display='none';document.getElementById('nl-success').style.display='block';},1000);">
         <input class="newsletter__input" type="email" name="EMAIL" id="nl-email" placeholder="La tua email" required>
         <div id="nl-gdpr" class="newsletter__gdpr">
           <label>
@@ -331,42 +291,21 @@
     </div>
     <div class="channel-card">
       <h3><i class="fab fa-telegram" aria-hidden="true"></i> Canale Telegram</h3>
-      <a class="btn" href="https://t.me/LifestyleRita" target="_blank" rel="noopener" style="margin-top:10px;"><i class="fab fa-telegram" aria-hidden="true"></i> Unisciti al canale</a>
+      <a class="btn" href="{{social.telegram}}" target="_blank" rel="noopener" style="margin-top:10px;"><i class="fab fa-telegram" aria-hidden="true"></i> Unisciti al canale</a>
     </div>
   </div>
 </section>
 
 </main>
 
-<footer class="footer">
-  <div class="footer__links">
-    <a href="mailto:digregorio.rita@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
-    <a href="https://www.instagram.com/rita.digregorio_la_prof_coach/" target="_blank" rel="noopener"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a>
-    <a href="https://www.youtube.com/@siiguerriero" target="_blank" rel="noopener"><i class="fab fa-youtube" aria-hidden="true"></i> YouTube</a>
-    <a href="https://t.me/LifestyleRita" target="_blank" rel="noopener"><i class="fab fa-telegram" aria-hidden="true"></i> Telegram</a>
-    <a href="https://www.linkedin.com/in/rita-di-gregorio-a1754738a/" target="_blank" rel="noopener"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a>
-  </div>
-  <div class="footer__legal">
-    <a href="https://www.iubenda.com/privacy-policy/67937036" class="iubenda-white iubenda-noiframe iubenda-embed" title="Privacy Policy">Privacy Policy</a>
-    <a href="https://www.iubenda.com/privacy-policy/67937036/cookie-policy" class="iubenda-white iubenda-noiframe iubenda-embed" title="Cookie Policy">Cookie Policy</a>
-    <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
-  </div>
-  <p class="footer__copyright">© 2026 Rita Di Gregorio. Tutti i diritti riservati.</p>
-</footer>
-
+{{> footer}}
 
 <!-- FLOATING CTA -->
 <div id="floating-cta" class="floating-cta">
-  <a href="https://wa.me/393477185545" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Contattami</a>
+  <a href="{{contact.whatsappUrl}}" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Contattami</a>
 </div>
 
-<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Consenso cookie">
-  Questo sito utilizza cookie tecnici e di analisi per migliorare la tua esperienza.
-  <a href="https://www.iubenda.com/privacy-policy/67937036/cookie-policy" target="_blank" rel="noopener">Cookie Policy</a>
-  <button class="cookie-banner__accept" id="cookie-accept" type="button">Accetta</button>
-  <button class="cookie-banner__reject" id="cookie-reject" type="button">Rifiuta</button>
-</div>
-
+{{> cookie-banner}}
 
 </body>
 </html>

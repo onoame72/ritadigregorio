@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://ritadigregorio.it/chi-sono.html</loc>
+    <lastmod>2026-05-01</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://ritadigregorio.it/</loc>
-    <lastmod>2026-04-04</lastmod>
+    <lastmod>2026-05-01</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://ritadigregorio.it/chi-sono.html</loc>
-    <lastmod>2026-04-04</lastmod>
+    <loc>https://ritadigregorio.it/lifestyle-matrix.html</loc>
+    <lastmod>2026-05-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ritadigregorio.it/media.html</loc>
-    <lastmod>2026-04-04</lastmod>
+    <lastmod>2026-05-01</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://ritadigregorio.it/quiz/index.html</loc>
-    <lastmod>2026-04-04</lastmod>
+    <lastmod>2026-04-26</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://ritadigregorio.it/webinar.html</loc>
-    <lastmod>2026-04-24</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://ritadigregorio.it/lifestyle-matrix.html</loc>
-    <lastmod>2026-04-26</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://ritadigregorio.it/siigioia.html</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-05-01</lastmod>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ritadigregorio.it/webinar.html</loc>
+    <lastmod>2026-05-01</lastmod>
+    <priority>0.7</priority>
   </url>
 </urlset>

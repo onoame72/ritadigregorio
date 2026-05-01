@@ -1,0 +1,40 @@
+{
+  "site": {
+    "domain": "ritadigregorio.it",
+    "url": "https://ritadigregorio.it",
+    "title": "Rita Di Gregorio",
+    "subtitle": "Lifestyle Coach",
+    "copyrightYear": "2026"
+  },
+  "contact": {
+    "whatsapp": "+393477185545",
+    "whatsappUrl": "https://wa.me/393477185545",
+    "email": "digregorio.rita@gmail.com",
+    "senderEmail": "no-reply@ritadigregorio.it"
+  },
+  "social": {
+    "instagram": "https://www.instagram.com/rita.digregorio_la_prof_coach/",
+    "youtube": "https://www.youtube.com/@siiguerriero",
+    "telegram": "https://t.me/LifestyleRita",
+    "linkedin": "https://www.linkedin.com/in/rita-di-gregorio-a1754738a/"
+  },
+  "analytics": {
+    "gaId": "G-3FEX3GSE3Y"
+  },
+  "google": {
+    "siteVerification": "dXll1czWayKbcaMxpZLQQg_kQ-v89kEecStvvJpRlTM"
+  },
+  "iubenda": {
+    "privacyId": "67937036"
+  },
+  "brevo": {
+    "formUrl": "https://9849341c.sibforms.com/serve/MUIFABGa1kTJDl4HsV-sA5c5oif7um-oVza5H64KFWJHKiGHk_qERtAZJkFGyHu5X4wfzE0BiKRIuk0g-bIdKIMONfs5_lrIm50Asxi7RZyfd1Q1VUvlu768kNYMFDtDgP3VZgsqhLu8rK6ZrAmkfoaKQKLh_OfuCriKEBMKXkiswqMq4NPFXRKx4MhD_jj0BAckL3UO4h8-7pU-jQ=="
+  },
+  "nav": [
+    { "href": "index.html", "label": "Home" },
+    { "href": "chi-sono.html", "label": "Chi Sono" },
+    { "href": "media.html", "label": "Media" },
+    { "href": "lifestyle-matrix.html", "label": "Lifestyle Matrix" },
+    { "href": "siigioia.html", "label": "Sii Gioia" }
+  ]
+}

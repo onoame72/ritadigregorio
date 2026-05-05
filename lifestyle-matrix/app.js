@@ -43,12 +43,33 @@ function updateProgress(){
   document.getElementById('progressBar').style.width=(done/total*100)+'%';
 }
 
+// LOCAL STORAGE AUTOSAVE
+function storageKey(){return 'lm-progress-'+tokenId;}
+function saveProgress(){
+  try{localStorage.setItem(storageKey(),JSON.stringify({answers,currentSection}));}catch(e){}
+}
+function loadProgress(){
+  try{
+    let raw=localStorage.getItem(storageKey());
+    if(!raw)return false;
+    let saved=JSON.parse(raw);
+    if(saved.answers)answers=saved.answers;
+    if(typeof saved.currentSection==='number')currentSection=saved.currentSection;
+    return true;
+  }catch(e){return false;}
+}
+function clearProgress(){try{localStorage.removeItem(storageKey());}catch(e){}}
+
 function startTest(){
   userName=document.getElementById('userName').value||'';
   userSurname=document.getElementById('userSurname').value||'';
   userAge=document.getElementById('userAge').value||'';
   userDate=document.getElementById('userDate').value||new Date().toLocaleDateString('it-IT');
-  currentSection=0;renderSection();showScreen('screen-questions');
+  if(loadProgress()&&Object.keys(answers).length>0){
+    renderSection();showScreen('screen-questions');
+  }else{
+    currentSection=0;renderSection();showScreen('screen-questions');
+  }
 }
 
 function renderSection(){
@@ -76,6 +97,7 @@ function rate(sId,idx,val,el){
   el.classList.add('selected');
   el.closest('.question-card').style.borderColor='#333';
   updateProgress();
+  saveProgress();
 }
 
 function calcScore(sId){
@@ -108,11 +130,11 @@ function nextSection(){
     return;
   }
   if(currentSection===allSections.length-1){submitResults();return;}
-  currentSection++;renderSection();showScreen('screen-questions');
+  currentSection++;saveProgress();renderSection();showScreen('screen-questions');
 }
 
 function prevSection(){
-  if(currentSection>0){currentSection--;renderSection();showScreen('screen-questions');}
+  if(currentSection>0){currentSection--;saveProgress();renderSection();showScreen('screen-questions');}
 }
 
 function showFoundationRadar(){
@@ -209,6 +231,7 @@ async function submitResults(){
         comTrasv:comTrasv,rTrasv:rTrasv,risTrasv:risTrasv,totalAvg:totalAvg
       });
     });
+    clearProgress();
     showScreen('screen-thanks');
     fetch('https://script.google.com/macros/s/AKfycbydHUIzFMDdr3wUbi5tFG50GfTjMq7s06bweka25VuF4DIaqUH1O-Y1fgbbVLa-EmCL/exec',{
       method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},

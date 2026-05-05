@@ -15,13 +15,49 @@ let currentCoacheeId='',currentSubmissions=[];
 function doLogin(){auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());}
 function doLogout(){auth.signOut();}
 const ALLOWED_EMAILS = ['digregorio.rita@gmail.com', 'onoame72@gmail.com'];
+let currentCoacheeName='';
+
 auth.onAuthStateChanged(user=>{
-  if(user && ALLOWED_EMAILS.includes(user.email)){showScreen('mainScreen');loadCoachees();}
+  if(user && ALLOWED_EMAILS.includes(user.email)){
+    document.getElementById('dashHeader').style.display='flex';
+    document.getElementById('dashUser').textContent=user.email;
+    showMain();
+  }
   else if(user){auth.signOut();alert('Accesso non autorizzato.');}
-  else{showScreen('loginScreen');}
+  else{
+    document.getElementById('dashHeader').style.display='none';
+    document.getElementById('breadcrumb').style.display='none';
+    showScreen('loginScreen');
+  }
 });
 
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  updateBreadcrumb(id);
+  window.scrollTo(0,0);
+}
+
+function updateBreadcrumb(screenId){
+  let bc=document.getElementById('breadcrumb');
+  if(screenId==='loginScreen'){bc.style.display='none';return;}
+  bc.style.display='block';
+  let parts=[];
+  if(screenId==='mainScreen'){
+    parts.push('<span>Coachee</span>');
+  }else if(screenId==='addCoacheeScreen'){
+    parts.push('<a onclick="showMain()">Coachee</a>');
+    parts.push('<span>Nuovo</span>');
+  }else if(screenId==='coacheeScreen'){
+    parts.push('<a onclick="showMain()">Coachee</a>');
+    parts.push('<span>'+currentCoacheeName+'</span>');
+  }else if(screenId==='reportScreen'){
+    parts.push('<a onclick="showMain()">Coachee</a>');
+    parts.push('<a onclick="openCoachee(\''+currentCoacheeId+'\')">'+currentCoacheeName+'</a>');
+    parts.push('<span>Report</span>');
+  }
+  bc.innerHTML=parts.join('<span class="sep">›</span>');
+}
 
 // COACHEE LIST
 async function loadCoachees(){
@@ -111,7 +147,8 @@ async function openCoachee(id){
   try{
   let doc=await db.collection('coachees').doc(id).get();
   let d=doc.data();
-  let html='<h2>'+[d.name,d.surname].filter(Boolean).join(' ')+'</h2>';
+  currentCoacheeName=[d.name,d.surname].filter(Boolean).join(' ');
+  let html='<h2>'+currentCoacheeName+'</h2>';
   html+='<p class="card-meta">'+(d.email||'Nessuna email')+'</p>';
   let tokens=await db.collection('tokens').where('coacheeId','==',id).get();
   html+='<div style="margin:15px 0"><strong style="color:#c8a96a">Link di accesso:</strong>';

@@ -46,13 +46,38 @@ canvas{max-width:100%;margin:15px auto;display:block}
 .sub-row input[type=checkbox]{accent-color:#c8a96a;width:16px;height:16px}
 .sub-info{flex:1}
 .copyright{text-align:center;font-size:12px;color:rgba(255,255,255,0.3);margin-top:40px;padding:20px;border-top:1px solid #222}
+.dash-header{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #333;margin-bottom:10px;flex-wrap:wrap;gap:10px}
+.dash-header__left{display:flex;align-items:center;gap:10px}
+.dash-header__logo{width:32px;height:32px;border-radius:50%;object-fit:cover}
+.dash-header__title{color:#c8a96a;font-family:'Playfair Display',serif;font-size:18px}
+.dash-header__right{display:flex;align-items:center;gap:12px}
+.dash-header__user{font-size:12px;color:rgba(255,255,255,0.5)}
+.breadcrumb{font-size:13px;color:rgba(255,255,255,0.5);padding:8px 0;margin-bottom:10px}
+.breadcrumb a{color:#c8a96a;text-decoration:none;cursor:pointer}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb .sep{margin:0 6px}
 #loginScreen{text-align:center;margin-top:100px}
 .question-card{background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:16px;margin:10px 0}
-@media print{body{background:#fff;color:#000}h1,h2,h3,.section-label,.card-name{color:#333}.foundation-title{page-break-before:always;color:#333}#notesSection{page-break-before:always}.btn,.nav,#loginScreen{display:none!important}.results-table th{color:#333}.results-table td,.results-table th{border-color:#999}textarea{border:1px solid #999;color:#000;background:#fff}.question-card{border-color:#999}}
+@media print{body{background:#fff;color:#000}h1,h2,h3,.section-label,.card-name{color:#333}.foundation-title{page-break-before:always;color:#333}#notesSection{page-break-before:always}.btn,.nav,#loginScreen,.dash-header,.breadcrumb{display:none!important}.results-table th{color:#333}.results-table td,.results-table th{border-color:#999}textarea{border:1px solid #999;color:#000;background:#fff}.question-card{border-color:#999}}
 </style>
 </head>
 <body>
 <div class="wrap">
+
+<!-- PERSISTENT HEADER (hidden on login) -->
+<div class="dash-header" id="dashHeader" style="display:none">
+<div class="dash-header__left">
+<img src="https://ritadigregorio.it/images/logo.png" alt="Rita Di Gregorio" class="dash-header__logo">
+<span class="dash-header__title">Dashboard</span>
+</div>
+<div class="dash-header__right">
+<span class="dash-header__user" id="dashUser"></span>
+<button class="btn btn-sm btn-outline" onclick="doLogout()">Esci</button>
+</div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb" id="breadcrumb" style="display:none"></div>
 
 <div class="screen active" id="loginScreen">
 <p class="section-label">Metodo Ongaro®</p>
@@ -63,10 +88,9 @@ canvas{max-width:100%;margin:15px auto;display:block}
 
 <div class="screen" id="mainScreen">
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-<div><p class="section-label">Dashboard</p><h1>I tuoi Coachee</h1></div>
+<div><h1>I tuoi Coachee</h1></div>
 <div class="nav">
 <button class="btn" onclick="showAddCoachee()">+ Nuovo Coachee</button>
-<button class="btn btn-outline" onclick="doLogout()">Esci</button>
 </div>
 </div>
 <div id="coacheeList"></div>
@@ -87,7 +111,6 @@ canvas{max-width:100%;margin:15px auto;display:block}
 
 <div class="screen" id="coacheeScreen">
 <div class="nav">
-<button class="btn btn-outline" onclick="showMain()">← Tutti i coachee</button>
 <button class="btn" onclick="generateNewToken()">🔗 Nuovo link</button>
 </div>
 <div id="coacheeDetail"></div>
@@ -104,7 +127,6 @@ canvas{max-width:100%;margin:15px auto;display:block}
 
 <div class="screen" id="reportScreen">
 <div class="nav" id="reportNav">
-<button class="btn btn-outline" onclick="backToCoachee()">← Torna al coachee</button>
 <button class="btn" onclick="window.print()">🖨️ Stampa / PDF</button>
 </div>
 <div style="text-align:center;margin-top:20px">

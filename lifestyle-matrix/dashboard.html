@@ -56,6 +56,9 @@ canvas{max-width:100%;margin:15px auto;display:block}
 .breadcrumb a{color:#c8a96a;text-decoration:none;cursor:pointer}
 .breadcrumb a:hover{text-decoration:underline}
 .breadcrumb .sep{margin:0 6px}
+#coacheeSearch{width:100%;max-width:100%;margin:12px 0}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:#1a1a1a;border:1px solid #c8a96a;color:#fff;padding:12px 24px;border-radius:8px;font-size:14px;opacity:0;transition:0.3s;pointer-events:none;z-index:999}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 #loginScreen{text-align:center;margin-top:100px}
 .question-card{background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:16px;margin:10px 0}
 @media print{body{background:#fff;color:#000}h1,h2,h3,.section-label,.card-name{color:#333}.foundation-title{page-break-before:always;color:#333}#notesSection{page-break-before:always}.btn,.nav,#loginScreen,.dash-header,.breadcrumb{display:none!important}.results-table th{color:#333}.results-table td,.results-table th{border-color:#999}textarea{border:1px solid #999;color:#000;background:#fff}.question-card{border-color:#999}}
@@ -93,6 +96,7 @@ canvas{max-width:100%;margin:15px auto;display:block}
 <button class="btn" onclick="showAddCoachee()">+ Nuovo Coachee</button>
 </div>
 </div>
+<input type="text" id="coacheeSearch" placeholder="Cerca per nome o email..." oninput="filterCoachees()">
 <div id="coacheeList"></div>
 </div>
 
@@ -147,6 +151,7 @@ canvas{max-width:100%;margin:15px auto;display:block}
 </div>
 
 </div>
+<div class="toast" id="toast"></div>
 <script src="dashboard.js"></script>
 </body>
 </html>

@@ -59,14 +59,33 @@ function updateBreadcrumb(screenId){
   bc.innerHTML=parts.join('<span class="sep">›</span>');
 }
 
+// TOAST
+function showToast(msg){
+  let t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
 // COACHEE LIST
+let allCoacheesDocs=[];
 async function loadCoachees(){
   let snap=await db.collection('coachees').orderBy('createdAt','desc').get();
+  allCoacheesDocs=[];
+  snap.forEach(doc=>{allCoacheesDocs.push({id:doc.id,...doc.data()});});
+  filterCoachees();
+}
+
+function filterCoachees(){
+  let q=(document.getElementById('coacheeSearch').value||'').toLowerCase();
+  let filtered=allCoacheesDocs.filter(d=>{
+    let text=[d.name,d.surname,d.email].filter(Boolean).join(' ').toLowerCase();
+    return text.includes(q);
+  });
   let html='';
-  if(snap.empty){html='<p style="color:rgba(255,255,255,0.5);margin:20px 0">Nessun coachee. Clicca "+ Nuovo Coachee" per iniziare.</p>';}
-  snap.forEach(doc=>{
-    let d=doc.data();
-    html+='<div class="card" onclick="openCoachee(\''+doc.id+'\')">';
+  if(!allCoacheesDocs.length){html='<p style="color:rgba(255,255,255,0.5);margin:20px 0">Nessun coachee. Clicca "+ Nuovo Coachee" per iniziare.</p>';}
+  else if(!filtered.length){html='<p style="color:rgba(255,255,255,0.5);margin:20px 0">Nessun risultato.</p>';}
+  filtered.forEach(d=>{
+    html+='<div class="card" onclick="openCoachee(\''+d.id+'\')">';
     html+='<div class="card-name">'+[d.name,d.surname].filter(Boolean).join(' ')+'</div>';
     html+='<div class="card-meta">'+(d.email||'')+(d.submissions?' · '+d.submissions+' valutazioni':'')+'</div>';
     html+='</div>';
@@ -205,7 +224,7 @@ async function generateNewToken(){
   });
   let link=BASE_URL+'?token='+token;
   try{await navigator.clipboard.writeText(link);}catch(e){}
-  alert('Nuovo link creato e copiato negli appunti:\n'+link+'\n\nValido 30 giorni, utilizzabile una sola volta.');
+  showToast('✅ Nuovo link creato e copiato negli appunti');
   openCoachee(currentCoacheeId);
 }
 
@@ -217,8 +236,9 @@ async function revokeToken(tokenId){
       usedAt:firebase.firestore.FieldValue.serverTimestamp(),
       revoked:true
     });
+    showToast('🚫 Link revocato');
     openCoachee(currentCoacheeId);
-  }catch(e){alert('Errore durante la revoca: '+e.message);}
+  }catch(e){showToast('❌ Errore: '+e.message);}
 }
 
 async function deleteSubmission(subId,idx){
@@ -307,7 +327,7 @@ async function saveNotes(){
       consigli:document.getElementById('noteConsigli').value
     }
   });
-  alert('Note salvate!');
+  showToast('✅ Note salvate');
 }
 
 function backToCoachee(){openCoachee(currentCoacheeId);}

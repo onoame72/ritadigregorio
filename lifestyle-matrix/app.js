@@ -12,9 +12,9 @@ async function init(){
     let doc=await db.collection('tokens').doc(tokenId).get();
     if(!doc.exists){showInvalid('Questo link non è valido.');return;}
     let data=doc.data();
-    if(data.used===true){showInvalid('Questo link è già stato utilizzato. Contatta il tuo coach per ricevere un nuovo link.');return;}
+    if(data.used===true){showInvalid('Questo link è già stato utilizzato. Contatta Rita per ricevere un nuovo link.');return;}
     let exp=data.expiresAt&&data.expiresAt.toDate?data.expiresAt.toDate():null;
-    if(exp&&exp<new Date()){showInvalid('Questo link è scaduto. Contatta il tuo coach per ricevere un nuovo link.');return;}
+    if(exp&&exp<new Date()){showInvalid('Questo link è scaduto. Contatta Rita per ricevere un nuovo link.');return;}
     coacheeId=data.coacheeId||'';
     // Pre-fill and lock name/surname/email if present in token
     if(data.name){

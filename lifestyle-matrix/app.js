@@ -7,18 +7,33 @@ async function init(){
   // Validate token
   let params=new URLSearchParams(window.location.search);
   tokenId=params.get('token')||'';
-  if(!tokenId){showScreen('screen-invalid');return;}
+  if(!tokenId){showInvalid('Link mancante.');return;}
   try{
     let doc=await db.collection('tokens').doc(tokenId).get();
-    if(!doc.exists){showScreen('screen-invalid');return;}
+    if(!doc.exists){showInvalid('Questo link non è valido.');return;}
     let data=doc.data();
-    if(data.expires&&data.expires.toDate()<new Date()){showScreen('screen-invalid');return;}
+    if(data.used===true){showInvalid('Questo link è già stato utilizzato. Contatta il tuo coach per ricevere un nuovo link.');return;}
+    let exp=data.expiresAt&&data.expiresAt.toDate?data.expiresAt.toDate():null;
+    if(exp&&exp<new Date()){showInvalid('Questo link è scaduto. Contatta il tuo coach per ricevere un nuovo link.');return;}
     coacheeId=data.coacheeId||'';
-    if(data.name)document.getElementById('userName').value=data.name;
-    if(data.surname)document.getElementById('userSurname').value=data.surname;
-  }catch(e){showScreen('screen-invalid');return;}
+    // Pre-fill and lock name/surname if present in token
+    if(data.name){
+      let el=document.getElementById('userName');
+      el.value=data.name;el.readOnly=true;el.style.opacity='0.7';
+    }
+    if(data.surname){
+      let el=document.getElementById('userSurname');
+      el.value=data.surname;el.readOnly=true;el.style.opacity='0.7';
+    }
+  }catch(e){console.error(e);showInvalid('Impossibile verificare il link.');return;}
 }
 init();
+
+function showInvalid(msg){
+  let p=document.querySelector('#screen-invalid p');
+  if(p&&msg)p.innerHTML=msg;
+  showScreen('screen-invalid');
+}
 
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
 
@@ -170,11 +185,29 @@ async function submitResults(){
   let vals=Object.values(scores);
   let totalAvg=+(vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(2);
   try{
-    await db.collection('submissions').add({
-      token:tokenId,coacheeId:coacheeId,
-      name:userName,surname:userSurname,age:userAge,date:userDate,
-      timestamp:Date.now(),answers:answers,scores:scores,fScores:fScores,
-      comTrasv:comTrasv,rTrasv:rTrasv,risTrasv:risTrasv,totalAvg:totalAvg
+    // Atomic: consume the token and create the submission in one transaction.
+    // If the token is already used or expired (race), the transaction fails and
+    // nothing is persisted.
+    let tokenRef=db.collection('tokens').doc(tokenId);
+    let submissionRef=db.collection('submissions').doc();
+    await db.runTransaction(async tx=>{
+      let tSnap=await tx.get(tokenRef);
+      if(!tSnap.exists)throw new Error('Link non valido.');
+      let tData=tSnap.data();
+      if(tData.used===true)throw new Error('Questo link è già stato utilizzato.');
+      let exp=tData.expiresAt&&tData.expiresAt.toDate?tData.expiresAt.toDate():null;
+      if(exp&&exp<new Date())throw new Error('Questo link è scaduto.');
+      tx.update(tokenRef,{
+        used:true,
+        usedAt:firebase.firestore.FieldValue.serverTimestamp(),
+        submissionId:submissionRef.id
+      });
+      tx.set(submissionRef,{
+        token:tokenId,coacheeId:coacheeId,
+        name:userName,surname:userSurname,age:userAge,date:userDate,
+        timestamp:Date.now(),answers:answers,scores:scores,fScores:fScores,
+        comTrasv:comTrasv,rTrasv:rTrasv,risTrasv:risTrasv,totalAvg:totalAvg
+      });
     });
     showScreen('screen-thanks');
     fetch('https://script.google.com/macros/s/AKfycbydHUIzFMDdr3wUbi5tFG50GfTjMq7s06bweka25VuF4DIaqUH1O-Y1fgbbVLa-EmCL/exec',{
@@ -183,6 +216,7 @@ async function submitResults(){
     }).catch(()=>{});
   }catch(e){
     console.error(e);
-    alert('Errore nell\'invio: '+e.message);showScreen('screen-questions');
+    alert('Errore nell\'invio: '+(e.message||e));
+    showScreen('screen-questions');
   }
 }

@@ -55,6 +55,13 @@ function generateToken(){
   return t;
 }
 
+// Token validity: 30 days
+const TOKEN_TTL_DAYS=30;
+function tokenExpiresAt(){
+  let d=new Date();d.setDate(d.getDate()+TOKEN_TTL_DAYS);
+  return firebase.firestore.Timestamp.fromDate(d);
+}
+
 async function createCoachee(){
   let name=document.getElementById('newName').value.trim();
   let surname=document.getElementById('newSurname').value.trim();
@@ -62,12 +69,42 @@ async function createCoachee(){
   if(!name&&!surname){alert('Inserisci almeno il nome.');return;}
   let ref=await db.collection('coachees').add({name,surname,email,submissions:0,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
   let token=generateToken();
-  await db.collection('tokens').doc(token).set({coacheeId:ref.id,name,surname,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+  await db.collection('tokens').doc(token).set({
+    coacheeId:ref.id,name,surname,
+    createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+    expiresAt:tokenExpiresAt(),
+    used:false,usedAt:null,submissionId:null
+  });
   let link=BASE_URL+'?token='+token;
-  document.getElementById('newTokenResult').innerHTML='<p style="color:#4CAF50;margin:10px 0">✅ Coachee creato!</p><p>Link per il test:</p><div class="token-box">'+link+'</div><button class="btn btn-sm" onclick="navigator.clipboard.writeText(\''+link+'\');this.textContent=\'Copiato!\'">📋 Copia link</button>';
+  let safeLink=link.replace(/'/g,"\\'");
+  document.getElementById('newTokenResult').innerHTML=
+    '<p style="color:#4CAF50;margin:10px 0">✅ Coachee creato!</p>'+
+    '<p>Link per il test (valido 30 giorni, utilizzabile una sola volta):</p>'+
+    '<div class="token-box">'+link+'</div>'+
+    '<div class="nav" style="margin-top:10px">'+
+    '<button class="btn btn-sm" onclick="navigator.clipboard.writeText(\''+safeLink+'\');this.textContent=\'Copiato!\'">📋 Copia link</button>'+
+    '<button class="btn btn-sm" onclick="openCoachee(\''+ref.id+'\')">📂 Apri scheda</button>'+
+    '<button class="btn btn-sm btn-outline" onclick="showAddCoachee()">+ Nuovo coachee</button>'+
+    '<button class="btn btn-sm btn-outline" onclick="showMain()">← Lista coachee</button>'+
+    '</div>';
 }
 
 // COACHEE DETAIL
+function formatDate(ts){
+  if(!ts)return '';
+  let d=ts.toDate?ts.toDate():new Date(ts);
+  return d.toLocaleDateString('it-IT');
+}
+function tokenStatus(t){
+  // t is the token data
+  let now=new Date();
+  let exp=t.expiresAt&&t.expiresAt.toDate?t.expiresAt.toDate():null;
+  if(t.used)return{label:'Usato'+(t.usedAt?' il '+formatDate(t.usedAt):''),color:'#888',cls:'used'};
+  if(exp&&exp<now)return{label:'Scaduto il '+formatDate(t.expiresAt),color:'#e74c3c',cls:'expired'};
+  if(exp)return{label:'Attivo · scade il '+formatDate(t.expiresAt),color:'#4CAF50',cls:'active'};
+  return{label:'Legacy',color:'#c8a96a',cls:'legacy'};
+}
+
 async function openCoachee(id){
   currentCoacheeId=id;
   try{
@@ -76,10 +113,25 @@ async function openCoachee(id){
   let html='<h2>'+[d.name,d.surname].filter(Boolean).join(' ')+'</h2>';
   html+='<p class="card-meta">'+(d.email||'Nessuna email')+'</p>';
   let tokens=await db.collection('tokens').where('coacheeId','==',id).get();
-  html+='<div style="margin:15px 0"><strong style="color:#c8a96a">Link attivi:</strong>';
+  html+='<div style="margin:15px 0"><strong style="color:#c8a96a">Link di accesso:</strong>';
+  if(tokens.empty){
+    html+='<p style="color:rgba(255,255,255,0.5);margin:8px 0">Nessun link. Clicca "Nuovo link" per generarne uno.</p>';
+  }
   tokens.forEach(t=>{
+    let td=t.data();
     let link=BASE_URL+'?token='+t.id;
-    html+='<div class="token-box" style="display:flex;align-items:center;gap:8px;justify-content:space-between"><span>'+link+'</span><button class="btn btn-sm" onclick="navigator.clipboard.writeText(\''+link+'\');this.textContent=\'✓\'">📋</button></div>';
+    let safeLink=link.replace(/'/g,"\\'");
+    let st=tokenStatus(td);
+    html+='<div class="token-row">';
+    html+='<div class="token-status" style="color:'+st.color+'">● '+st.label+'</div>';
+    html+='<div class="token-box" style="display:flex;align-items:center;gap:8px;justify-content:space-between">';
+    html+='<span>'+link+'</span>';
+    html+='<div style="display:flex;gap:6px;flex-shrink:0">';
+    html+='<button class="btn btn-sm" onclick="navigator.clipboard.writeText(\''+safeLink+'\');this.textContent=\'✓\'">📋</button>';
+    if(st.cls==='active'){
+      html+='<button class="btn btn-sm btn-danger" onclick="revokeToken(\''+t.id+'\')" title="Revoca questo link">🚫</button>';
+    }
+    html+='</div></div></div>';
   });
   html+='</div>';
   document.getElementById('coacheeDetail').innerHTML=html;
@@ -107,11 +159,28 @@ async function generateNewToken(){
   let token=generateToken();
   let doc=await db.collection('coachees').doc(currentCoacheeId).get();
   let d=doc.data();
-  await db.collection('tokens').doc(token).set({coacheeId:currentCoacheeId,name:d.name,surname:d.surname,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+  await db.collection('tokens').doc(token).set({
+    coacheeId:currentCoacheeId,name:d.name,surname:d.surname,
+    createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+    expiresAt:tokenExpiresAt(),
+    used:false,usedAt:null,submissionId:null
+  });
   let link=BASE_URL+'?token='+token;
-  alert('Nuovo link creato!\n'+link);
-  navigator.clipboard.writeText(link);
+  try{await navigator.clipboard.writeText(link);}catch(e){}
+  alert('Nuovo link creato e copiato negli appunti:\n'+link+'\n\nValido 30 giorni, utilizzabile una sola volta.');
   openCoachee(currentCoacheeId);
+}
+
+async function revokeToken(tokenId){
+  if(!confirm('Revocare questo link? Non potrà più essere usato.'))return;
+  try{
+    await db.collection('tokens').doc(tokenId).update({
+      used:true,
+      usedAt:firebase.firestore.FieldValue.serverTimestamp(),
+      revoked:true
+    });
+    openCoachee(currentCoacheeId);
+  }catch(e){alert('Errore durante la revoca: '+e.message);}
 }
 
 async function deleteSubmission(subId,idx){

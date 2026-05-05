@@ -167,8 +167,12 @@ async function openCoachee(id){
   let doc=await db.collection('coachees').doc(id).get();
   let d=doc.data();
   currentCoacheeName=[d.name,d.surname].filter(Boolean).join(' ');
-  let html='<h2>'+currentCoacheeName+'</h2>';
-  html+='<p class="card-meta">'+(d.email||'Nessuna email')+'</p>';
+  let html='<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px">';
+  html+='<div><h2>'+currentCoacheeName+'</h2>';
+  html+='<p class="card-meta">'+(d.email||'Nessuna email')+'</p></div>';
+  html+='<div class="nav"><button class="btn btn-sm btn-outline" onclick="editCoachee()">✏️ Modifica</button>';
+  html+='<button class="btn btn-sm btn-danger" onclick="deleteCoachee()">🗑️ Elimina</button></div>';
+  html+='</div>';
   let tokens=await db.collection('tokens').where('coacheeId','==',id).get();
   html+='<div style="margin:15px 0"><strong style="color:#c8a96a">Link di accesso:</strong>';
   if(tokens.empty){
@@ -241,6 +245,36 @@ async function revokeToken(tokenId){
   }catch(e){showToast('❌ Errore: '+e.message);}
 }
 
+async function editCoachee(){
+  let doc=await db.collection('coachees').doc(currentCoacheeId).get();
+  let d=doc.data();
+  let name=prompt('Nome:',d.name||'');
+  if(name===null)return;
+  let surname=prompt('Cognome:',d.surname||'');
+  if(surname===null)return;
+  let email=prompt('Email:',d.email||'');
+  if(email===null)return;
+  await db.collection('coachees').doc(currentCoacheeId).update({name:name.trim(),surname:surname.trim(),email:email.trim()});
+  showToast('✅ Dati aggiornati');
+  openCoachee(currentCoacheeId);
+}
+
+async function deleteCoachee(){
+  if(!confirm('Eliminare questo coachee e tutti i suoi dati (valutazioni, link)? Azione irreversibile.'))return;
+  // Delete tokens
+  let tokens=await db.collection('tokens').where('coacheeId','==',currentCoacheeId).get();
+  let batch=db.batch();
+  tokens.forEach(t=>batch.delete(t.ref));
+  // Delete submissions
+  let subs=await db.collection('submissions').where('coacheeId','==',currentCoacheeId).get();
+  subs.forEach(s=>batch.delete(s.ref));
+  // Delete coachee
+  batch.delete(db.collection('coachees').doc(currentCoacheeId));
+  await batch.commit();
+  showToast('🗑️ Coachee eliminato');
+  showMain();
+}
+
 async function deleteSubmission(subId,idx){
   if(!confirm('Eliminare questa valutazione?'))return;
   await db.collection('submissions').doc(subId).delete();
@@ -254,6 +288,15 @@ let currentReportSub=null;
 function viewReport(idx){
   currentReportSub=currentSubmissions[idx];
   let s=currentReportSub;
+  // Populate report selector
+  let sel=document.getElementById('reportSelector');
+  sel.innerHTML='';
+  currentSubmissions.forEach((sub,i)=>{
+    let opt=document.createElement('option');
+    opt.value=i;opt.textContent=sub.date+' — Media: '+sub.totalAvg;
+    if(i===idx)opt.selected=true;
+    sel.appendChild(opt);
+  });
   let label=[s.name,s.surname].filter(Boolean).join(' ')+(s.age?' — Età: '+s.age:'')+(s.date?' — '+s.date:'');
   document.getElementById('reportName').textContent=label;
   let html='';

@@ -131,6 +131,7 @@ canvas{max-width:100%;margin:15px auto;display:block}
 
 <div class="screen" id="reportScreen">
 <div class="nav" id="reportNav">
+<select id="reportSelector" onchange="viewReport(+this.value)" style="padding:6px 10px;border:1px solid #c8a96a;border-radius:6px;background:#222;color:#fff;font-size:13px"></select>
 <button class="btn" onclick="window.print()">🖨️ Stampa / PDF</button>
 </div>
 <div style="text-align:center;margin-top:20px">

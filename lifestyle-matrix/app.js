@@ -16,7 +16,7 @@ async function init(){
     let exp=data.expiresAt&&data.expiresAt.toDate?data.expiresAt.toDate():null;
     if(exp&&exp<new Date()){showInvalid('Questo link è scaduto. Contatta il tuo coach per ricevere un nuovo link.');return;}
     coacheeId=data.coacheeId||'';
-    // Pre-fill and lock name/surname if present in token
+    // Pre-fill and lock name/surname/email if present in token
     if(data.name){
       let el=document.getElementById('userName');
       el.value=data.name;el.readOnly=true;el.style.opacity='0.7';
@@ -24,6 +24,10 @@ async function init(){
     if(data.surname){
       let el=document.getElementById('userSurname');
       el.value=data.surname;el.readOnly=true;el.style.opacity='0.7';
+    }
+    if(data.email){
+      let el=document.getElementById('userEmail');
+      el.value=data.email;el.readOnly=true;el.style.opacity='0.7';
     }
   }catch(e){console.error(e);showInvalid('Impossibile verificare il link.');return;}
 }

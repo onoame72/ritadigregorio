@@ -67,10 +67,11 @@ async function createCoachee(){
   let surname=document.getElementById('newSurname').value.trim();
   let email=document.getElementById('newEmail').value.trim();
   if(!name&&!surname){alert('Inserisci almeno il nome.');return;}
+  if(!email){alert('Inserisci l\'email del coachee.');return;}
   let ref=await db.collection('coachees').add({name,surname,email,submissions:0,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
   let token=generateToken();
   await db.collection('tokens').doc(token).set({
-    coacheeId:ref.id,name,surname,
+    coacheeId:ref.id,name,surname,email,
     createdAt:firebase.firestore.FieldValue.serverTimestamp(),
     expiresAt:tokenExpiresAt(),
     used:false,usedAt:null,submissionId:null

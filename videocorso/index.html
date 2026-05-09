@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sii Guerriero — Videocorso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#111;color:#fff;font-family:-apple-system,sans-serif;font-size:16px;line-height:1.7}
+h1,h2{font-family:'Playfair Display',serif;color:#c8a96a}
+h1{font-size:28px;margin-bottom:10px}
+h2{font-size:20px}
+.wrap{max-width:800px;margin:auto;padding:20px}
+.section-label{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:5px}
+#accessDenied{text-align:center;margin-top:100px}
+#courseContent{display:none}
+.lesson{background:#1a1a1a;border:1px solid #333;border-radius:10px;margin:12px 0;overflow:hidden;transition:0.2s}
+.lesson:hover{border-color:#c8a96a}
+.lesson-header{padding:16px;cursor:pointer;display:flex;align-items:center;gap:12px}
+.lesson-num{background:#c8a96a;color:#111;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold;flex-shrink:0}
+.lesson-title{font-size:15px;font-weight:bold;color:#fff}
+.lesson-toggle{margin-left:auto;color:#c8a96a;font-size:18px;transition:0.3s}
+.lesson.open .lesson-toggle{transform:rotate(180deg)}
+.lesson-body{display:none;padding:0 16px 16px}
+.lesson.open .lesson-body{display:block}
+.video-container{position:relative;padding-bottom:56.25%;height:0;margin-top:12px;border-radius:6px;overflow:hidden}
+.video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.welcome{text-align:center;margin:30px 0}
+.copyright{text-align:center;font-size:12px;color:rgba(255,255,255,0.3);margin-top:40px;padding:20px;border-top:1px solid #222}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div id="accessDenied">
+<p class="section-label">Videocorso</p>
+<h1>Sii Guerriero</h1>
+<p style="color:rgba(255,255,255,0.6);margin:20px 0">Accesso non autorizzato.<br>Se hai acquistato il corso, usa il link che ti è stato inviato.</p>
+</div>
+
+<div id="courseContent">
+<div class="welcome">
+<p class="section-label">Videocorso</p>
+<h1>Sii Guerriero</h1>
+<p style="color:rgba(255,255,255,0.6);margin:10px 0">Benvenuto/a, <span id="clientName"></span></p>
+</div>
+
+<div id="lessonList"></div>
+
+<div class="copyright">© 2026 Rita Di Gregorio · Tutti i diritti riservati</div>
+</div>
+
+</div>
+<script>
+firebase.initializeApp({
+  apiKey:"AIzaSyCe93JvddBAmv6BUwvkzSsCO1GAdqXRv4Q",
+  authDomain:"lifestyle-matrix.firebaseapp.com",
+  projectId:"lifestyle-matrix",
+  storageBucket:"lifestyle-matrix.firebasestorage.app",
+  messagingSenderId:"885705065634",
+  appId:"1:885705065634:web:0e6ca7855628021ecbc3fb"
+});
+const db=firebase.firestore();
+
+const LESSONS=[
+  {title:"I Miei Obiettivi",videoId:""},
+  {title:"Mi Immergo in Me, nei Miei Bisogni e Valori",videoId:""},
+  {title:"Io Valgo – Autostima e Assertività",videoId:""},
+  {title:"Le Risorse del Guerriero",videoId:""},
+  {title:"No Stress – Impara a Vincere lo Stress",videoId:""},
+  {title:"La Giornata del Guerriero – Creare Abitudini Potenziative",videoId:""},
+  {title:"La Magia delle Relazioni e la Risoluzione dei Conflitti",videoId:""},
+  {title:"Mi Amo – Come Coltivare l'Auto-Dialogo Positivo",videoId:""},
+  {title:"Occuparsi Senza Pre-Occuparsi",videoId:""},
+  {title:"Yes I Can – La Pratica della Felicità",videoId:""},
+  {title:"Genitori Strategici – Per Genitori, Educatori e Insegnanti",videoId:""}
+];
+
+async function init(){
+  let params=new URLSearchParams(window.location.search);
+  let token=params.get('token');
+  if(!token)return;
+  try{
+    let doc=await db.collection('corsoClients').doc(token).get();
+    if(!doc.exists)return;
+    let d=doc.data();
+    if(d.revoked)return;
+    document.getElementById('accessDenied').style.display='none';
+    document.getElementById('courseContent').style.display='block';
+    document.getElementById('clientName').textContent=[d.name,d.surname].filter(Boolean).join(' ');
+    renderLessons();
+  }catch(e){console.error(e);}
+}
+
+function renderLessons(){
+  let html='';
+  LESSONS.forEach((l,i)=>{
+    html+='<div class="lesson" onclick="toggleLesson(this)">';
+    html+='<div class="lesson-header">';
+    html+='<div class="lesson-num">'+(i+1)+'</div>';
+    html+='<div class="lesson-title">'+l.title+'</div>';
+    html+='<div class="lesson-toggle">▼</div>';
+    html+='</div>';
+    html+='<div class="lesson-body">';
+    if(l.videoId){
+      html+='<div class="video-container"><iframe src="https://www.youtube.com/embed/'+l.videoId+'?rel=0" title="'+l.title+'" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>';
+    }else{
+      html+='<p style="color:rgba(255,255,255,0.5)">Video in arrivo</p>';
+    }
+    html+='</div></div>';
+  });
+  document.getElementById('lessonList').innerHTML=html;
+}
+
+function toggleLesson(el){el.classList.toggle('open');}
+
+init();
+</script>
+</body>
+</html>

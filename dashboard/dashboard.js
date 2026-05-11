@@ -343,7 +343,7 @@ function viewReport(idx){
   document.getElementById('noteLimiti').value=s.notes?.limiti||'';
   document.getElementById('noteRisorse').value=s.notes?.risorse||'';
   document.getElementById('noteConsigli').value=s.notes?.consigli||'';
-  document.querySelectorAll('#notesSection textarea').forEach(ta=>{ta.nextElementSibling.textContent=ta.value;});
+  renderNotesView(s.notes);
   showScreen('reportScreen');
   // Draw radars
   setTimeout(()=>{
@@ -366,15 +366,38 @@ function viewReport(idx){
 
 async function saveNotes(){
   if(!currentReportSub||!currentReportSub._id)return;
-  await db.collection('submissions').doc(currentReportSub._id).update({
-    notes:{
-      osservazioni:document.getElementById('noteOsservazioni').value,
-      limiti:document.getElementById('noteLimiti').value,
-      risorse:document.getElementById('noteRisorse').value,
-      consigli:document.getElementById('noteConsigli').value
-    }
-  });
+  let notes={
+    osservazioni:document.getElementById('noteOsservazioni').value,
+    limiti:document.getElementById('noteLimiti').value,
+    risorse:document.getElementById('noteRisorse').value,
+    consigli:document.getElementById('noteConsigli').value
+  };
+  await db.collection('submissions').doc(currentReportSub._id).update({notes});
+  currentReportSub.notes=notes;
+  renderNotesView(notes);
   showToast('✅ Note salvate');
+}
+
+function renderNotesView(notes){
+  let n=notes||{};
+  let labels={osservazioni:'Osservazioni',limiti:'Limiti',risorse:'Risorse',consigli:'Consigli Operativi'};
+  let html='';
+  for(let k of ['osservazioni','limiti','risorse','consigli']){
+    if(n[k]){
+      html+='<div class="question-card"><label style="color:#c8a96a;font-weight:bold;display:block;margin-bottom:8px">'+labels[k]+'</label>';
+      html+='<p style="white-space:pre-wrap;line-height:1.7">'+n[k]+'</p></div>';
+    }
+  }
+  if(!html)html='<p style="color:rgba(255,255,255,0.5);margin:10px 0">Nessuna nota inserita.</p>';
+  document.getElementById('notesView').innerHTML=html;
+  document.getElementById('notesEdit').style.display='none';
+  document.getElementById('notesEditBtn').style.display='';
+}
+
+function editNotes(){
+  document.getElementById('notesView').innerHTML='';
+  document.getElementById('notesEdit').style.display='block';
+  document.getElementById('notesEditBtn').style.display='none';
 }
 
 function backToCoachee(){openCoachee(currentCoacheeId);}
@@ -476,9 +499,7 @@ function drawRadar(canvasId,labels,values,size,print){
 }
 
 // Print support
-function syncNote(ta){ta.nextElementSibling.textContent=ta.value;}
 window.addEventListener('beforeprint',()=>{
-  document.querySelectorAll('#notesSection textarea').forEach(ta=>{ta.nextElementSibling.textContent=ta.value;});
   document.querySelectorAll('canvas').forEach(c=>{
     if(c._radarData)drawRadar(c.id,c._radarData.labels,c._radarData.values,c._radarData.size,true);
   });

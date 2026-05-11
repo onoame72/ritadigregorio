@@ -479,11 +479,23 @@ window.addEventListener('beforeprint',()=>{
   document.querySelectorAll('canvas').forEach(c=>{
     if(c._radarData)drawRadar(c.id,c._radarData.labels,c._radarData.values,c._radarData.size,true);
   });
+  document.querySelectorAll('#notesSection textarea').forEach(ta=>{
+    let div=document.createElement('div');
+    div.className='print-note';
+    div.style.whiteSpace='pre-wrap';
+    div.style.padding='12px';
+    div.style.minHeight='20px';
+    div.textContent=ta.value;
+    ta.style.display='none';
+    ta.parentNode.insertBefore(div,ta.nextSibling);
+  });
 });
 window.addEventListener('afterprint',()=>{
   document.querySelectorAll('canvas').forEach(c=>{
     if(c._radarData)drawRadar(c.id,c._radarData.labels,c._radarData.values,c._radarData.size,false);
   });
+  document.querySelectorAll('.print-note').forEach(d=>d.remove());
+  document.querySelectorAll('#notesSection textarea').forEach(ta=>{ta.style.display='';});
 });
 
 // === SII GUERRIERO SECTION ===

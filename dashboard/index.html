@@ -66,7 +66,7 @@ canvas{max-width:100%;margin:15px auto;display:block}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 #loginScreen{text-align:center;margin-top:100px}
 .question-card{background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:16px;margin:10px 0}
-@media print{body{background:#fff;color:#000}h1,h2,h3,.section-label,.card-name{color:#333}.foundation-title{page-break-before:always;color:#333}#notesSection{page-break-before:always}.btn,.nav,#loginScreen,.dash-header,.breadcrumb,.tab-bar{display:none!important}.results-table th{color:#333}.results-table td,.results-table th{border-color:#999}textarea{border:1px solid #999;color:#000;background:#fff}.print-note{color:#000;font-size:14px;line-height:1.7;border:1px solid #999;border-radius:6px}.question-card{border-color:#999;break-inside:avoid}}
+@media print{body{background:#fff;color:#000}h1,h2,h3,.section-label,.card-name{color:#333}.foundation-title{page-break-before:always;color:#333}#notesSection{page-break-before:always}.btn,.nav,#loginScreen,.dash-header,.breadcrumb,.tab-bar{display:none!important}.results-table th{color:#333}.results-table td,.results-table th{border-color:#999}#notesSection textarea{display:none!important}#notesSection .print-note{display:block!important;color:#000;font-size:14px;line-height:1.7;border:1px solid #999;border-radius:6px;padding:12px;white-space:pre-wrap}.question-card{border-color:#999;break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -155,10 +155,10 @@ canvas{max-width:100%;margin:15px auto;display:block}
 <div id="reportContent"></div>
 <div id="notesSection">
 <div class="foundation-title">Le mie osservazioni e indicazioni per te</div>
-<div class="question-card"><label style="color:#c8a96a;font-weight:bold;display:block;margin-bottom:8px">Osservazioni</label><textarea id="noteOsservazioni" rows="4"></textarea></div>
-<div class="question-card"><label style="color:#c8a96a;font-weight:bold;display:block;margin-bottom:8px">Limiti</label><textarea id="noteLimiti" rows="4"></textarea></div>
-<div class="question-card"><label style="color:#c8a96a;font-weight:bold;display:block;margin-bottom:8px">Risorse</label><textarea id="noteRisorse" rows="4"></textarea></div>
-<div class="question-card"><label style="color:#c8a96a;font-weight:bold;display:block;margin-bottom:8px">Consigli Operativi</label><textarea id="noteConsigli" rows="4"></textarea></div>
+<div class="question-card"><label style="color:#c8a96a;font-weight:bold;display:block;margin-bottom:8px">Osservazioni</label><textarea id="noteOsservazioni" rows="4" oninput="syncNote(this)"></textarea><div class="print-note" style="display:none"></div></div>
+<div class="question-card"><label style="color:#c8a96a;font-weight:bold;display:block;margin-bottom:8px">Limiti</label><textarea id="noteLimiti" rows="4" oninput="syncNote(this)"></textarea><div class="print-note" style="display:none"></div></div>
+<div class="question-card"><label style="color:#c8a96a;font-weight:bold;display:block;margin-bottom:8px">Risorse</label><textarea id="noteRisorse" rows="4" oninput="syncNote(this)"></textarea><div class="print-note" style="display:none"></div></div>
+<div class="question-card"><label style="color:#c8a96a;font-weight:bold;display:block;margin-bottom:8px">Consigli Operativi</label><textarea id="noteConsigli" rows="4" oninput="syncNote(this)"></textarea><div class="print-note" style="display:none"></div></div>
 </div>
 <div class="nav"><button class="btn" onclick="saveNotes()">💾 Salva note</button></div>
 <div class="copyright">© 2022 - Metodo Ongaro Switzerland SA · v2.0</div>

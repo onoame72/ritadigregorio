@@ -135,7 +135,7 @@ Il breakpoint **deve** essere 768px ovunque. La variante 600px presente su `life
 Ogni componente è definito una sola volta in `assets/css/components.css` e usato uguale ovunque.
 
 ### 3.1 `.topbar`
-Barra superiore con logo + menu. Identica in tutte le pagine. Navigazione: Home, Chi Sono, Media, Lifestyle Matrix, Sii Gioia. Aggiornare l'elenco **solo** in `partials/topbar.html`.
+Barra superiore con logo + menu. Identica in tutte le pagine. Navigazione: Home, Chi Sono, Media, Lifestyle Matrix, Sii Guerriero. Aggiornare l'elenco **solo** in `partials/topbar.html`.
 
 ### 3.2 `.btn`
 Bottone dorato primario. Per varianti usare modificatori:

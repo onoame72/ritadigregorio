@@ -172,8 +172,13 @@ Footer con social, Iubenda, copyright. Modificare **solo** `partials/footer.html
 ### 3.9 `.cookie-banner`
 Banner consenso. Modificare **solo** `partials/cookie-banner.html` e `assets/js/cookies.js`.
 
-### 3.10 `.floating-cta`
-Pulsante WhatsApp fisso in basso a destra, compare dopo 600px di scroll. Gestito da `assets/js/ui.js`.
+### 3.11 `.webinar-promotion`
+Per promozioni di eventi (webinar), usare `.section` e `.split` (immagine locandina + testo).
+- Struttura: `.section` (bianco) o `.section-alt` (beige) per alternanza.
+- Modificatori: sempre `.split` per layout desktop, `.u-text-center` per mobile se necessario.
+- Bottone: `.btn` con link WhatsApp (`{{contact.whatsappUrl}}?text=...`) o pagina dedicata.
+- Badge: P `<p class="label" style="color:var(--color-gold);margin-bottom:5px;">`
+- Titolo: `<h2>`
 
 ---
 

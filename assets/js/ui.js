@@ -40,10 +40,39 @@
     }, { passive: true });
   }
 
+  function initAcademyOffers() {
+    const now = new Date();
+    const superOffertaEnd = new Date('2026-07-09T00:00:00');
+    const offertaLancioEnd = new Date('2026-09-08T00:00:00');
+
+    let activeTier = 'ordinario';
+    if (now < superOffertaEnd) {
+      activeTier = 'super';
+    } else if (now < offertaLancioEnd) {
+      activeTier = 'lancio';
+    }
+
+    const items = document.querySelectorAll('[data-tier]');
+    items.forEach(function(item) {
+      const tier = item.getAttribute('data-tier');
+      if (tier === activeTier) {
+        item.classList.add('price-timeline-item--active');
+      } else if (
+        (activeTier === 'lancio' && tier === 'super') ||
+        (activeTier === 'ordinario' && (tier === 'super' || tier === 'lancio'))
+      ) {
+        item.classList.add('price-timeline-item--expired');
+      } else {
+        item.classList.add('price-timeline-item--upcoming');
+      }
+    });
+  }
+
   function init() {
     initHamburger();
     initScrollAnimations();
     initFloatingCta();
+    initAcademyOffers();
   }
 
   if (document.readyState === 'loading') {

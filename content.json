@@ -37,5 +37,11 @@
     { "href": "lifestyle-matrix.html", "label": "Lifestyle Matrix" },
     { "href": "sii-gioia.html", "label": "Sii Gioia Academy" },
     { "href": "sii-guerriero.html", "label": "Sii Guerriero" }
-  ]
+  ],
+  "academy": {
+    "deadlines": {
+      "superOfferta": "2026-07-09T00:00:00",
+      "offertaLancio": "2026-09-08T00:00:00"
+    }
+  }
 }

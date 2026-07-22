@@ -42,8 +42,8 @@
 
   function initAcademyOffers() {
     const now = new Date();
-    const superOffertaEnd = new Date('2026-07-09T00:00:00');
-    const offertaLancioEnd = new Date('2026-09-08T00:00:00');
+    const superOffertaEnd = new Date('2026-07-09T00:00:00Z');
+    const offertaLancioEnd = new Date('2026-09-08T00:00:00Z');
 
     let activeTier = 'ordinario';
     if (now < superOffertaEnd) {

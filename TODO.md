@@ -20,4 +20,4 @@ Questo file traccia gli interventi di miglioramento pianificati per il sito.
 ## 3. Pulizia & Struttura
 - [ ] **Rinomina immagini:** Audit e rinomina file immagini secondo la convenzione `{scope}-{descrittore}-{indice}.{ext}` (§5.4).
 - [ ] **Accessibilità:** Verificare coerenza gerarchica dei tag `h2`/`h3` in tutte le pagine. Assicurare attributi ARIA corretti per componenti dinamici.
-- [ ] **Cleanup:** Rinominare `siigioia.html` in `sii-gioia.html` (richiede gestione redirect).
+- [x] **Cleanup:** Rimossa `siigioia.html` (Sii Gioia Pre Summer, percorso obsoleto). La pagina viva è `sii-gioia.html` (Academy); il link nel quiz è stato reindirizzato.

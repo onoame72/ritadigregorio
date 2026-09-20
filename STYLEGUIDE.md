@@ -22,7 +22,6 @@ La parola **deve** indica una regola obbligatoria, **dovrebbe** una forte prefer
 │   ├── chi-sono.html
 │   ├── media.html
 │   ├── webinar.html
-│   ├── siigioia.html
 │   └── lifestyle-matrix.html
 ├── partials/              # Frammenti HTML riutilizzati
 │   ├── head.html
@@ -146,7 +145,7 @@ Bottone dorato primario. Per varianti usare modificatori:
 ### 3.3 `.hero`
 Sezione di apertura. Un solo nome di classe. Modificatori:
 - `.hero` = pagina home (immagine + titolo)
-- `.hero--dark` = fondo scuro (chi-sono, media, webinar, siigioia, lifestyle-matrix)
+- `.hero--dark` = fondo scuro (chi-sono, media, webinar, lifestyle-matrix)
 - `.hero--centered` = contenuto centrato
 
 Vietato creare `.hero-chi`, `.hero-lm`, `.hero-media`. Se già esistono nel codice legacy, si migrano.
@@ -206,7 +205,7 @@ Accessibilità minima obbligatoria:
 ### 5.1 File
 - Tutti i nomi file in **kebab-case**, minuscolo, senza spazi, senza caratteri accentati.
 - Estensioni immagine in minuscolo (`.jpg`, non `.JPG`; scegliere una tra `.jpg` e `.jpeg` per lo stesso scopo).
-- `siigioia.html` va rinominato `sii-gioia.html` in un intervento dedicato (richiede redirect, si valuta a parte).
+- `siigioia.html` (Sii Gioia Pre Summer, obsoleto) è stato rimosso: la pagina canonica è `sii-gioia.html` (Academy).
 - File immagini con spazi o typo (storico: `challenge 1.png`, `chellenge 5.png`) vanno rinominati secondo questa convenzione. La challenge è stata risolta in un commit dedicato.
 
 ### 5.2 Classi CSS
@@ -280,7 +279,7 @@ Ogni pagina **deve** avere, nel suo `<head>`:
 JSON-LD per pagina:
 - `index.html`: `ProfessionalService` (già presente)
 - `chi-sono.html`: `Person`
-- `siigioia.html`: `Course`
+- `sii-gioia.html`: `Course`
 - `lifestyle-matrix.html`: `Service`
 - `webinar.html`: `VideoObject` con `embedUrl`
 - `media.html`: facoltativo
@@ -385,9 +384,11 @@ Se una regola qui sopra blocca un'esigenza reale, la deviazione si documenta nel
 ```
 feat(siigioia): prezzo dinamico via JS
 
-Deviazione styleguide §9: il prezzo non è in content.json perché cambia
-per promozioni temporanee. Resta hard-coded in siigioia.html con commento
-`<!-- STYLEGUIDE-DEVIATION: prezzo temporaneo -->`.
+Deviazione styleguide §9: il prezzo non è in content.json perché è
+specifico del servizio e soggetto a variazioni. Resta hard-coded nella
+pagina del servizio (es. `supervisione-mentoring.html`, `parent-coaching.html`)
+con commento
+`<!-- STYLEGUIDE-DEVIATION: prezzo non in content.json perche specifico di questo servizio -->`.
 ```
 
 Ogni deviazione ha un commento marker `<!-- STYLEGUIDE-DEVIATION: motivo -->` accanto al codice, così è grep-abile.

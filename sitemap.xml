@@ -7,7 +7,7 @@
   </url>
   <url>
     <loc>https://ritadigregorio.it/</loc>
-    <lastmod>2026-09-04</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
@@ -43,6 +43,11 @@
   <url>
     <loc>https://ritadigregorio.it/siigioia.html</loc>
     <lastmod>2026-05-01</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ritadigregorio.it/supervisione-mentoring.html</loc>
+    <lastmod>2026-09-20</lastmod>
     <priority>0.8</priority>
   </url>
   <url>

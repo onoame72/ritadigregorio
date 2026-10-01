@@ -106,8 +106,6 @@
 
 .hero__img {
   max-height: 40vh;
-  width: auto;
-  height: auto;
   border-radius: var(--radius-lg);
 }
 
@@ -780,8 +778,6 @@
 
 .hero--home img {
   max-height: 45vh;
-  width: auto;
-  height: auto;
   border-radius: var(--radius-lg);
   margin-bottom: -10px;
 }

@@ -14,9 +14,8 @@ Questo file traccia gli interventi di miglioramento pianificati per il sito.
     - [x] `index.html` (ProfessionalService) — *Già presente*
     - [x] `chi-sono.html` (Person) — *Implementato*
     - [x] `sii-gioia.html` (Course) — *Implementato*
-    - [x] `lifestyle-matrix.html` (Service) — *Già presente*
-    - [x] `webinar.html` (VideoObject) — *Già presente*
-    - [x] `media.html` (ItemList di VideoObject) — *Implementato*
+    - [ ] `lifestyle-matrix.html` (Service) — *Da implementare*
+    - [ ] `webinar.html` (VideoObject) — *Da implementare*
 
 ## 3. Pulizia & Struttura
 - [ ] **Rinomina immagini:** Audit e rinomina file immagini secondo la convenzione `{scope}-{descrittore}-{indice}.{ext}` (§5.4).

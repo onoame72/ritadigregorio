@@ -68,7 +68,20 @@
     });
   }
 
+  // Nasconde banner/blocchi promo (data-promo-deadline) dopo la scadenza.
+  // La data viene da content.json > promo.*.deadline (nessuna data hard-coded qui).
+  function initPromoDeadline() {
+    const now = new Date();
+    document.querySelectorAll('[data-promo-deadline]').forEach(function(el) {
+      const deadline = new Date(el.getAttribute('data-promo-deadline'));
+      if (!isNaN(deadline) && now > deadline) {
+        el.hidden = true;
+      }
+    });
+  }
+
   function init() {
+    initPromoDeadline();
     initHamburger();
     initScrollAnimations();
     initFloatingCta();

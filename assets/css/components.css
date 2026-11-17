@@ -889,3 +889,79 @@
   width: 100%;
   border-radius: var(--radius-lg);
 }
+
+/* ===== Promo bar (banner offerta a tempo, sopra la topbar) ===== */
+.promo-bar {
+  background: var(--color-gold);
+  color: var(--color-text);
+  padding: 8px 20px;
+  text-align: center;
+  font-size: var(--fs-small);
+  line-height: 1.4;
+}
+
+.promo-bar[hidden] {
+  display: none;
+}
+
+.promo-bar__text {
+  margin: 0;
+}
+
+.promo-bar__link {
+  color: var(--color-text);
+  font-weight: bold;
+  text-decoration: underline;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
+.promo-bar__link:hover {
+  color: var(--color-text);
+}
+
+/* ===== Promo (blocco offerta a tempo) ===== */
+.promo__image {
+  justify-self: center;
+  width: 100%;
+  max-width: 360px;
+}
+
+.promo__label {
+  color: var(--color-gold);
+  margin-bottom: 5px;
+}
+
+.promo__price-line {
+  margin: 20px 0 0;
+  color: var(--color-text-muted);
+}
+
+.promo__price {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-heading);
+  color: var(--color-gold);
+  margin: 0;
+}
+
+.promo__price-note {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.promo__saving {
+  font-weight: bold;
+  margin: 0 0 10px;
+}
+
+.promo__note {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+[data-promo-deadline][hidden] {
+  display: none;
+}
